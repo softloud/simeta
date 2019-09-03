@@ -4,26 +4,207 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
+```{r set up, echo = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  fig.path = "README-"
 )
 ```
-# simeta
 
-<!-- badges: start -->
-<!-- badges: end -->
+[![Travis build status](https://travis-ci.org/softloud/metasim.svg?branch=master)](https://travis-ci.org/softloud/metasim)
 
-The goal of simeta is to simulate meta-analysis data. 
+ [![Coverage status](https://codecov.io/gh/softloud/metasim/branch/master/graph/badge.svg)](https://codecov.io/github/softloud/metasim?branch=master)
 
-<!-- ## Installation -->
+# metasim
 
-<!-- You can install the released version of simeta from [CRAN](https://CRAN.R-project.org) with: -->
+The goal of metasim is to simulate meta-analysis data. 
 
-<!-- ``` r -->
-<!-- install.packages("simeta") -->
-<!-- ``` -->
+I found I was rewriting the same types of analyses. I got to thinking how to make a modular set of tools for simulating meta-anlaysis data. 
+
+In particular, I'm interested in simulating for different values of 
+
+- $k$, number of studies
+- $\tau^2$, variation between studies
+- $\varepsilon^2$, variation within a study
+- numbers of trials, say 10, 100, 1000
+- distributions, _and_ parameters; e.g., $\exp(\lambda = 1)$ and $\exp(\lambda = 2)$. 
+
+## work in progress
+
+This package is a work in progress, can't guarantee anything works as intended.  
+
+## installation
+
+You can install metasim from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("softloud/metasim")
+```
+
+## examples
+
+
+### simulate paired sample sizes
+
+```{r packages, message=FALSE}
+# packages
+library(metasim)
+library(tidyverse)
+
+# so these results are reproducible
+set.seed(38) 
+
+# I like to set.seed with my age. It makes me feel smug that I'm a middle-aged woman who codes. 
+
+```
+
+
+This is a function I have often wished I've had on hand when simulating meta-analysis data. Thing is, running, say, 1000 simulations, I want to do this for the _same_ sample sizes. So, I need to generate the sample sizes for each study and for each group (control or intervention).   
+
+Given a specific $k$, generate a set of sample sizes. 
+
+```{r different k}
+
+# defaults to k = 3
+sim_n() %>% knitr::kable()
+
+sim_n(k = 3) %>% knitr::kable()
+
+# set k to a different value
+
+sim_n(k = 6) %>% knitr::kable()
+
+
+```
+
+Suppose we require data that mimics small cohorts, say as small as 3, and as large as 50. 
+
+```{r small cohort}
+# control upper and lower bounds
+sim_n(min_n = 3, max_n = 50) %>% knitr::kable()
+ 
+```
+
+We expect cohorts from the same study to have roughly the same size, proportional to that size. We can control this proportion with the `prop` argument.
+
+Suppose we wish to mimic data for which the cohorts are almost exactly the same (say becaues of classes of undergrads being split in half and accounting for dropouts).
+
+```{r prop}
+# small variation between sample sizes of studies
+sim_n(k = 2, prop = 0.05, max_n = 50) %>% knitr::kable()
+
+```
+
+It can be useful, for more human-interpretable purposes, to display the sample sizes in wide format. 
+
+This is also useful for calculations that convert two measures to one, say, the standardised mean difference of the control and intervention groups. 
+
+Consider four classrooms of children, who may have one or two away for illness.
+
+```{r wide n}
+sim_n(k = 4, prop = 0.05, max_n = 30, wide = TRUE) %>%
+  # from here I'm just relabelling the class variable for prettiness
+  separate(study, into = c("remove", "class"), sep = "_") %>% 
+  select(-remove) %>% 
+  mutate(class = letters[as.numeric(class)]) %>% knitr::kable()
+```
+
+
+### simulation parameters
+
+Adding a few values of $\tau$, different numbers of studies $k$, and so forth can ramp up the number of combinations of simulation parameters very quickly.  
+
+I haven't settled on a _way_ of simulating data, and haven't found heaps in the way of guidance yet. So, this is all a bit experimental. My guiding star is packaging what I'd use right now. 
+
+What I do always end up with is generating a dataset that summarises what I would like to iterate over in simulation. 
+
+The `sim_df` takes user inputs for distributions, numbers of studies, between-study error $\tau$, within-study error $\varepsilon$, and the proportion $\rho$ of sample size we expect the sample sizes to different within study cohorts.
+
+```{r sim overview}
+# defaults
+sim_df() 
+
+sim_df() %>% str(1)
+
+# only consider small values of k
+sim_df(k = c(2, 5, 7)) %>% str(1)
+```
+
+For the list-column of tibbles `n`, the `sim_df` function calls `sim_n` and generates a set of sample sizes based on the value in the column `k`.
+
+```{r sample sizes set}
+demo_k <- sim_df() 
+
+# the variable n is a list-column of tibbles
+demo_k %>% pluck("n") %>% head(3)
+
+
+# compare the number of rows in the dataframe in the n column with the k value
+# divide by two because there are two rows for each study,
+# one for each group, control and intervention
+demo_k %>% pluck("n") %>% map_int(nrow) %>% head(3) / 2
+demo_k %>% pluck("k") %>% head(3)
+
+```
+
+## simulating data
+
+Once we have established a set of sample sizes for a given distribution, with parameters, and so forth, I usually want to generate a sample for each of those `n`. We need to adjust the value of the sampled data based on the median ratio, and whether the `n` is from a control or intervention group.
+
+A random effect is added to account for the between study error $\tau$ and within study error $\varepsilon$. 
+
+For meta-analysis data, we work with summmary statistics, so we drop the sample and return tabulated summary stats. 
+
+```{r simulate a sample}
+sim_stats()  %>% knitr::kable()
+```
+
+## trial
+
+In a trial, we'd first want to simulate some data, for a given distribution, for this we use the `sim_stats` function discussed in the above section. 
+
+With the summary statistics, we then calculate an estimate of the effect or the variance of the effect. 
+
+1. simulate data
+2. calculate summary statistics
+3. **calculate estimates using summary statistics**
+4. calculate effects using estimates (difference, standardised, log-ratio)[^1]
+5. meta-analyse 
+6. return simulation results of interest
+
+[^1]: Ideally this would be configurable but let's hardcode it for now. 
+
+
+The first two steps are taken care of by the `sim_stats` function. The third step will by necessity be bespoke. 
+
+But the rest could be automated, assuming there are the same kinds of results. 
+
+step | input | output |
+-|-|-
+calculate estimates | summary statistics as produced by `sim_n` | summary stats
+calculate effects | summary stats | `effect` and `effect_se`
+meta-analyse | `effect` and `effect_se` | `rma` object 
+summary stats | `rma` object | some kind of `broom`ing script
+
+```{r}
+metatrial()
+```
+
+## summarising simulation results
+
+So, now we can put together some generic summarisations. Things I always want to do. Like calculate the coverage probability, confidence interval width, and bias. Most results here are mean values across all trials, the exceptions being `cp_` variables.  
+
+`metasim` calls `metatrial` many times and summarises the results.
+
+```{r}
+metasim()
+```
+
+## simulate over parameters
+
+```{r}
+# metasims is not working yet.
+```
 
