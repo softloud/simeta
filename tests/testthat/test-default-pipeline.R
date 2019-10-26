@@ -1,8 +1,5 @@
 context("default pipeline")
 
-library(testthat)
-library(metasim)
-
 test_that("work upwards through algorithm", {
   expect_is(sim_n(), "data.frame")
   expect_gt(sim_n() %>% nrow(), 1)
@@ -14,9 +11,13 @@ test_that("work upwards through algorithm", {
   expect_is(singletrial(), "data.frame") # alternate trial
   expect_is(metasim(trials = 3), "data.frame")
   # metasims calls sim_df & metasim
-  expect_is(metasims(single_study = FALSE, trials = 3, progress = FALSE), "sim_ma")
+  expect_is(metasims(
+    single_study = FALSE,
+    trials = 3,
+    progress = FALSE
+  ),
+  "sim_ma")
 })
-
 
 
 # test each component on defaults
@@ -43,5 +44,10 @@ test_that("metasim", {
 })
 
 test_that("metasims", {
-  expect_is(metasims(single_study = FALSE, trials = 3, progress = FALSE), "list")
+  expect_is(metasims(
+    single_study = FALSE,
+    trials = 3,
+    progress = FALSE
+  ),
+  "list")
 })

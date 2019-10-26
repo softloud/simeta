@@ -1,0 +1,104 @@
+---
+title: "the motivating use-case for simeta::"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{the motivating use-case for simeta}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(simeta)
+
+# other packages used in this vignette
+library(tidyverse)
+library(skimr)
+
+# otherwise i'll forget
+conflicted::conflict_prefer("filter", winner = "dplyr")
+
+```
+
+# objective of the `simeta::` package
+
+The `simeta::` package aims to provide coverage probability simulation results for estimators derived, as is common in meta-analyses, from summary statistics for the variance of the sample median. Different simulation-level parameters of interest can be specified so that simulated data mimics different meta-analytic conditions:
+
+- Different numbers of $K$ studies.
+- Different values of $\tau^2$, the variation between the studies.
+- Different distributions.
+- Different distributions of expected sample sizes.
+- Different proportions of control and intervention group.
+
+The components of the algorithm have been produced in a compartmentalised way, with the objective of exploring the extendability of this package to estimators for the variance of the sample mean, but also for estimators for the mean or median, themselves.   
+
+In this vignette, we restrict ourselves to the original use-case of the package, testing estimators for the variance of the sample median.
+
+# using `simeta::` to assess an estimator for the sample median
+
+In this analysis, we are interested in assessing how an estimator for the variance of the sample median performs in under various meta-analytic conditions.
+
+We will test estimators in the `varameta::` package. 
+
+For example, given a sample median of 50, an interquartile range of 0.6, and a sample size of 24, what do we estimator the variance of the sample median to be? 
+
+```{r median var}
+
+varameta::effect_se(
+  centre = 50, 
+  spread = 0.6, 
+  n = 24, 
+  centre_type = "median",
+  spread_type = "iqr") 
+
+```
+
+How can we tell if this is a *good* estimator for the variance of the sample median?
+
+Well, if have the true median $\nu$ and the true distribution $f$, we can approximate the variance of the sample median thus,
+$$
+\textrm{var}(M) \approx \frac 1 {4nf(\nu)^2}.
+$$
+
+
+
+
+
+```{r metasims defaults, eval=FALSE}
+ 
+# metasims function with default arguments
+sims <-
+  metasims(
+    single_study = FALSE,
+    measure = "median",
+    measure_spread = "iqr",
+    distributions = default_parameters,
+    k = c(3, 7, 10),
+    tau_sq_true = seq(from = 0, to = 0.4, by = 0.2),
+    unequal_effect_ratio = 1.2,
+    min_n = 20,
+    max_n = 200,
+    prop = 0.5,
+    prop_error = 0.1,
+    trials = 3,
+    trial_fn = metatrial,
+    beep = FALSE,
+    knha = TRUE,
+    progress = TRUE
+  )
+
+sims %>% skimr::skim()
+
+```
+
+
+
+
+
+# components of simeta

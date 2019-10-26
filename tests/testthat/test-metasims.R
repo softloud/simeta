@@ -2,7 +2,9 @@ context("metasims")
 
 set.seed(38)
 
-default_metasims <- metasims(progress = FALSE, trials = 100)
+default_metasims <-
+  metasims(progress = FALSE, trials = 100) %>%
+  pluck("results")
 
 test_that("default trial_fn metatrial", {
   expect_is(default_metasims, "data.frame")
@@ -12,10 +14,12 @@ test_that("default trial_fn metatrial", {
   expect_true("effect_ratio" %in% colnames(default_metasims))
 })
 
-single_metasims <- metasims(single_study = TRUE,
-                            trials = 100,
-                            trial_fn = singletrial,
-                            progress = FALSE)
+single_metasims <- metasims(
+  single_study = TRUE,
+  trials = 100,
+  trial_fn = singletrial,
+  progress = FALSE
+)
 
 test_that("singletrial trial_fn", {
   expect_is(single_metasims, "data.frame")
