@@ -2,8 +2,11 @@ context("metasims")
 
 set.seed(38)
 
+trials <- 3
+
+
 default_metasims <-
-  metasims(progress = FALSE, trials = 100) %>%
+  metasims(progress = FALSE, trials = trials) %>%
   pluck("results")
 
 test_that("default trial_fn metatrial", {
@@ -16,10 +19,10 @@ test_that("default trial_fn metatrial", {
 
 single_metasims <- metasims(
   single_study = TRUE,
-  trials = 100,
+  trials = trials,
   trial_fn = singletrial,
   progress = FALSE
-)
+) %>% pluck("results")
 
 test_that("singletrial trial_fn", {
   expect_is(single_metasims, "data.frame")

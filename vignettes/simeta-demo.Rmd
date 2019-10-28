@@ -9,10 +9,14 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  cache = TRUE,
   collapse = TRUE,
   comment = "#>"
 )
 ```
+
+
+### Important message for future Charles: Remember, writing this provides a fun and aesthestic way of debugging this algorithm. Focus on writing a cohesive document, and the debugging  will be enjoyable. It's a cognitive bait and switch; and it works. Make the document _pretty_, and you not be able to help ensuring the science is correct, because you hate doing a sloppy job at anything. Answer the question, with clarity and aesthetics; the motivation for correct science will follow. 
 
 ```{r setup}
 library(simeta)
@@ -91,13 +95,11 @@ sims <-
     beep = FALSE,
     knha = TRUE,
     progress = TRUE
-  )
+  ) 
 
-sims %>% skimr::skim()
+
 
 ```
-
-
 
 
 

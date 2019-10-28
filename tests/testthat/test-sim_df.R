@@ -73,6 +73,7 @@ test_that("sim_df produces correct sample sizes", {
 
 metasims_test  <- function(...) {
   metasims(...) %>%
+    pluck("results") %>%
     dplyr::filter(measure == "median") %>%
     dplyr::select(id, n) %>%
     tidyr::unnest(n) %>%
