@@ -27,6 +27,9 @@ library(skimr)
 # otherwise i'll forget
 conflicted::conflict_prefer("filter", winner = "dplyr")
 
+# for reproducibility
+set.seed(39)
+
 ```
 
 # objective of the `simeta::` package
@@ -74,7 +77,7 @@ $$
 
 
 ```{r metasims defaults}
- 
+
 # metasims function with default arguments
 sims <-
   metasims(
@@ -93,10 +96,11 @@ sims <-
     trial_fn = metatrial,
     beep = FALSE,
     knha = TRUE,
-    progress = TRUE
+    progress = FALSE
   ) 
 
-
+# take a look at results
+sims %>% pluck("results") %>% head()
 
 ```
 
