@@ -1,22 +1,21 @@
 ---
 title: "the motivating use-case for simeta::"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{the motivating use-case for simeta}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: html_document
 ---
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  cache = TRUE,
-  collapse = TRUE,
-  comment = "#>"
-)
+  cache = TRUE
+  )
+
 ```
 
 
-### Important message for future Charles: Remember, writing this provides a fun and aesthestic way of debugging this algorithm. Focus on writing a cohesive document, and the debugging  will be enjoyable. It's a cognitive bait and switch; and it works. Make the document _pretty_, and you not be able to help ensuring the science is correct, because you hate doing a sloppy job at anything. Answer the question, with clarity and aesthetics; the motivation for correct science will follow. 
+### Important message for future Charles: 
+
+**Remember, writing this provides a fun and aesthestic way of debugging this algorithm. Focus on writing a cohesive document, and the debugging  will be enjoyable. It's a cognitive bait and switch; and it works. Make the document _pretty_, and you not be able to help ensuring the science is correct, because you hate doing a sloppy job at anything. Answer the question, with clarity and aesthetics; the motivation for correct science will follow.**
+
+## preamble
 
 ```{r setup}
 library(simeta)
@@ -74,7 +73,7 @@ $$
 
 
 
-```{r metasims defaults, eval=FALSE}
+```{r metasims defaults}
  
 # metasims function with default arguments
 sims <-
@@ -90,7 +89,7 @@ sims <-
     max_n = 200,
     prop = 0.5,
     prop_error = 0.1,
-    trials = 3,
+    trials = 1000,
     trial_fn = metatrial,
     beep = FALSE,
     knha = TRUE,
@@ -100,6 +99,15 @@ sims <-
 
 
 ```
+
+```{r coverage plot, out.width="\\textwidth"}
+ 
+# basic scatterplot
+sims %>% 
+  coverage_plot()
+
+```
+
 
 
 

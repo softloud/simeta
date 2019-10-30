@@ -18,7 +18,7 @@ metasims(single_study = FALSE, measure = "median",
 
 \item{measure_spread}{Specify "iqr", "range", "sd", "var". Will have to check how many of these are done right now.}
 
-\item{distributions}{a dataframe with a \code{dist} column of R distributions, i.e., norm, exp, pareto, and a list-column \code{par} of parameter sets. Defaults to \link{default_parmetres}}
+\item{distributions}{a dataframe with a \code{dist} column of R distributions, i.e., norm, exp, pareto, and a list-column \code{par} of parameter sets. Defaults to \link{default_parameters}.}
 
 \item{k}{Vector of desired numbers studies to simulate for.}
 
