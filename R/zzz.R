@@ -1,4 +1,3 @@
-#' @import varameta
 #' @import dplyr
 #' @import tidyr
 #' @import purrr

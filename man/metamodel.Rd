@@ -4,8 +4,12 @@
 \alias{metamodel}
 \title{Meta-analyse with error handling}
 \usage{
-metamodel(y = rnorm(10, mean = 20, sd = 0.2), se = runif(10, 0, 0.8),
-  test = "knha", data = NULL)
+metamodel(
+  y = rnorm(10, mean = 20, sd = 0.2),
+  se = runif(10, 0, 0.8),
+  test = "knha",
+  data = NULL
+)
 }
 \arguments{
 \item{test}{"knha" or "z"}

@@ -9,7 +9,7 @@ lr_se(measure, n_c, effect_c, effect_se_c, n_i, effect_i, effect_se_i)
 \arguments{
 \item{measure}{mean or median}
 
-\item{n_c}{sample size of control group}
+\item{n_c}{sample size of intervention group}
 
 \item{effect_c}{effect measure for control group}
 
@@ -18,8 +18,6 @@ lr_se(measure, n_c, effect_c, effect_se_c, n_i, effect_i, effect_se_i)
 \item{effect_i}{effect measure of intervention group}
 
 \item{effect_se_i}{standard error of intervention group}
-
-\item{n_c}{sample size of intervention group}
 }
 \description{
 Provides sample estimator for the squared-root of the variance of the log-ratio of two random samples

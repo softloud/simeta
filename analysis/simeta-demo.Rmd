@@ -1,6 +1,8 @@
 ---
 title: "the motivating use-case for simeta::"
 output: html_document
+params: 
+  trials: 3
 ---
 
 ```{r, include = FALSE}
@@ -92,7 +94,7 @@ sims <-
     max_n = 200,
     prop = 0.5,
     prop_error = 0.1,
-    trials = 1000,
+    trials = params$trials,
     trial_fn = metatrial,
     beep = FALSE,
     knha = TRUE,

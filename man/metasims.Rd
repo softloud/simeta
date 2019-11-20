@@ -4,15 +4,27 @@
 \alias{metasims}
 \title{metasims}
 \usage{
-metasims(single_study = FALSE, measure = "median",
-  measure_spread = "iqr", distributions = default_parameters,
-  k = c(3, 7, 10), tau_sq_true = seq(from = 0, to = 0.4, by = 0.2),
-  unequal_effect_ratio = 1.2, min_n = 20, max_n = 200, prop = 0.5,
-  prop_error = 0.1, trials = 3, trial_fn = metatrial, beep = FALSE,
-  knha = TRUE, progress = TRUE)
+metasims(
+  single_study = FALSE,
+  measure = "median",
+  measure_spread = "iqr",
+  distributions = default_parameters,
+  k = c(3, 7, 10),
+  tau_sq_true = seq(from = 0, to = 0.4, by = 0.2),
+  unequal_effect_ratio = 1.2,
+  min_n = 20,
+  max_n = 200,
+  prop = 0.5,
+  prop_error = 0.1,
+  trials = 3,
+  trial_fn = metatrial,
+  beep = FALSE,
+  knha = TRUE,
+  progress = TRUE
+)
 }
 \arguments{
-\item{single_study}{Set this to TRUE for a simulation of single samples; i.e., one control and one intervention group.}
+\item{single_study}{When set to TRUE, will override simulation parameters with k = 1 and tau_sq_true = 0.}
 
 \item{measure}{Calculate sample median or mean. Defaults to median.}
 
@@ -20,7 +32,7 @@ metasims(single_study = FALSE, measure = "median",
 
 \item{distributions}{a dataframe with a \code{dist} column of R distributions, i.e., norm, exp, pareto, and a list-column \code{par} of parameter sets. Defaults to \link{default_parameters}.}
 
-\item{k}{Vector of desired numbers studies to simulate for.}
+\item{k}{Simulate for different numbers of studies.}
 
 \item{tau_sq_true}{Variance \eqn{\gamma_k \sim N(0, \tau^2)} associated with the random effect}
 
@@ -32,15 +44,11 @@ metasims(single_study = FALSE, measure = "median",
 
 \item{prop}{proportion of n we expect}
 
-\item{prop_error}{what do we expect 90% of proportions to fall within?}
+\item{prop_error}{what do we expect 90\% of proportions to fall within?}
 
 \item{beep}{Turn on beep alert when successfully finished.}
 
 \item{progress}{Turn progress bar on and off.}
-
-\item{single_study}{When set to TRUE, will override simulation parameters with k = 1 and tau_sq_true = 0.}
-
-\item{k}{Simulate for different numbers of studies.}
 }
 \description{
 coverage probability simulations of an estimator for various

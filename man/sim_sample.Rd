@@ -4,9 +4,14 @@
 \alias{sim_sample}
 \title{Simulate a sample}
 \usage{
-sim_sample(n = 18, this_study_error = 0.2, rdist = "norm",
-  par = list(mean = 20, sd = 0.2), control = TRUE,
-  effect_ratio = 1.2)
+sim_sample(
+  n = 18,
+  this_study_error = 0.2,
+  rdist = "norm",
+  par = list(mean = 20, sd = 0.2),
+  control = TRUE,
+  effect_ratio = 1.2
+)
 }
 \arguments{
 \item{n}{sample size}

@@ -4,8 +4,12 @@
 \alias{density_fn}
 \title{get an arbitrary}
 \usage{
-density_fn(x, distribution = "norm", parameters = list(mean = 50, sd =
-  0.2), type = "q")
+density_fn(
+  x,
+  distribution = "norm",
+  parameters = list(mean = 50, sd = 0.2),
+  type = "q"
+)
 }
 \description{
 get an arbitrary

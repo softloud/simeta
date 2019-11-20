@@ -20,7 +20,7 @@ below to see their documentation.
 
   \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
-  \item{metafor}{\code{\link[metafor]{rma}}, \code{\link[metafor]{forest}}, \code{\link[metafor]{escalc}}}
+  \item{metafor}{\code{\link[metafor]{escalc}}, \code{\link[metafor]{forest}}, \code{\link[metafor]{rma}}}
 
   \item{purrr}{\code{\link[purrr]{pluck}}}
 }}

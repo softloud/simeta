@@ -6,6 +6,7 @@ output: github_document
 
 ```{r set up, echo = FALSE}
 knitr::opts_chunk$set(
+  eval = FALSE,
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
@@ -20,7 +21,7 @@ knitr::opts_chunk$set(
 
 The goal of metasim is to simulate meta-analysis data. 
 
-I found I was rewriting the same types of analyses. I got to thinking how to make a modular set of tools for simulating meta-anlaysis data. 
+I found I was rewriting the same types of analyses. How to make a modular set of tools for simulating meta-anlaysis data. 
 
 In particular, I'm interested in simulating for different values of 
 

@@ -4,9 +4,16 @@
 \alias{sim_stats}
 \title{Simulate a meta-analysis dataset}
 \usage{
-sim_stats(measure = "median", measure_spread = "iqr", n_df = sim_n(),
-  wide = FALSE, rdist = "norm", par = list(mean = 50, sd = 0.2),
-  tau_sq = 0.4, effect_ratio = 1.2)
+sim_stats(
+  measure = "median",
+  measure_spread = "iqr",
+  n_df = sim_n(),
+  wide = FALSE,
+  rdist = "norm",
+  par = list(mean = 50, sd = 0.2),
+  tau_sq = 0.4,
+  effect_ratio = 1.2
+)
 }
 \arguments{
 \item{n_df}{\code{data.frame} of sample sizes,
