@@ -1,6 +1,10 @@
 ---
 title: "the motivating use-case for simeta::"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    number_sections: true
 params: 
   trials: 3
 ---
@@ -114,7 +118,33 @@ sims %>%
 
 ```
 
-
-
-
 # components of simeta
+
+
+## simulation-level parameters
+
+The `metasims` function has `default_parmeters`. But these can be modified.
+
+```{r metasims args}
+args(metasims)
+
+```
+
+
+It is expected to be of the form of a `tibble` with a column, `dist`, for R-friendly distribution names and a column, `par`. R-friendly means by concatenating on `d`, `p`, `q`, or `r`, you obtain a distribution function in R. 
+
+```{r default parameters}
+default_parameters %>% 
+  kableExtra::kable() %>% 
+  kableExtra::kable_styling()
+
+```
+
+The `simeta::` package is currently coded to simulate date from the normal, exponential, Pareto, and log-normal distributions. 
+
+The mathematical methodology to is repeated, but the derivation is slightly different for each distribution, and a solution for generalising has not been developed yet.
+
+For these distributions, any reasonable parameter choice can be specified via the `par` column. 
+
+
+
