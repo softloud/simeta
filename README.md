@@ -1,15 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-[![Travis build
-status](https://travis-ci.org/softloud/metasim.svg?branch=master)](https://travis-ci.org/softloud/metasim)
+# `simeta::`
 
-[![Coverage
-status](https://codecov.io/gh/softloud/metasim/branch/master/graph/badge.svg)](https://codecov.io/github/softloud/metasim?branch=master)
-
-# metasim
-
-The goal of metasim is to simulate meta-analysis data.
+The goal of `simeta::` is to simulate meta-analysis data.
 
 I found I was rewriting the same types of analyses. How to make a
 modular set of tools for simulating meta-anlaysis data.
@@ -30,11 +24,11 @@ intended.
 
 ## installation
 
-You can install metasim from github with:
+You can install `simeta::` from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("softloud/metasim")
+devtools::install_github("softloud/simeta")
 ```
 
 ## examples
@@ -43,7 +37,7 @@ devtools::install_github("softloud/metasim")
 
 ``` r
 # packages
-library(metasim)
+library(simeta)
 library(tidyverse)
 
 # so these results are reproducible
