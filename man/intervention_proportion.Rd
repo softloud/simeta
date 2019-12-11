@@ -9,7 +9,8 @@ intervention_proportion(n, proportion, error)
 \arguments{
 \item{proportion}{Expected proportion for the intervention group}
 
-\item{error}{Within what value will 90 per cent of the proportion of intervention groups fall within?}
+\item{error}{Within what value will 90 per cent of the proportion
+of intervention groups fall within?}
 }
 \description{
 Calculate proportion of intervention group

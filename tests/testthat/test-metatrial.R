@@ -1,6 +1,6 @@
 context("metatrial")
 
-library(metasim)
+
 
 
 # fuzz samples ------------------------------------------------------------

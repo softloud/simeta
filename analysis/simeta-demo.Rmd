@@ -145,6 +145,3 @@ The `simeta::` package is currently coded to simulate date from the normal, expo
 The mathematical methodology to is repeated, but the derivation is slightly different for each distribution, and a solution for generalising has not been developed yet.
 
 For these distributions, any reasonable parameter choice can be specified via the `par` column. 
-
-
-

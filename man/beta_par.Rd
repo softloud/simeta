@@ -2,15 +2,25 @@
 % Please edit documentation in R/beta_par.R
 \name{beta_par}
 \alias{beta_par}
-\title{calculate beta parameters}
+\title{Calculate distributional parametrs for proportion of sample size given
+to intervention}
 \usage{
 beta_par(proportion, error)
 }
 \arguments{
 \item{proportion}{Expected proportion for the intervention group}
 
-\item{error}{Within what value will 90 per cent of the proportion of intervention groups fall within?}
+\item{error}{Within what value will 90 per cent of the proportion
+of intervention groups fall within?}
 }
 \description{
-calculate beta parameters
+This function returns parameters for a beta distribution calculated from an
+expected proportion assigned to intervention group and error.
+}
+\details{
+Called by \link{intervention_proportion}, this function is calculates creating
+the parameters for the beta distribution to sample
+the proportion \eqn{p_k} of the total sample size
+\eqn{N_k} for the
+\eqn{k}th study.
 }

@@ -1,7 +1,6 @@
 context("sampling")
 
 library(tidyverse)
-library(metasim)
 set.seed(38)
 
 big <- runif(3, 5, 100)
