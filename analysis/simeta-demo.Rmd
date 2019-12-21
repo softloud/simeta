@@ -142,6 +142,6 @@ default_parameters %>%
 
 The `simeta::` package is currently coded to simulate date from the normal, exponential, Pareto, and log-normal distributions. 
 
-The mathematical methodology to is repeated, but the derivation is slightly different for each distribution, and a solution for generalising has not been developed yet.
+The mathematical methodology to is repeated, but the derivation is slightly different.
 
 For these distributions, any reasonable parameter choice can be specified via the `par` column. 
