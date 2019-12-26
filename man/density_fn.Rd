@@ -2,15 +2,21 @@
 % Please edit documentation in R/density-fn.R
 \name{density_fn}
 \alias{density_fn}
-\title{get an arbitrary}
+\title{Get an arbitrary density function}
 \usage{
-density_fn(
-  x,
-  distribution = "norm",
-  parameters = list(mean = 50, sd = 0.2),
-  type = "q"
-)
+density_fn(x, distribution, parameters, type = "q")
+}
+\arguments{
+\item{x}{Input for density function.}
+
+\item{distribution}{Currently programmed for "norm", "pareto", "exp", and
+"lnorm" inputs.}
+
+\item{parameters}{List of parameters for distribution; e.g. list(mean = 30,
+sd = 0.2) for \eqn{normal(30, 0.2)}.}
+
+\item{type}{Random "r" sample, density "d", quantile "q", or probability "p".}
 }
 \description{
-get an arbitrary
+Get an arbitrary density function
 }

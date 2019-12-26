@@ -6,7 +6,7 @@
 #' @param measure Calculate sample median or mean. Defaults to median.
 #' @param measure_spread Specify "iqr", "range", "sd", "var". Will have to check how many of these are done right now.
 #' @param k Vector of desired numbers studies to simulate for.
-#' @param tau_sq_true
+#' @param tau_sq_true The true value of the variation between the studies.
 #' @param distributions a dataframe with a `dist` column of R distributions, i.e., norm, exp, pareto, and a list-column `par` of parameter sets. Defaults to [default_parameters].
 #' @param single_study When set to TRUE, will override simulation parameters with k = 1 and tau_sq_true = 0.
 #' @param k Simulate for different numbers of studies.
