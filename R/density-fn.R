@@ -19,8 +19,10 @@ density_fn <- function(x,
   fn <- get(paste0(type, distribution))
 
   # dplyr::case_when()
-  dplyr::if_else(length(parameters) == 1,
-                 fn(x, parameters[[1]]),
-                 fn(x, parameters[[1]], parameters[[2]]))
+  if (length(parameters) == 1) {
+    fn(x, parameters[[1]])
+  } else {
+    fn(x, parameters[[1]], parameters[[2]])
+  }
 
 }

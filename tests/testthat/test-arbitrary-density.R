@@ -41,7 +41,8 @@ expect_neet <- function(dist, par) {
 
 test_that("Density works for normal distributions", {
   expect_neet(dist = "norm", par = list(mean = 30, sd = 0.3))
-  expect_neet(dist = "norm", par = list(mean = whole_num, sd = part_num))
+  expect_neet(dist = "norm",
+              par = list(mean = whole_num, sd = part_num))
 })
 
 test_that("Density works for exponential distributions", {
@@ -52,11 +53,12 @@ test_that("Density works for exponential distributions", {
 
 test_that("Density works for pareto distributions", {
   expect_neet(dist = "pareto", par = list(shape = 30, scale = 0.3))
-  expect_neet(dist = "pareto", par = list(shape = whole_num, scale = part_num))
+  expect_neet(dist = "pareto",
+              par = list(shape = whole_num, scale = part_num))
 })
 
 test_that("Density works for lnorm distributions", {
   expect_neet(dist = "lnorm", par = list(meanlog = 30, sdlog = 0.3))
-  expect_neet(dist = "lnorm", par = list(meanlog = whole_num, sdlog = part_num))
+  expect_neet(dist = "lnorm",
+              par = list(meanlog = whole_num, sdlog = part_num))
 })
-
