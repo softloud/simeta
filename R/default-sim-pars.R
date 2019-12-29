@@ -2,6 +2,8 @@
 #'
 #' These are the default distributional parameter sets used in [metasim].
 #'
+#' @family metapar Simulation metaparameter functions.
+#'
 #' @format A dataframe with 6 rows and 2 variables.
 #' \describe{
 #'   \item{dist}{R-friendly distribution name.}

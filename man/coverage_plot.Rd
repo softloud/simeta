@@ -12,4 +12,9 @@ coverage_plot(results_df)
 \description{
 Plot a coverage simulation for a single estimator
 }
+\seealso{
+Other vis_tools: 
+\code{\link{sim_dist}()},
+\code{\link{zeta_plot}()}
+}
 \concept{vis_tools}
