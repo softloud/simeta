@@ -32,9 +32,3 @@ with one column for distribution, and one column for the parameters}
 \description{
 generate simulation parameter dataframe
 }
-\seealso{
-Other metapar Simulation metaparameter functions.: 
-\code{\link{default_parameters}},
-\code{\link{sim_dist}()}
-}
-\concept{metapar Simulation metaparameter functions.}

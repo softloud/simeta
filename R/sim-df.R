@@ -10,8 +10,6 @@
 #' @import tibble
 #' @import dplyr
 #'
-#' @family metapar Simulation metaparameter functions.
-#'
 #' @export
 
 

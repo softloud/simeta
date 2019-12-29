@@ -4,7 +4,7 @@
 \alias{sim_dist}
 \title{Summarise sampling distributions}
 \usage{
-sim_dist(parameter_tibble, x_values = seq(0, 2, by = 0.001), output = "plot")
+sim_dist(parameter_tibble, output = "plot")
 }
 \arguments{
 \item{parameter_tibble}{A tibble in the format of \link{default_parameters}, with
@@ -16,19 +16,3 @@ parameters as a list-column.}
 \description{
 Provides plot or table summary of distributions dampled from in \link{metasims}.
 }
-\examples{
-sim_dist(default_parameters)
-sim_dist(default_parameters, output = "table")
-
-}
-\seealso{
-Other metapar Simulation metaparameter functions.: 
-\code{\link{default_parameters}},
-\code{\link{sim_df}()}
-
-Other vis_tools: 
-\code{\link{coverage_plot}()},
-\code{\link{zeta_plot}()}
-}
-\concept{metapar Simulation metaparameter functions.}
-\concept{vis_tools}
