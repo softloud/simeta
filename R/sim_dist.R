@@ -7,15 +7,24 @@
 #' parameters as a list-column.
 #' @param output Specify "plot" or "table".
 #'
+#' @examples
+#' sim_dist(default_parameters)
+#' sim_dist(default_parameters, output = "table")
+#'
+#' @family metapar Simulation metaparameter functions.
+#' @family vis_tools
+#'
 #' @export
 
-sim_dist <- function(parameter_tibble, output = "plot") {
+sim_dist <- function(parameter_tibble,
+                     x_values = seq(0, 2, by = 0.001),
+                     output = "plot") {
   density_data <-
     parameter_tibble %>%
     dplyr::mutate(
       sim_id = letters[seq(1:nrow(parameter_tibble))],
       Distribution = map_chr(dist, .f = dist_name),
-      par_string = str_sub(as.character(par), start = 5, end = -1)
+      par_string = stringr::str_sub(as.character(par), start = 5, end = -1)
     ) %>%
     dplyr::mutate(Parameters = map2_chr(
       Distribution,
@@ -48,7 +57,10 @@ sim_dist <- function(parameter_tibble, output = "plot") {
                    legend.position = "none") +
     ggrepel::geom_text_repel(ggplot2::aes(label = Parameters),
                              alpha = 0.6,
-                             data = label_data)
+                             data = label_data) +
+    ggplot2::labs(
+      title = "Distributions Sampled"
+    )
 
   density_table <- density_data %>%
     dplyr::filter(x == 0) %>%
