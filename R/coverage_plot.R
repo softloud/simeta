@@ -9,8 +9,8 @@
 coverage_plot <- function(results_df) {
   results_df %>%
     purrr::pluck("results") %>%
-    dplyr::mutate(Distribution = map_chr(rdist, dist_name),
-                  Effect_ratio = map_chr(effect_ratio,
+    dplyr::mutate(Distribution = purrr::map_chr(rdist, dist_name),
+                  Effect_ratio = purrr::map_chr(effect_ratio,
                                          .f = function(x) {
                                            dplyr::if_else(is.na(x),
                                                           x,
@@ -18,7 +18,7 @@ coverage_plot <- function(results_df) {
                                          })) %>%
     ggplot2::ggplot(ggplot2::aes(x = Distribution, y = coverage)) +
     ggplot2::geom_point(position = "jitter",
-                        alpha = 0.5,
+                        alpha = 0.4,
                         size = 4,
                         ggplot2::aes(colour = Distribution,
                                      shape = Effect_ratio)) +
