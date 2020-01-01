@@ -5,17 +5,15 @@ output:
     toc: true
     toc_float: true
     number_sections: true
+    code_folding: show
 params: 
   trials: 3
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  cache = TRUE
-  )
+knitr::opts_chunk$set(cache = TRUE)
 
 ```
-
 
 ### Important message for future Charles: 
 
@@ -38,9 +36,12 @@ set.seed(39)
 
 ```
 
-# objective of the `simeta::` package
+# Objective of the `simeta::` package
 
-The `simeta::` package aims to provide coverage probability simulation results for estimators derived, as is common in meta-analyses, from summary statistics for the variance of the sample median. Different simulation-level parameters of interest can be specified so that simulated data mimics different meta-analytic conditions:
+The `simeta::` package aims to provide coverage probability simulation results for estimators derived, as is common in meta-analyses, from summary statistics for the variance of the sample median. 
+
+
+Different simulation-level parameters of interest can be specified so that simulated data mimics different meta-analytic conditions:
 
 - Different numbers of $K$ studies.
 - Different values of $\tau^2$, the variation between the studies.
@@ -52,11 +53,11 @@ The components of the algorithm have been produced in a compartmentalised way, w
 
 In this vignette, we restrict ourselves to the original use-case of the package, testing estimators for the variance of the sample median.
 
-# using `simeta::` to assess an estimator for the sample median
+# Using `simeta::` to assess an estimator for the sample median
 
 In this analysis, we are interested in assessing how an estimator for the variance of the sample median performs in under various meta-analytic conditions.
 
-We will test estimators in the `varameta::` package. 
+We will test estimators provided by `varameta::` package. 
 
 For example, given a sample median of 50, an interquartile range of 0.6, and a sample size of 24, what do we estimator the variance of the sample median to be? 
 
@@ -73,14 +74,14 @@ varameta::effect_se(
 
 How can we tell if this is a *good* estimator for the variance of the sample median?
 
-Well, if have the true median $\nu$ and the true distribution $f$, we can approximate the variance of the sample median thus,
+Well, if have the true median $\nu$ and the true distribution $f$, we can approximate the variance of the sample median by adapting the following result, (todo: cite) 
 $$
 \textrm{var}(M) \approx \frac 1 {4nf(\nu)^2}.
 $$
+to ,
+todo: eqn.
 
-
-
-
+todo: medians ms & varmeta discuss connection
 
 ```{r metasims defaults}
 
@@ -118,25 +119,57 @@ sims %>%
 
 ```
 
-# components of simeta
+# Components of simeta
 
+The central motivation to modularising this package is attempting to address how to create extendable research analyses. Perhaps not all of the solutions provided are of use, but perhaps some components are. 
 
-## simulation-level parameters
+In this section we describe the different classes of functions in the `simeta::` package.
 
-The `metasims` function has `default_parmeters`. But these can be modified.
+todo: briefly describe each 
+
+## Simulation-level parameters
+
+The `metasims` function has a set of default simulation-level parameters, `default_parameters`. In the [following section](#specify-dist) it is shown how to specify these parameters. 
+
 
 ```{r metasims args}
+
+# extract default arguments of simulation function
 args(metasims)
+
+# arguments are easier to read and extract using the output of the simulation object
+# todo: convert to function
+# this simulation used the same as the default arguments
+sims %>% 
+  pluck("arguments") %>% 
+  select(argument, default) %>% 
+  kableExtra::kable() %>% 
+  kableExtra::kable_styling()
 
 ```
 
+The distributions sampled are expected to be in the form of a table. 
+
+```{r}
+# simeta comes with a default parameter set
+default_parameters
+
+```
+
+### Specifying distribution parameters {#specify-dist}
+
+You can specify your 
 
 It is expected to be of the form of a `tibble` with a column, `dist`, for R-friendly distribution names and a column, `par`. R-friendly means by concatenating on `d`, `p`, `q`, or `r`, you obtain a distribution function in R. 
 
 ```{r default parameters}
-default_parameters %>% 
-  kableExtra::kable() %>% 
-  kableExtra::kable_styling()
+sims %>%
+  pluck("distributions") %>% 
+  sim_dist(output = "table")
+
+sims %>% 
+  pluck("distributions") %>% 
+  sim_dist()
 
 ```
 
@@ -145,3 +178,78 @@ The `simeta::` package is currently coded to simulate date from the normal, expo
 The mathematical methodology to is repeated, but the derivation is slightly different.
 
 For these distributions, any reasonable parameter choice can be specified via the `par` column. 
+
+## Research output tools
+
+Simeta provides a few research outputs, which we describe in this section: 
+
+1. Coverage plot
+2. Distributions sampled summary tools
+3. Simulation results as data
+
+### Coverage plot
+
+The coverage probability plot summarises the proportion of trials for each metaparameter set of distribution, variation between studies, effect ratio, and number of studies.  
+
+```{r }
+sims %>% 
+  coverage_plot()
+
+```
+
+### Distributions summary
+
+Provide details about the distributions sampled in the simulation in a metaparameter plot or table. 
+
+```{r}
+# as a plot
+sims %>% 
+  pluck("distributions") %>% 
+  sim_dist()
+
+# as a table
+sims %>% 
+  pluck("distributions") %>% 
+  sim_dist(output = "table")
+
+
+
+```
+
+
+### Simulation results
+
+A list-object is returned from `metasims` that provides: 
+
+1. simulation results in a tibble
+2. simulation metaparameters in a summary tibble
+4. simulation metaparameters, one row per simulation
+3. simulation distributions 
+
+```{r}
+
+# metasims-created object
+sims %>% str(1)
+
+# simulation results
+sims %>% pluck("results") %>% skimr::skim()
+
+# simulation metaparameters summary
+sims %>% pluck("arguments") %>% 
+  kableExtra::kable() %>% kableExtra::kable_styling()
+
+
+# simulation metaparameters, one row per simulation
+sims %>% pluck("sim_pars") %>% head() %>% select(1:5) %>% 
+  kableExtra::kable() %>% kableExtra::kable_styling()
+
+# simulation distributions summary
+sims %>% pluck("distributions") %>% 
+  kableExtra::kable() %>% kableExtra::kable_styling()
+
+```
+
+## Simulation tools
+
+The components of `simeta::` are deliberately modularised, with the intention of facilitating future optimisation and improvements.
+
