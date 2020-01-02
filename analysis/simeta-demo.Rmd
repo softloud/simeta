@@ -199,20 +199,26 @@ sims %>%
 
 ### Distributions summary
 
-Provide details about the distributions sampled in the simulation in a metaparameter plot or table. 
+There are three ways to summarise the distributions sampled in the simulation:
+
+1. Plot
+2. Table
+3. R dataframe
 
 ```{r}
-# as a plot
+# plot
 sims %>% 
   pluck("distributions") %>% 
   sim_dist()
 
-# as a table
+# table
 sims %>% 
   pluck("distributions") %>% 
   sim_dist(output = "table")
 
-
+# data.frame
+sims %>% 
+  pluck("distributions")
 
 ```
 
