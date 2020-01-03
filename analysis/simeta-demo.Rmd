@@ -142,19 +142,34 @@ args(metasims)
 # this simulation used the same as the default arguments
 sims %>% 
   pluck("arguments") %>% 
-  select(argument, default) %>% 
+    kableExtra::kable() %>% 
+  kableExtra::kable_styling()
+
+```
+
+In the above table, we set simulation-level parameters:
+
+argument | description 
+- | -
+`single_study` | Is there only one study? i.e., $k = 1$.
+`measure` | Measure of effect: `"median"` or `"mean"`
+`measure_spread`| Measure of spread: `"iqr"` or `"range"`.
+`k` | Number of studies.
+
+> todo: finish table
+> todo fiish desription of table
+> finish what comes after that
+
+The distributions sampled are expected to be in the form of a table, with one column for distributions `dist` in an R-friendly format, and parameters `par` in a list. 
+
+```{r default parameters}
+# simeta comes with a default parameter set
+default_parameters %>% 
   kableExtra::kable() %>% 
   kableExtra::kable_styling()
 
 ```
 
-The distributions sampled are expected to be in the form of a table. 
-
-```{r}
-# simeta comes with a default parameter set
-default_parameters
-
-```
 
 ### Specifying distribution parameters {#specify-dist}
 
@@ -162,7 +177,7 @@ You can specify your
 
 It is expected to be of the form of a `tibble` with a column, `dist`, for R-friendly distribution names and a column, `par`. R-friendly means by concatenating on `d`, `p`, `q`, or `r`, you obtain a distribution function in R. 
 
-```{r default parameters}
+```{r default parameters vis}
 sims %>%
   pluck("distributions") %>% 
   sim_dist(output = "table")

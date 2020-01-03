@@ -65,17 +65,17 @@ metasims <- function(single_study = FALSE,
                             default,
                             specified)
       ) %>%
-      arrange(argument) %>%
       mutate(
         value = case_when(
           class(value_raw) == "language" ~ eval(value_raw),
           TRUE ~ value_raw
         ),
         value = as.character(eval(value))
-      )
+      ) %>%
+      select(argument, value)
 
   } else {
-    defaults %>% rename(value = default)
+    defaults %>% rename(value = default) %>% select(argument, value)
   }
 
 
