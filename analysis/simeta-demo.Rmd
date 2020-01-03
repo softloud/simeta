@@ -123,9 +123,8 @@ sims %>%
 
 The central motivation to modularising this package is attempting to address how to create extendable research analyses. Perhaps not all of the solutions provided are of use, but perhaps some components are. 
 
-In this section we describe the different classes of functions in the `simeta::` package.
+In this section we describe the different classes of functions in the `simeta::` package. These fall into roughly three categories. Simulation-level parameters set the different parameters to simulate over, such as number of studies or true effect ratio. Research output tools provide outputs of the analysis for reporting, with tables and visualisations. Finally, simulation tools, where the components of `simeta::` have been modularised for use and extendability in other analyses. 
 
-todo: briefly describe each 
 
 ## Simulation-level parameters
 
@@ -134,31 +133,16 @@ The `metasims` function has a set of default simulation-level parameters, `defau
 
 ```{r metasims args}
 
-# extract default arguments of simulation function
-args(metasims)
-
 # arguments are easier to read and extract using the output of the simulation object
-# todo: convert to function
-# this simulation used the same as the default arguments
 sims %>% 
   pluck("arguments") %>% 
     kableExtra::kable() %>% 
   kableExtra::kable_styling()
+# this simulation used the same as the default arguments
 
 ```
 
-In the above table, we set simulation-level parameters:
-
-argument | description 
-- | -
-`single_study` | Is there only one study? i.e., $k = 1$.
-`measure` | Measure of effect: `"median"` or `"mean"`
-`measure_spread`| Measure of spread: `"iqr"` or `"range"`.
-`k` | Number of studies.
-
-> todo: finish table
-> todo fiish desription of table
-> finish what comes after that
+In the above table, we set simulation-level parameters: distribution sets, `distributions`; number of studies, `k`; true variation between the studies, `tau_sq_true`; unequal effect ratio, `unequal_effect_ratio`, in addition to testing for no effect; minimum, `min_n`, and maximum, `max_n`, expected sample sizes with proportion, `prop`, and associated error, `prop_err`; and number of trials, `trials`, of each simulation.  
 
 The distributions sampled are expected to be in the form of a table, with one column for distributions `dist` in an R-friendly format, and parameters `par` in a list. 
 
