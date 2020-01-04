@@ -23,6 +23,7 @@ knitr::opts_chunk$set(cache = TRUE)
 
 ```{r setup}
 library(simeta)
+library(varameta)
 
 # other packages used in this vignette
 library(tidyverse)
@@ -55,15 +56,19 @@ In this vignette, we restrict ourselves to the original use-case of the package,
 
 # Using `simeta::` to assess an estimator for the sample median
 
+Taking a case study in the meta-analysis of medians, using estimators provided by `varameta::`, we outline the problem, and use the `simeta::` package to assess the estimators.  
+
+## A case study
+
 In this analysis, we are interested in assessing how an estimator for the variance of the sample median performs in under various meta-analytic conditions.
 
 We will test estimators provided by `varameta::` package. 
 
-For example, given a sample median of 50, an interquartile range of 0.6, and a sample size of 24, what do we estimator the variance of the sample median to be? 
+For example, given a sample median of 50, an interquartile range of 0.6, and a sample size of 24, how do we estiamte the variance of the sample median? 
 
 ```{r median var}
-
-varameta::effect_se(
+# estimate this using varameta::
+effect_se(
   centre = 50, 
   spread = 0.6, 
   n = 24, 
@@ -80,6 +85,8 @@ $$
 $$
 to ,
 todo: eqn.
+
+## assessing the estimator
 
 todo: medians ms & varmeta discuss connection
 
