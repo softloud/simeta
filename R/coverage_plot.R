@@ -13,7 +13,7 @@ coverage_plot <- function(results_df) {
                   Effect_ratio = purrr::map_chr(effect_ratio,
                                          .f = function(x) {
                                            dplyr::if_else(is.na(x),
-                                                          x,
+                                                          "single group",
                                                           as.character(as.numeric(x)))
                                          })) %>%
     ggplot2::ggplot(ggplot2::aes(x = Distribution, y = coverage)) +
@@ -34,13 +34,13 @@ coverage_plot <- function(results_df) {
       pairings of intervention and control groups, where there is random
       error associated with both the study's context and the variability.
       See the R package
-      simeta:: for more details.", 100),
+      simeta:: for more details.", 90),
       subtitle = stringr::str_wrap(
       "Each point represents the proportion of trials wherein the true
       effect ratio falls within the confidence interveral calculated from a
       meta-analytic random sample* from a given distribution,
       distributional parameter set, variance between studies (facet columns), and number of
-      studies (facet rows).", 100)
+      studies (facet rows).", 80)
     ) +
     ggplot2::scale_shape_discrete(name = "Effect ratio")
 }

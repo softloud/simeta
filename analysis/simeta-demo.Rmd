@@ -1,11 +1,16 @@
 ---
 title: "the motivating use-case for simeta::"
+always_allow_html: true
 output: 
   html_document:
     toc: true
     toc_float: true
     number_sections: true
     code_folding: show
+  pdf_document:
+    toc: true
+    highlight: null
+    number_sections: yes
 params: 
   trials: 3
 ---
@@ -13,15 +18,15 @@ params:
 ```{r, include = FALSE}
 knitr::opts_chunk$set(cache = TRUE)
 
+# run this to update the pdf, as well
+# rmarkdown::render("vignettes/simeta.Rmd", "all")
+
+
 ```
-
-### Important message for future Charles: 
-
-**Remember, writing this provides a fun and aesthestic way of debugging this algorithm. Focus on writing a cohesive document, and the debugging  will be enjoyable. It's a cognitive bait and switch; and it works. Make the document _pretty_, and you not be able to help ensuring the science is correct, because you hate doing a sloppy job at anything. Answer the question, with clarity and aesthetics; the motivation for correct science will follow.**
 
 ## preamble
 
-```{r setup}
+```{r setup, message=FALSE}
 library(simeta)
 library(varameta)
 
@@ -86,9 +91,11 @@ $$
 to ,
 todo: eqn.
 
-## assessing the estimator
+## Assessing the estimator
 
-todo: medians ms & varmeta discuss connection
+The `metasims` function is a wrapper function that takes in a trial function.
+
+> todo: this should be an estimator! this is the bit of code to fix. 
 
 ```{r metasims defaults}
 
@@ -117,7 +124,8 @@ sims <-
 sims %>% pluck("results") %>% head()
 
 ```
-
+> todo summary output
+                                                                                                                                                                                                                                                                                
 ```{r coverage plot, out.width="\\textwidth"}
  
 # basic scatterplot
@@ -195,13 +203,14 @@ Simeta provides a few research outputs, which we describe in this section:
 
 ### Coverage plot
 
-The coverage probability plot summarises the proportion of trials for each metaparameter set of distribution, variation between studies, effect ratio, and number of studies.  
+The coverage probability plot produced by `coverage_plot` summarises the proportion of trials for each metaparameter set of distribution, variation between studies, effect ratio, and number of studies.  
 
 ```{r }
 sims %>% 
   coverage_plot()
 
 ```
+
 
 ### Distributions summary
 
