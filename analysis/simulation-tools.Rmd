@@ -1,0 +1,28 @@
+---
+title: "simulation tools"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE}
+library(varameta)
+library(simeta)
+
+```
+
+
+## Compare estimators
+
+Suppose we want to compare estimators for the varameta package. 
+
+
+
+```{r}
+
+
+
+```
+

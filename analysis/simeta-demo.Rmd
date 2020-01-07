@@ -270,7 +270,5 @@ sims %>% pluck("distributions") %>%
 
 ```
 
-## Simulation tools
 
-The components of `simeta::` are deliberately modularised, with the intention of facilitating future optimisation and improvements.
 
