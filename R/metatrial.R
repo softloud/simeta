@@ -26,8 +26,8 @@ metatrial <- function(measure = "median",
   true_effects <- tibble::tibble(measure = measures,
                                  true_effect = c(true_effect,
                                                  log(effect_ratio)))
-  # # simulate data
-  metadata <- sim_stats(
+  # simulate data
+  metadata <- sim_stat(
     measure = measure,
     measure_spread = measure_spread,
     n_df = n_df,
@@ -37,6 +37,7 @@ metatrial <- function(measure = "median",
     effect_ratio = effect_ratio,
     wide = TRUE
   ) %>%
+  # append estimators
     mutate(
       effect_se_c = pmap_dbl(
         list(
