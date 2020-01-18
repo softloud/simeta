@@ -27,7 +27,7 @@ metatrial <- function(measure = "median",
                                  true_effect = c(true_effect,
                                                  log(effect_ratio)))
   # simulate data
-  metadata <- sim_stat(
+  metadata <- sim_stats(
     measure = measure,
     measure_spread = measure_spread,
     n_df = n_df,

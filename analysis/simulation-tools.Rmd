@@ -1,6 +1,8 @@
 ---
-title: "simulation tools"
-output: html_document
+title: "Simulation tools in the `simeta::`"
+output: 
+  html_document:
+    number_sections: true
 ---
 
 ```{r setup, include=FALSE}
@@ -13,16 +15,30 @@ library(simeta)
 
 ```
 
+# `simeta::` components overview
 
-## Compare estimators
+- todo: overview of simeta components
 
-Suppose we want to compare estimators for the varameta package. 
-
-
-
-```{r}
-
-
-
+```{}
+# input
+simulation parameters %>%
+  # function
+  simulations | function %>% 
+    simulation parameters | dataframe %>% 
+      simulation trial | per row x |trials| %>% 
+      trial results | dataframe %>% 
+    simulation results | mutate %>% 
+  # output a dataframe summarising results
+  simulations results | dataframe
+  
 ```
 
+# Simulation metaparameters
+
+# Trial: The atom of a metasimulation toolchain
+
+# Simulation: An analysis of trials
+
+# Metasimulation: An analysis of simulations
+
+# Simulation output
