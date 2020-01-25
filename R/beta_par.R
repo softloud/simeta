@@ -14,6 +14,8 @@
 #' @param error Within what value will 90 per cent of the proportion
 #' of intervention groups fall within?
 #'
+#' @family neet_test_one One neet test has been written
+#'
 #' @export
 
 beta_par <- function(proportion, error) {

@@ -16,5 +16,14 @@ Plot a coverage simulation for a single estimator
 Other vis_tools: 
 \code{\link{sim_dist}()},
 \code{\link{zeta_plot}()}
+
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{dist_name}()}
+
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{dist_name}()}
 }
+\concept{neet_test_one One neet test has been written}
 \concept{vis_tools}

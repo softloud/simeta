@@ -411,12 +411,28 @@ simulation parameters %&gt;%
 </div>
 <div id="trial-the-atom-of-a-metasimulation-toolchain" class="section level1" number="3">
 <h1 number="3"><span class="header-section-number">3</span> Trial: The atom of a metasimulation toolchain</h1>
+<p>A trial function in <code>simeta::</code> takes takes a set of simulation parameters, samples data, estimates an overall effect of interest, and outputs a summary.</p>
 </div>
 <div id="simulation-an-analysis-of-trials" class="section level1" number="4">
 <h1 number="4"><span class="header-section-number">4</span> Simulation: An analysis of trials</h1>
+<pre class="r"><code>metatrial()</code></pre>
+<pre><code>## Joining, by = &quot;study&quot;</code></pre>
+<pre><code>## # A tibble: 2 x 10
+##   measure   conf_low conf_high tau_sq     k effect true_effect coverage    bias scaled_bias
+##   &lt;chr&gt;        &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;       &lt;dbl&gt; &lt;lgl&gt;      &lt;dbl&gt;       &lt;dbl&gt;
+## 1 median     13.7        49.4  51.4       3  31.5       50     FALSE    -18.5        -0.369
+## 2 lr_median   0.0502      2.23  0.192     3   1.14       0.182 TRUE       0.956       0.956</code></pre>
 </div>
 <div id="metasimulation-an-analysis-of-simulations" class="section level1" number="5">
 <h1 number="5"><span class="header-section-number">5</span> Metasimulation: An analysis of simulations</h1>
+<p>A metasimulation is a collection of simulations. The <code>metasim()</code> function</p>
+<pre class="r"><code>metasim()</code></pre>
+<pre><code>## # A tibble: 2 x 12
+##   measure  tau_sq ci_width   bias coverage_count successful_tria… coverage id    errors
+##   &lt;chr&gt;     &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;          &lt;int&gt;            &lt;int&gt;    &lt;dbl&gt; &lt;chr&gt;  &lt;int&gt;
+## 1 lr_med…   0.190     1.94 -0.104              4                4        1 simu…      0
+## 2 median  145.       52.1   4.13               4                4        1 simu…      0
+## # … with 3 more variables: warnings &lt;int&gt;, messages &lt;int&gt;, result &lt;int&gt;</code></pre>
 </div>
 <div id="simulation-output" class="section level1" number="6">
 <h1 number="6"><span class="header-section-number">6</span> Simulation output</h1>

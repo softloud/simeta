@@ -37,8 +37,24 @@ simulation parameters %>%
 
 # Trial: The atom of a metasimulation toolchain
 
+A trial function in `simeta::` takes takes a set of simulation parameters, samples data, estimates an overall effect of interest, and outputs a summary. 
+
 # Simulation: An analysis of trials
 
+```{r}
+metatrial()
+
+
+```
+
+
 # Metasimulation: An analysis of simulations
+
+A metasimulation is a collection of simulations.  The `metasim()` function 
+
+```{r}
+metasim()
+```
+
 
 # Simulation output

@@ -24,3 +24,9 @@ the proportion \eqn{p_k} of the total sample size
 \eqn{N_k} for the
 \eqn{k}th study.
 }
+\seealso{
+Other neet_test_one One neet test has been written: 
+\code{\link{coverage_plot}()},
+\code{\link{dist_name}()}
+}
+\concept{neet_test_one One neet test has been written}

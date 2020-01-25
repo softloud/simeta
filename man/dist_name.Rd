@@ -16,3 +16,9 @@ false.}
 A function that switches out the R name for a distribution with the real
 name, and back again.
 }
+\seealso{
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{coverage_plot}()}
+}
+\concept{neet_test_one One neet test has been written}
