@@ -1,7 +1,13 @@
 #' A first pass at S3 methods for datulation objects
 #'
-#' Methods for datulation results.
+#' Methods for simulation results.
 #' @name plots
+#'
+#' @family vis_tools
+#' @family neet_test_one One neet test has been written
+#'
+#' @family
+#'
 NULL
 
 # parameters --------------------------------------------------------------

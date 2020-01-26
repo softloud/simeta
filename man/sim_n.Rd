@@ -29,3 +29,19 @@ sim_n(
 \description{
 Generate a set of meta-analysis sample sizes. We assume that control and intervention sizes are mostly within some proportion \code{prop} of the same sample size.
 }
+\seealso{
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{dist_name}()},
+\code{\link{intervention_proportion}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{plots}},
+\code{\link{sim_df}()},
+\code{\link{sim_dist}()}
+}
+\concept{neet_test_one One neet test has been written}

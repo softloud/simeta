@@ -7,6 +7,8 @@
 #' @param ... \code{trial_fn} arguments, i.e., simulation nparameters
 #' @inheritParams metatrial
 #'
+#' @family neet_test_one One neet test has been written
+#'
 #' @export
 
 metasim <- function(...,

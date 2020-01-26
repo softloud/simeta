@@ -12,6 +12,7 @@ plot the distribution of the proportion allocated to the intervention group
 \seealso{
 Other vis_tools: 
 \code{\link{coverage_plot}()},
+\code{\link{plots}},
 \code{\link{sim_dist}()}
 }
 \concept{vis_tools}

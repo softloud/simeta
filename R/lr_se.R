@@ -6,9 +6,11 @@
 #' @param n_c sample size of control group
 #' @param effect_c effect measure for control group
 #' @param effect_se_c standard error of control group
-#' @param n_c sample size of intervention group
+#' @param n_i sample size of intervention group
 #' @param effect_i effect measure of intervention group
 #' @param effect_se_i standard error of intervention group
+#'
+#' @family neet_test_one One neet test has been written
 #'
 #' @export
 

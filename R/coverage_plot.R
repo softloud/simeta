@@ -5,8 +5,6 @@
 #' @family vis_tools
 #' @family neet_test_one One neet test has been written
 #'
-#' @family neet_test_one One neet test has been written
-#'
 #' @export
 
 coverage_plot <- function(results_df) {

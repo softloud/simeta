@@ -13,6 +13,7 @@
 #'
 #' @family metapar Simulation metaparameter functions.
 #' @family vis_tools
+#' @family neet_test_one One neet test has been written
 #'
 #' @export
 

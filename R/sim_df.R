@@ -11,6 +11,7 @@
 #' @import dplyr
 #'
 #' @family metapar Simulation metaparameter functions.
+#' @family neet_test_one One neet test has been written
 #'
 #' @export
 

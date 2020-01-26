@@ -9,6 +9,8 @@
 #' @param prop_error what do we expect 90% of proportions to fall within?
 #' @param wide if true, case and control sample sizes are provided in one row
 #'
+#' @family neet_test_one One neet test has been written
+#'
 #' @export
 
 sim_n <- function(k = 3,

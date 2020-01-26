@@ -19,6 +19,16 @@ name, and back again.
 \seealso{
 Other neet_test_one One neet test has been written: 
 \code{\link{beta_par}()},
-\code{\link{coverage_plot}()}
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{intervention_proportion}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{plots}},
+\code{\link{sim_df}()},
+\code{\link{sim_dist}()},
+\code{\link{sim_n}()}
 }
 \concept{neet_test_one One neet test has been written}
