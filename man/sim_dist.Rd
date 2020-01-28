@@ -28,6 +28,7 @@ Other metapar Simulation metaparameter functions.:
 
 Other vis_tools: 
 \code{\link{coverage_plot}()},
+\code{\link{metaplot}()},
 \code{\link{plots}},
 \code{\link{zeta_plot}()}
 

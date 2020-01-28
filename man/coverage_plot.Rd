@@ -14,6 +14,7 @@ Plot a coverage simulation for a single estimator
 }
 \seealso{
 Other vis_tools: 
+\code{\link{metaplot}()},
 \code{\link{plots}},
 \code{\link{sim_dist}()},
 \code{\link{zeta_plot}()}

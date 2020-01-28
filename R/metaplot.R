@@ -4,9 +4,11 @@
 #'
 #' @importFrom cowplot plot_grid
 #'
+#' @family vis_tools
+#'
 #' @export
 
-metaplot <- function(type = "coverage") {
+metaplot <- function(sim, coverage = TRUE) {
 
   # plots -------------------------------------------------------------------
 
@@ -21,24 +23,20 @@ disttable <- sim %>%
   pluck("distributions") %>%
   sim_dist(output = "table")
 
-distplot <- sim %>%
-  pluck("distributions") %>%
-  sim_dist()
-
-
 simpar <- sim %>%
   simpar_table()
 
-if (type = "coverage") {
-  cowplot::plot_grid(covplot, simpar, #disttable, distplot,
+if (isTRUE(coverage)) {
+  cowplot::plot_grid(simpar, covplot, #disttable, distplot,
                      labels = letters[1:2],
-                     rel_widths = c(1, 0.3),
+                     rel_widths = c(0.4, 1),
                      label_size = 12)
 
 } else {
   cowplot::plot_grid(distplot, disttable,
                      labels = letters[1:2],
-                     rel_widths = c(1, 0.6),
+                     ncol = 1,
+                     rel_widths = c(0.5, 1),
                      label_size = 12)
 }
 

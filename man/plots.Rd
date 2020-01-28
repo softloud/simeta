@@ -41,6 +41,7 @@ Plot single-study simulation results.
 \seealso{
 Other vis_tools: 
 \code{\link{coverage_plot}()},
+\code{\link{metaplot}()},
 \code{\link{sim_dist}()},
 \code{\link{zeta_plot}()}
 
