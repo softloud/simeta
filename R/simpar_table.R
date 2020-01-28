@@ -11,7 +11,7 @@ simpar_table <- function(sim) {
     dplyr::filter(class != "name") %>%
     dplyr::mutate(
        v = purrr::map_chr(value, .f = function(x) {
-         paste(as.character(x), collapse = "|")
+         paste(as.character(x), collapse = " | ")
        })) %>%
     dplyr::select(argument, v) %>%
     dplyr::rename(Argument = argument,
