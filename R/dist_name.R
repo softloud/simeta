@@ -1,12 +1,14 @@
 #' R to name
-#' 
-#' A function that switches out the R name for a distribution with the real 
+#'
+#' A function that switches out the R name for a distribution with the real
 #' name, and back again.
-#' 
+#'
 #' @param dist A string with a distribution name, e.g. "lnorm" or "log-normal".
-#' @param toR Boolean as to whether it's to the R name or not. Defaults to 
+#' @param toR Boolean as to whether it's to the R name or not. Defaults to
 #' false.
-#' 
+#'
+#' @family neet_test_one One neet test has been written
+#'
 #' @export
 
 dist_name <- function(dist, toR = FALSE) {

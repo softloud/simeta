@@ -36,5 +36,20 @@ generate simulation parameter dataframe
 Other metapar Simulation metaparameter functions.: 
 \code{\link{default_parameters}},
 \code{\link{sim_dist}()}
+
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{dist_name}()},
+\code{\link{intervention_proportion}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{plots}},
+\code{\link{sim_dist}()},
+\code{\link{sim_n}()}
 }
 \concept{metapar Simulation metaparameter functions.}
+\concept{neet_test_one One neet test has been written}

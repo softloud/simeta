@@ -1,0 +1,60 @@
+---
+title: "Simulation tools in the `simeta::`"
+output: 
+  html_document:
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r message=FALSE}
+library(varameta)
+library(simeta)
+
+```
+
+# `simeta::` components overview
+
+- todo: overview of simeta components
+
+```{}
+# input
+simulation parameters %>%
+  # function
+  simulations | function %>% 
+    simulation parameters | dataframe %>% 
+      simulation trial | per row x |trials| %>% 
+      trial results | dataframe %>% 
+    simulation results | mutate %>% 
+  # output a dataframe summarising results
+  simulations results | dataframe
+  
+```
+
+# Simulation metaparameters
+
+# Trial: The atom of a metasimulation toolchain
+
+A trial function in `simeta::` takes takes a set of simulation parameters, samples data, estimates an overall effect of interest, and outputs a summary. 
+
+# Simulation: An analysis of trials
+
+```{r}
+metatrial()
+
+
+```
+
+
+# Metasimulation: An analysis of simulations
+
+A metasimulation is a collection of simulations.  The `metasim()` function 
+
+```{r}
+metasim()
+```
+
+
+# Simulation output

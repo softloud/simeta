@@ -24,3 +24,19 @@ the proportion \eqn{p_k} of the total sample size
 \eqn{N_k} for the
 \eqn{k}th study.
 }
+\seealso{
+Other neet_test_one One neet test has been written: 
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{dist_name}()},
+\code{\link{intervention_proportion}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{plots}},
+\code{\link{sim_df}()},
+\code{\link{sim_dist}()},
+\code{\link{sim_n}()}
+}
+\concept{neet_test_one One neet test has been written}

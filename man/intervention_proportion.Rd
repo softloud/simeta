@@ -7,6 +7,8 @@
 intervention_proportion(n, proportion, error)
 }
 \arguments{
+\item{n}{sample size}
+
 \item{proportion}{Expected proportion for the intervention group}
 
 \item{error}{Within what value will 90 per cent of the proportion
@@ -15,3 +17,20 @@ of intervention groups fall within?}
 \description{
 Calculate proportion of intervention group
 }
+\seealso{
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{dist_name}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{plots}},
+\code{\link{sim_df}()},
+\code{\link{sim_dist}()},
+\code{\link{sim_n}()}
+}
+\concept{beta_parameters Beta distribution parameters for intervention proportion.}
+\concept{neet_test_one One neet test has been written}

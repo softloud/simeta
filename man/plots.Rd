@@ -34,7 +34,30 @@ caption_text(dat)
 \item{sim}{A \code{sim_ss} object from \link{metasim}.}
 }
 \description{
-Methods for datulation results.
+Methods for simulation results.
 
 Plot single-study simulation results.
 }
+\seealso{
+Other vis_tools: 
+\code{\link{coverage_plot}()},
+\code{\link{sim_dist}()},
+\code{\link{zeta_plot}()}
+
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{dist_name}()},
+\code{\link{intervention_proportion}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{sim_df}()},
+\code{\link{sim_dist}()},
+\code{\link{sim_n}()}
+}
+\concept{}
+\concept{neet_test_one One neet test has been written}
+\concept{vis_tools}

@@ -8,6 +8,8 @@
 #' @inheritParams sim_stats
 #' @param test "knha" or "z" for [metafor::rma].
 #'
+#' @family neet_test_one One neet test has been written
+#'
 #' @export
 
 metatrial <- function(measure = "median",
@@ -27,7 +29,7 @@ metatrial <- function(measure = "median",
                                  true_effect = c(true_effect,
                                                  log(effect_ratio)))
   # simulate data
-  metadata <- sim_stat(
+  metadata <- sim_stats(
     measure = measure,
     measure_spread = measure_spread,
     n_df = n_df,

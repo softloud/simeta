@@ -9,11 +9,13 @@ lr_se(measure, n_c, effect_c, effect_se_c, n_i, effect_i, effect_se_i)
 \arguments{
 \item{measure}{mean or median}
 
-\item{n_c}{sample size of intervention group}
+\item{n_c}{sample size of control group}
 
 \item{effect_c}{effect measure for control group}
 
 \item{effect_se_c}{standard error of control group}
+
+\item{n_i}{sample size of intervention group}
 
 \item{effect_i}{effect measure of intervention group}
 
@@ -22,3 +24,19 @@ lr_se(measure, n_c, effect_c, effect_se_c, n_i, effect_i, effect_se_i)
 \description{
 Provides sample estimator for the squared-root of the variance of the log-ratio of two random samples
 }
+\seealso{
+Other neet_test_one One neet test has been written: 
+\code{\link{beta_par}()},
+\code{\link{coverage_plot}()},
+\code{\link{default_parameters}},
+\code{\link{dist_name}()},
+\code{\link{intervention_proportion}()},
+\code{\link{metamodel}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{plots}},
+\code{\link{sim_df}()},
+\code{\link{sim_dist}()},
+\code{\link{sim_n}()}
+}
+\concept{neet_test_one One neet test has been written}

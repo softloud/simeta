@@ -21,7 +21,6 @@ knitr::opts_chunk$set(cache = TRUE)
 # run this to update the pdf, as well
 # rmarkdown::render("vignettes/simeta.Rmd", "all")
 
-
 ```
 
 ## preamble
@@ -211,7 +210,6 @@ sims %>%
 
 ```
 
-
 ### Distributions summary
 
 There are three ways to summarise the distributions sampled in the simulation:
@@ -269,8 +267,4 @@ sims %>% pluck("distributions") %>%
   kableExtra::kable() %>% kableExtra::kable_styling()
 
 ```
-
-## Simulation tools
-
-The components of `simeta::` are deliberately modularised, with the intention of facilitating future optimisation and improvements.
 
