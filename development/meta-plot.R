@@ -8,17 +8,32 @@ library(simeta)
 
 # plots -------------------------------------------------------------------
 
-sim %>%
+covplot <- sim %>%
   coverage_plot()
 
-sim %>%
+distplot <- sim %>%
   pluck("distributions") %>%
   sim_dist()
 
-sim %>%
+disttable <- sim %>%
   pluck("distributions") %>%
   sim_dist(output = "table")
 
-sim %>%
+distplot <- sim %>%
+  pluck("distributions") %>%
+  sim_dist()
+
+
+simpar <- sim %>%
   simpar_table()
 
+library(cowplot)
+plot_grid(covplot, simpar, #disttable, distplot,
+          labels = letters[1:2],
+          rel_widths = c(1, 0.3),
+           label_size = 12)
+
+plot_grid(distplot, disttable,
+          labels = letters[1:2],
+          rel_widths = c(1, 0.6),
+          label_size = 12)
