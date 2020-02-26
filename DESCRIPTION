@@ -16,6 +16,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.1
 Depends:
     actuar
+Imports: assertthat, collateral, cowplot, dplyr, ggplot2, janitor, 
+    latex2exp, magrittr, metafor, purrr, stringr, tibble, tidyr, varameta
 Suggests: 
     testthat (>= 2.1.0),
     knitr,

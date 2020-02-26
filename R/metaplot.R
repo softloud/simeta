@@ -36,7 +36,7 @@ if (isTRUE(coverage)) {
   cowplot::plot_grid(distplot, disttable,
                      labels = letters[1:2],
                      ncol = 1,
-                     rel_widths = c(0.5, 1),
+                     rel_widths = c(1, 2),
                      label_size = 12)
 }
 

@@ -1,7 +1,7 @@
 library(testthat)
 context("time-intensive")
 
-library(metasim)
+
 
 test_that("simulation can handle more trials", {
   expect_is(metasim(trials = 10), "data.frame")
