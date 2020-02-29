@@ -1,4 +1,4 @@
 library(testthat)
 
 
-test_check("metasim")
+test_check("simeta")

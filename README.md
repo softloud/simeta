@@ -1,6 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![Build
+Status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta)
+
 # `simeta::`
 
 The goal of `simeta::` is to simulate meta-analysis data.
