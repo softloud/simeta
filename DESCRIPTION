@@ -38,4 +38,5 @@ Suggests:
     rmarkdown
 VignetteBuilder: knitr
 Remotes: 
-    softloud/varameta
+    softloud/varameta,
+    softloud/neet
