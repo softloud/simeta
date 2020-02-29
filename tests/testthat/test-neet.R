@@ -1,4 +1,4 @@
-context("non-empty thing of expected type")
+context("neet: non-empty thing of expected type")
 
 # devtools::install_github("softloud/neet")
 library(neet)
@@ -9,20 +9,16 @@ test_error <- runif(1, 0.1, 0.2)
 
 test_that(
   "beta_par", {
-    expect_neet(beta_par(proportion = 0.3, error = 0.2))
+    expect_neet(beta_par(proportion = 0.3, error = 0.2), "list")
   }
 )
 
 test_that("intervention_proportion", {
-  expect_neet(intervention_proportion(3, 0.5, 0.1))
+  expect_neet(intervention_proportion(3, 0.5, 0.1), "numeric")
 })
 
 test_that("intervention_proportion", {
-  expect_neet(intervention_proportion(4, 0.2, 0.01))
-})
-
-test_that("zeta_plot", {
-
+  expect_neet(intervention_proportion(4, 0.2, 0.01), "numeric")
 })
 
 
@@ -30,28 +26,12 @@ test_that("zeta_plot", {
 
 sims <- metasims(progress = FALSE)
 
-# summary functions -------------------------------------------------------
-
-test_that(
-  "coverage_plot", {
-    expect_neet(sims %>% coverage_plot())
-  }
-)
-
-test_that("simpar_table", {
-
-})
-
-test_that("sim_dist", {
-  expect_neet(sim_dist(default_parameters))
-})
-
 # simulation functions ----------------------------------------------------
 
 
 test_that(
   "density function", {
-    expect_neet(density_fn(0.1, "norm", list(mean = 3, sd = 0.4)))
+    expect_neet(density_fn(0.1, "norm", list(mean = 3, sd = 0.4)), "numeric")
   }
 )
 
@@ -65,64 +45,47 @@ test_that(
 )
 
 test_that("default_parameters", {
-  expect_is(default_parameters, "tbl")
+  expect_is(default_parameters, "data.frame")
 })
 
 
 test_that("lr_se", {
-  expect_neet(lr_se("median", 4, 3, 0.2, 5, 4.1, 0.3))
+  expect_neet(lr_se("median", 4, 3, 0.2, 5, 4.1, 0.3), "numeric")
 })
 
 test_that("metamodel", {
-  expect_neet(metamodel())
+  expect_neet(metamodel(), "data.frame")
 })
 
 test_that("metasim", {
-  expect_neet(metasim())
+  expect_neet(metasim(), "data.frame")
 })
 
 test_that("metasims", {
-  expect_neet(sims)
+  expect_neet(sims, "list")
 })
 
 test_that("metatrial", {
-  expect_neet(metatrial())
+  expect_neet(metatrial(), "data.frame")
 })
 
 test_that("sim_df", {
-  expect_neet(sim_df())
+  expect_neet(sim_df(), "data.frame")
 })
 
 test_that("sim_n", {
-  expect_neet(sim_n())
+  expect_neet(sim_n(), "data.frame")
 
 })
 
-
 test_that("sim_sample", {
-  expect_neet(sim_sample())
+  expect_neet(sim_sample(), "numeric")
 })
 
 test_that("sim_stats", {
-  expect_neet(sim_stats())
-})
-
-test_that("simulation_methods", {
-  # these are methods for summary
-})
-
-test_that("simulation_parameters", {
- # not sure about these
+  expect_neet(sim_stats(), "data.frame")
 })
 
 test_that("singletrial", {
-  expect_neet(singletrial())
-})
-
-test_that("tidy_sim", {
-  expect_neet(pinheiro_data %>% metafor::rma(yi = m_c, vi = s_c_d, data = .))
-})
-
-test_that("toss", {
-  # don't think I need this function
+  expect_neet(singletrial(), "data.frame")
 })
