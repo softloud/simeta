@@ -3,7 +3,6 @@
 \docType{import}
 \name{reexports}
 \alias{reexports}
-\alias{\%>\%}
 \alias{rma}
 \alias{forest}
 \alias{escalc}
@@ -17,8 +16,6 @@ below to see their documentation.
 
 \describe{
   \item{janitor}{\code{\link[janitor]{clean_names}}}
-
-  \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
   \item{metafor}{\code{\link[metafor]{escalc}}, \code{\link[metafor]{forest}}, \code{\link[metafor]{rma}}}
 

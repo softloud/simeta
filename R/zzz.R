@@ -17,9 +17,6 @@
 NULL
 
 #' @export
-magrittr::`%>%`
-
-#' @export
 metafor::rma
 
 #' @export

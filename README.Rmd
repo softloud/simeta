@@ -6,7 +6,7 @@ output: github_document
 
 ```{r set up, echo = FALSE}
 knitr::opts_chunk$set(
-  eval = FALSE,
+  eval = TRUE,
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
@@ -55,9 +55,7 @@ library(simeta)
 library(tidyverse)
 
 # so these results are reproducible
-set.seed(38) 
-
-# I like to set.seed with my age. It makes me feel smug that I'm a middle-aged woman who codes. 
+set.seed(39) 
 
 ```
 
@@ -206,6 +204,14 @@ metasim()
 ## simulate over parameters
 
 ```{r}
-# metasims is not working yet.
+(sim <- metasims())
 ```
+
+
+## visualise
+
+```{r}
+sim %>% coverage_plot()
+```
+
 
