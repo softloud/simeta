@@ -3,7 +3,7 @@
 #' @param results_df A data.frame produced by [metasims].
 #'
 #' @family vis_tools
-#' @family neet_test_one One neet test has been written
+#' @family reporting Functions and tools for reporting simulation results.
 #'
 #' @export
 

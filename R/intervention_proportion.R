@@ -4,7 +4,8 @@
 #' @inheritParams beta_par
 #'
 #' @family neet_test_one One neet test has been written
-#' @family beta_parameters Beta distribution parameters for intervention proportion.
+#' @family simulation Functions that contribute to simulation pipeline.
+#' @family sample_size Generating meta-anlysis sample sizes.
 #'
 #' @export
 

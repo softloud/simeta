@@ -8,6 +8,7 @@
 #' false.
 #'
 #' @family neet_test_one One neet test has been written
+#' @family reporting Functions and tools for reporting simulation results.
 #'
 #' @export
 

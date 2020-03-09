@@ -17,21 +17,15 @@ Other vis_tools:
 \code{\link{metaplot}()},
 \code{\link{plots}},
 \code{\link{sim_dist}()},
+\code{\link{simpar_table}()},
 \code{\link{zeta_plot}()}
 
-Other neet_test_one One neet test has been written: 
-\code{\link{beta_par}()},
-\code{\link{default_parameters}},
+Other reporting Functions and tools for reporting simulation results.: 
 \code{\link{dist_name}()},
-\code{\link{intervention_proportion}()},
-\code{\link{lr_se}()},
-\code{\link{metamodel}()},
-\code{\link{metasim}()},
-\code{\link{metatrial}()},
-\code{\link{plots}},
-\code{\link{sim_df}()},
+\code{\link{metaplot}()},
 \code{\link{sim_dist}()},
-\code{\link{sim_n}()}
+\code{\link{simpar_table}()},
+\code{\link{zeta_plot}()}
 }
-\concept{neet_test_one One neet test has been written}
+\concept{reporting Functions and tools for reporting simulation results.}
 \concept{vis_tools}

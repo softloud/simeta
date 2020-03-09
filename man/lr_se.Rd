@@ -22,21 +22,37 @@ lr_se(measure, n_c, effect_c, effect_se_c, n_i, effect_i, effect_se_i)
 \item{effect_se_i}{standard error of intervention group}
 }
 \description{
-Provides sample estimator for the squared-root of the variance of the log-ratio of two random samples
+Provides sample estimator for the squared-root of the variance of the
+log-ratio of two random samples
 }
 \seealso{
 Other neet_test_one One neet test has been written: 
 \code{\link{beta_par}()},
-\code{\link{coverage_plot}()},
 \code{\link{default_parameters}},
+\code{\link{density_fn}()},
 \code{\link{dist_name}()},
 \code{\link{intervention_proportion}()},
 \code{\link{metamodel}()},
+\code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
 \code{\link{plots}},
 \code{\link{sim_df}()},
 \code{\link{sim_dist}()},
 \code{\link{sim_n}()}
+
+Other simulation Functions that contribute to simulation pipeline.: 
+\code{\link{beta_par}()},
+\code{\link{default_parameters}},
+\code{\link{density_fn}()},
+\code{\link{intervention_proportion}()},
+\code{\link{metamodel}()},
+\code{\link{metasims}()},
+\code{\link{metasim}()},
+\code{\link{metatrial}()},
+\code{\link{sim_df}()},
+\code{\link{sim_n}()},
+\code{\link{sim_sample}()}
 }
 \concept{neet_test_one One neet test has been written}
+\concept{simulation Functions that contribute to simulation pipeline.}

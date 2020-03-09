@@ -16,6 +16,9 @@
 #' @param progress Turn progress bar on and off.
 #' @inheritParams sim_n
 #'
+#' @family simulation Functions that contribute to simulation pipeline.
+#' @family neet_test_one One neet test has been written
+#'
 #' @export
 
 metasims <- function(single_study = FALSE,

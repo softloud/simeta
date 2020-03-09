@@ -6,6 +6,7 @@
 #' @param test "knha" or "z"
 #'
 #' @family neet_test_one One neet test has been written
+#' @family simulation Functions that contribute to simulation pipeline.
 #'
 #' @export
 

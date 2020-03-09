@@ -10,7 +10,7 @@
 #' @import tibble
 #' @import dplyr
 #'
-#' @family metapar Simulation metaparameter functions.
+#' @family simulation Functions that contribute to simulation pipeline.
 #' @family neet_test_one One neet test has been written
 #'
 #' @export

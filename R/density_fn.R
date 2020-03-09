@@ -7,8 +7,10 @@
 #' sd = 0.2) for \eqn{normal(30, 0.2)}.
 #' @param type Random "r" sample, density "d", quantile "q", or probability "p".
 #'
-#'
 #' @importFrom actuar dpareto qpareto rpareto qpareto
+#'
+#' @family simulation Functions that contribute to simulation pipeline.
+#' @family neet_test_one One neet test has been written
 #'
 #' @export
 

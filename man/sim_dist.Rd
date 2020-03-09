@@ -22,30 +22,35 @@ sim_dist(default_parameters, output = "table")
 
 }
 \seealso{
-Other metapar Simulation metaparameter functions.: 
-\code{\link{default_parameters}},
-\code{\link{sim_df}()}
+Other reporting Functions and tools for reporting simulation results.: 
+\code{\link{coverage_plot}()},
+\code{\link{dist_name}()},
+\code{\link{metaplot}()},
+\code{\link{simpar_table}()},
+\code{\link{zeta_plot}()}
 
 Other vis_tools: 
 \code{\link{coverage_plot}()},
 \code{\link{metaplot}()},
 \code{\link{plots}},
+\code{\link{simpar_table}()},
 \code{\link{zeta_plot}()}
 
 Other neet_test_one One neet test has been written: 
 \code{\link{beta_par}()},
-\code{\link{coverage_plot}()},
 \code{\link{default_parameters}},
+\code{\link{density_fn}()},
 \code{\link{dist_name}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
 \code{\link{metamodel}()},
+\code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
 \code{\link{plots}},
 \code{\link{sim_df}()},
 \code{\link{sim_n}()}
 }
-\concept{metapar Simulation metaparameter functions.}
 \concept{neet_test_one One neet test has been written}
+\concept{reporting Functions and tools for reporting simulation results.}
 \concept{vis_tools}

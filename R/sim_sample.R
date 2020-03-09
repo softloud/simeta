@@ -9,6 +9,9 @@
 #' @param par list of parameter arguments
 #' @param control value of first parameter of distribution is determined by median ratio
 #' @param effect_ratio ratio of population effects intervention / control
+#'
+#' @family simulation Functions that contribute to simulation pipeline.
+#'
 #' @export
 
 sim_sample <- function(n = 18,

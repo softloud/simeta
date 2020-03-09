@@ -10,6 +10,8 @@
 #' @param wide if true, case and control sample sizes are provided in one row
 #'
 #' @family neet_test_one One neet test has been written
+#' @family simulation Functions that contribute to simulation pipeline.
+#' @family sample_size Generating meta-anlysis sample sizes.
 #'
 #' @export
 

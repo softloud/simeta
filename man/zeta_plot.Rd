@@ -14,6 +14,15 @@ Other vis_tools:
 \code{\link{coverage_plot}()},
 \code{\link{metaplot}()},
 \code{\link{plots}},
-\code{\link{sim_dist}()}
+\code{\link{sim_dist}()},
+\code{\link{simpar_table}()}
+
+Other reporting Functions and tools for reporting simulation results.: 
+\code{\link{coverage_plot}()},
+\code{\link{dist_name}()},
+\code{\link{metaplot}()},
+\code{\link{sim_dist}()},
+\code{\link{simpar_table}()}
 }
+\concept{reporting Functions and tools for reporting simulation results.}
 \concept{vis_tools}

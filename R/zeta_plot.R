@@ -1,7 +1,8 @@
 #' plot the distribution of the proportion allocated to the intervention group
 #'
-#'
 #' @family vis_tools
+#' @family reporting Functions and tools for reporting simulation results.
+#'
 #' @export
 
 zeta_plot <- function(mu, epsilon) {

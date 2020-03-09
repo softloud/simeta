@@ -5,6 +5,7 @@
 #' @importFrom cowplot plot_grid
 #'
 #' @family vis_tools
+#' @family reporting Functions and tools for reporting simulation results.
 #'
 #' @export
 

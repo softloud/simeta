@@ -38,16 +38,31 @@ NB: bias is effect - true effect.
 \seealso{
 Other neet_test_one One neet test has been written: 
 \code{\link{beta_par}()},
-\code{\link{coverage_plot}()},
 \code{\link{default_parameters}},
+\code{\link{density_fn}()},
 \code{\link{dist_name}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
 \code{\link{metamodel}()},
+\code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{plots}},
 \code{\link{sim_df}()},
 \code{\link{sim_dist}()},
 \code{\link{sim_n}()}
+
+Other simulation Functions that contribute to simulation pipeline.: 
+\code{\link{beta_par}()},
+\code{\link{default_parameters}},
+\code{\link{density_fn}()},
+\code{\link{intervention_proportion}()},
+\code{\link{lr_se}()},
+\code{\link{metamodel}()},
+\code{\link{metasims}()},
+\code{\link{metasim}()},
+\code{\link{sim_df}()},
+\code{\link{sim_n}()},
+\code{\link{sim_sample}()}
 }
 \concept{neet_test_one One neet test has been written}
+\concept{simulation Functions that contribute to simulation pipeline.}

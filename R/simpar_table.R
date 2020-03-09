@@ -2,6 +2,9 @@
 #'
 #' @param sim Metasimulation object produced by [metasims].
 #'
+#' @family vis_tools
+#' @family reporting Functions and tools for reporting simulation results.
+#'
 #' @export
 
 simpar_table <- function(sim) {

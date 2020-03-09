@@ -11,7 +11,7 @@
 #' sim_dist(default_parameters)
 #' sim_dist(default_parameters, output = "table")
 #'
-#' @family metapar Simulation metaparameter functions.
+#' @family reporting Functions and tools for reporting simulation results.
 #' @family vis_tools
 #' @family neet_test_one One neet test has been written
 #'

@@ -19,16 +19,25 @@ name, and back again.
 \seealso{
 Other neet_test_one One neet test has been written: 
 \code{\link{beta_par}()},
-\code{\link{coverage_plot}()},
 \code{\link{default_parameters}},
+\code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
 \code{\link{metamodel}()},
+\code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
 \code{\link{plots}},
 \code{\link{sim_df}()},
 \code{\link{sim_dist}()},
 \code{\link{sim_n}()}
+
+Other reporting Functions and tools for reporting simulation results.: 
+\code{\link{coverage_plot}()},
+\code{\link{metaplot}()},
+\code{\link{sim_dist}()},
+\code{\link{simpar_table}()},
+\code{\link{zeta_plot}()}
 }
 \concept{neet_test_one One neet test has been written}
+\concept{reporting Functions and tools for reporting simulation results.}

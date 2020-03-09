@@ -14,7 +14,9 @@
 #' @param error Within what value will 90 per cent of the proportion
 #' of intervention groups fall within?
 #'
+#' @family sample_size Generating meta-anlysis sample sizes.
 #' @family neet_test_one One neet test has been written
+#' @family simulation Functions that contribute to simulation pipeline.
 #'
 #' @export
 
