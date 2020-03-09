@@ -17,6 +17,10 @@ simpar_table <- function(sim) {
          paste(as.character(x), collapse = " | ")
        })) %>%
     dplyr::select(argument, v) %>%
+    dplyr::filter(argument != "beep",
+                  argument != "knha",
+                  argument != "progress",
+                  argument != "single_study") %>%
     dplyr::rename(Argument = argument,
                   Value = v) %>%
   ggpubr::ggtexttable(rows = NULL)
