@@ -47,9 +47,7 @@ library(simeta)
 library(tidyverse)
 
 # so these results are reproducible
-set.seed(38) 
-
-# I like to set.seed with my age. It makes me feel smug that I'm a middle-aged woman who codes. 
+set.seed(39) 
 ```
 
 This is a function I have often wished I’ve had on hand when simulating
@@ -67,26 +65,26 @@ sim_n() %>% knitr::kable()
 
 | study    | group        |  n |
 | :------- | :----------- | -: |
-| study\_1 | control      | 59 |
-| study\_2 | control      | 32 |
-| study\_3 | control      | 44 |
-| study\_1 | intervention | 57 |
-| study\_2 | intervention | 36 |
-| study\_3 | intervention | 44 |
+| study\_1 | control      | 31 |
+| study\_2 | control      | 14 |
+| study\_3 | control      | 59 |
+| study\_1 | intervention | 29 |
+| study\_2 | intervention | 13 |
+| study\_3 | intervention | 64 |
 
 ``` r
 
 sim_n(k = 3) %>% knitr::kable()
 ```
 
-| study    | group        |  n |
-| :------- | :----------- | -: |
-| study\_1 | control      | 15 |
-| study\_2 | control      | 93 |
-| study\_3 | control      | 16 |
-| study\_1 | intervention | 15 |
-| study\_2 | intervention | 94 |
-| study\_3 | intervention | 18 |
+| study    | group        |   n |
+| :------- | :----------- | --: |
+| study\_1 | control      |  93 |
+| study\_2 | control      |  44 |
+| study\_3 | control      |  89 |
+| study\_1 | intervention |  84 |
+| study\_2 | intervention |  49 |
+| study\_3 | intervention | 103 |
 
 ``` r
 
@@ -97,18 +95,18 @@ sim_n(k = 6) %>% knitr::kable()
 
 | study    | group        |  n |
 | :------- | :----------- | -: |
-| study\_1 | control      | 47 |
-| study\_2 | control      | 17 |
-| study\_3 | control      | 40 |
-| study\_4 | control      | 24 |
-| study\_5 | control      | 26 |
-| study\_6 | control      | 94 |
-| study\_1 | intervention | 50 |
-| study\_2 | intervention | 15 |
-| study\_3 | intervention | 36 |
-| study\_4 | intervention | 19 |
-| study\_5 | intervention | 34 |
-| study\_6 | intervention | 96 |
+| study\_1 | control      | 93 |
+| study\_2 | control      | 55 |
+| study\_3 | control      | 41 |
+| study\_4 | control      | 90 |
+| study\_5 | control      | 95 |
+| study\_6 | control      | 66 |
+| study\_1 | intervention | 87 |
+| study\_2 | intervention | 55 |
+| study\_3 | intervention | 45 |
+| study\_4 | intervention | 92 |
+| study\_5 | intervention | 92 |
+| study\_6 | intervention | 52 |
 
 Suppose we require data that mimics small cohorts, say as small as 3,
 and as large as 50.
@@ -120,12 +118,12 @@ sim_n(min_n = 3, max_n = 50) %>% knitr::kable()
 
 | study    | group        |  n |
 | :------- | :----------- | -: |
-| study\_1 | control      | 15 |
-| study\_2 | control      | 22 |
-| study\_3 | control      | 14 |
-| study\_1 | intervention | 16 |
-| study\_2 | intervention | 23 |
-| study\_3 | intervention | 17 |
+| study\_1 | control      |  6 |
+| study\_2 | control      |  6 |
+| study\_3 | control      | 12 |
+| study\_1 | intervention |  5 |
+| study\_2 | intervention |  6 |
+| study\_3 | intervention | 15 |
 
 We expect cohorts from the same study to have roughly the same size,
 proportional to that size. We can control this proportion with the
@@ -142,10 +140,10 @@ sim_n(k = 2, prop = 0.05, max_n = 50) %>% knitr::kable()
 
 | study    | group        |  n |
 | :------- | :----------- | -: |
-| study\_1 | control      | 39 |
-| study\_2 | control      | 48 |
-| study\_1 | intervention |  6 |
-| study\_2 | intervention |  1 |
+| study\_1 | control      | 26 |
+| study\_2 | control      | 38 |
+| study\_1 | intervention |  1 |
+| study\_2 | intervention |  0 |
 
 It can be useful, for more human-interpretable purposes, to display the
 sample sizes in wide format.
@@ -167,10 +165,10 @@ sim_n(k = 4, prop = 0.05, max_n = 30, wide = TRUE) %>%
 
 | class | intervention | control |
 | :---- | -----------: | ------: |
-| a     |            3 |      26 |
-| b     |            1 |      27 |
-| c     |            1 |      20 |
-| d     |            1 |      21 |
+| a     |            0 |      22 |
+| b     |            0 |      21 |
+| c     |            0 |      25 |
+| d     |            0 |      24 |
 
 ### simulation parameters
 
@@ -209,27 +207,11 @@ sim_df()
 #> # … with 98 more rows
 
 sim_df() %>% str(1)
-#> Classes 'tbl_df', 'tbl' and 'data.frame':    108 obs. of  8 variables:
-#>  $ k           : num  3 3 3 3 3 3 7 7 7 7 ...
-#>  $ tau_sq_true : num  0 0 0 0 0 0 0 0 0 0 ...
-#>  $ effect_ratio: num  1 1 1 1 1 1 1 1 1 1 ...
-#>  $ rdist       : chr  "norm" "exp" "pareto" "pareto" ...
-#>  $ parameters  :List of 108
-#>  $ n           :List of 108
-#>  $ id          : chr  "sim_1" "sim_2" "sim_3" "sim_4" ...
-#>  $ true_effect : num  2 0.347 0.78 0.414 3 ...
+#> tibble [108 × 8] (S3: tbl_df/tbl/data.frame)
 
 # only consider small values of k
 sim_df(k = c(2, 5, 7)) %>% str(1)
-#> Classes 'tbl_df', 'tbl' and 'data.frame':    108 obs. of  8 variables:
-#>  $ k           : num  2 2 2 2 2 2 5 5 5 5 ...
-#>  $ tau_sq_true : num  0 0 0 0 0 0 0 0 0 0 ...
-#>  $ effect_ratio: num  1 1 1 1 1 1 1 1 1 1 ...
-#>  $ rdist       : chr  "norm" "exp" "pareto" "pareto" ...
-#>  $ parameters  :List of 108
-#>  $ n           :List of 108
-#>  $ id          : chr  "sim_1" "sim_2" "sim_3" "sim_4" ...
-#>  $ true_effect : num  2 0.347 0.78 0.414 3 ...
+#> tibble [108 × 8] (S3: tbl_df/tbl/data.frame)
 ```
 
 For the list-column of tibbles `n`, the `sim_df` function calls `sim_n`
@@ -245,34 +227,34 @@ demo_k %>% pluck("n") %>% head(3)
 #> # A tibble: 6 x 3
 #>   study   group            n
 #>   <chr>   <chr>        <dbl>
-#> 1 study_1 control         81
-#> 2 study_2 control         30
-#> 3 study_3 control         41
-#> 4 study_1 intervention    76
-#> 5 study_2 intervention    29
-#> 6 study_3 intervention    37
+#> 1 study_1 control         86
+#> 2 study_2 control         17
+#> 3 study_3 control         81
+#> 4 study_1 intervention    86
+#> 5 study_2 intervention    19
+#> 6 study_3 intervention    89
 #> 
 #> [[2]]
 #> # A tibble: 6 x 3
 #>   study   group            n
 #>   <chr>   <chr>        <dbl>
-#> 1 study_1 control         77
+#> 1 study_1 control         23
 #> 2 study_2 control         30
-#> 3 study_3 control         51
-#> 4 study_1 intervention    94
-#> 5 study_2 intervention    29
-#> 6 study_3 intervention    41
+#> 3 study_3 control         57
+#> 4 study_1 intervention    23
+#> 5 study_2 intervention    36
+#> 6 study_3 intervention    59
 #> 
 #> [[3]]
 #> # A tibble: 6 x 3
 #>   study   group            n
 #>   <chr>   <chr>        <dbl>
-#> 1 study_1 control         95
-#> 2 study_2 control         84
-#> 3 study_3 control         87
-#> 4 study_1 intervention    81
-#> 5 study_2 intervention    85
-#> 6 study_3 intervention    79
+#> 1 study_1 control         62
+#> 2 study_2 control         37
+#> 3 study_3 control         76
+#> 4 study_1 intervention    56
+#> 5 study_2 intervention    45
+#> 6 study_3 intervention    77
 
 
 # compare the number of rows in the dataframe in the n column with the k value
@@ -302,14 +284,14 @@ sample and return tabulated summary stats.
 sim_stats()  %>% knitr::kable()
 ```
 
-| study    | group        |   effect | effect\_spread |  n |
-| :------- | :----------- | -------: | -------------: | -: |
-| study\_1 | control      | 66.39775 |      0.2417787 | 64 |
-| study\_1 | intervention | 45.18561 |      0.2534450 | 85 |
-| study\_2 | control      | 43.86020 |      0.2415023 | 48 |
-| study\_2 | intervention | 68.36120 |      0.2254957 | 59 |
-| study\_3 | control      | 56.82204 |      0.2305867 | 61 |
-| study\_3 | intervention | 52.82040 |      0.3316609 | 71 |
+| study    | group        |   effect | effect\_spread |   n |
+| :------- | :----------- | -------: | -------------: | --: |
+| study\_1 | control      | 63.38346 |      0.3209470 | 105 |
+| study\_1 | intervention | 47.32126 |      0.3023392 |  93 |
+| study\_2 | control      | 48.05826 |      0.2650456 |  26 |
+| study\_2 | intervention | 62.45385 |      0.1783509 |  25 |
+| study\_3 | control      | 46.24123 |      0.3056731 |  76 |
+| study\_3 | intervention | 64.88732 |      0.2871718 |  91 |
 
 ## trial
 
@@ -345,10 +327,10 @@ results.
 metatrial()
 #> Joining, by = "study"
 #> # A tibble: 2 x 10
-#>   measure conf_low conf_high  tau_sq     k effect true_effect coverage    bias
-#>   <chr>      <dbl>     <dbl>   <dbl> <int>  <dbl>       <dbl> <lgl>      <dbl>
-#> 1 median      3.29    105.   416.        3 54.0        50     TRUE      3.97  
-#> 2 lr_med…    -1.79      2.05   0.596     3  0.128       0.182 TRUE     -0.0544
+#>   measure conf_low conf_high  tau_sq     k effect true_effect coverage   bias
+#>   <chr>      <dbl>     <dbl>   <dbl> <int>  <dbl>       <dbl> <lgl>     <dbl>
+#> 1 median    16.9       77.6  149.        3 47.3        50     TRUE     -2.72 
+#> 2 lr_med…   -0.879      1.55   0.239     3  0.335       0.182 TRUE      0.153
 #> # … with 1 more variable: scaled_bias <dbl>
 ```
 
@@ -364,10 +346,10 @@ the exceptions being `cp_` variables.
 ``` r
 metasim()
 #> # A tibble: 2 x 12
-#>   measure tau_sq ci_width   bias coverage_count successful_tria… coverage id   
-#>   <chr>    <dbl>    <dbl>  <dbl>          <int>            <int>    <dbl> <chr>
-#> 1 lr_med…  0.117     1.46  0.140              3                4     0.75 simu…
-#> 2 median  97.8      38.6  -1.91               3                4     0.75 simu…
+#>   measure  tau_sq ci_width   bias coverage_count successful_tria… coverage id   
+#> * <chr>     <dbl>    <dbl>  <dbl>          <int>            <int>    <dbl> <chr>
+#> 1 lr_med…   0.478     3.23 0.0452              4                4        1 simu…
+#> 2 median  401.       88.6  1.31                4                4        1 simu…
 #> # … with 4 more variables: errors <int>, warnings <int>, messages <int>,
 #> #   result <int>
 ```
@@ -382,16 +364,16 @@ metasim()
 #> # A tibble: 216 x 20
 #>    measure  tau_sq ci_width     bias coverage_count successful_tria… coverage
 #>    <chr>     <dbl>    <dbl>    <dbl>          <int>            <int>    <dbl>
-#>  1 lr_med… 8.11e-4    0.212 -0.0148               3                3    1    
-#>  2 median  4.48e-3    0.359  0.0164               2                3    0.667
-#>  3 lr_med… 8.34e-2    1.89  -0.0675               3                3    1    
-#>  4 median  1.10e-3    0.261 -0.00253              3                3    1    
-#>  5 lr_med… 0.         0.787  0.0294               3                3    1    
-#>  6 median  1.71e-2    0.976 -0.0208               3                3    1    
-#>  7 lr_med… 0.         0.584 -0.112                3                3    1    
-#>  8 median  1.47e-3    0.419  0.0248               3                3    1    
-#>  9 lr_med… 1.21e-6    2.59   0.221                3                3    1    
-#> 10 median  2.70e-1    4.18  -0.493                2                3    0.667
+#>  1 lr_med… 6.89e-4    0.202 -0.00236              3                3    1    
+#>  2 median  1.98e-4    0.165  0.0271               3                3    1    
+#>  3 lr_med… 6.67e-2    1.33   0.00323              3                3    1    
+#>  4 median  5.13e-3    0.405 -0.00643              3                3    1    
+#>  5 lr_med… 1.05e-2    0.700 -0.159                3                3    1    
+#>  6 median  8.54e-3    0.687  0.134                2                3    0.667
+#>  7 lr_med… 0.         1.21  -0.203                3                3    1    
+#>  8 median  0.         0.329  0.0269               3                3    1    
+#>  9 lr_med… 2.98e-2    2.53   0.0283               3                3    1    
+#> 10 median  7.06e-1    4.70  -0.371                3                3    1    
 #> # … with 206 more rows, and 13 more variables: id <chr>, errors <int>,
 #> #   warnings <int>, messages <int>, result <int>, k <dbl>, tau_sq_true <dbl>,
 #> #   effect_ratio <chr>, rdist <chr>, parameters <list>, n <list>,
@@ -453,6 +435,6 @@ metasim()
 sim %>% coverage_plot()
 ```
 
-![](README-unnamed-chunk-4-1.png)<!-- -->
+![](README-coverage-1.png)<!-- -->
 
 1.  Ideally this would be configurable but let’s hardcode it for now.

@@ -57,8 +57,6 @@ Other neet_test_one One neet test has been written:
 \code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
-\code{\link{plots}},
-\code{\link{sim_dist}()},
 \code{\link{sim_n}()}
 }
 \concept{neet_test_one One neet test has been written}

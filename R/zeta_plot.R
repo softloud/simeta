@@ -6,6 +6,18 @@
 #' @export
 
 zeta_plot <- function(mu, epsilon) {
+  # check numeric args
+  neet::assert_neet(mu, "numeric")
+  neet::assert_neet(epsilon, "numeric")
+
+  # check args are [0,1]
+  assertthat::assert_that(
+    mu > 0 & mu < 1,
+    msg = "mu must be a value from [0,1].")
+  assertthat::assert_that(
+    epsilon > 0 & epsilon < 1,
+    msg = "epsilon must be a value from [0,1].")
+
   # calculate parameters
   par <- beta_par(mu, epsilon)
 
@@ -30,7 +42,7 @@ zeta_plot <- function(mu, epsilon) {
         mu - epsilon,
         ",",
         mu + epsilon,
-        "]"), width = 50)) +
+        "]"), width = 70)) +
     theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
 
 

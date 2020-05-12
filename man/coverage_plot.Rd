@@ -14,16 +14,11 @@ Plot a coverage simulation for a single estimator
 }
 \seealso{
 Other vis_tools: 
-\code{\link{metaplot}()},
-\code{\link{plots}},
-\code{\link{sim_dist}()},
 \code{\link{simpar_table}()},
 \code{\link{zeta_plot}()}
 
 Other reporting Functions and tools for reporting simulation results.: 
 \code{\link{dist_name}()},
-\code{\link{metaplot}()},
-\code{\link{sim_dist}()},
 \code{\link{simpar_table}()},
 \code{\link{zeta_plot}()}
 }

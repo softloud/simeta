@@ -89,3 +89,7 @@ test_that("sim_stats", {
 test_that("singletrial", {
   expect_neet(singletrial(), "data.frame")
 })
+
+
+# test reporting ----------------------------------------------------------
+

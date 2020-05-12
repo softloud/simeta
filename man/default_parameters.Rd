@@ -4,11 +4,13 @@
 \name{default_parameters}
 \alias{default_parameters}
 \title{Default Simulation Parameters}
-\format{A dataframe with 6 rows and 2 variables.
+\format{
+A dataframe with 6 rows and 2 variables.
 \describe{
 \item{dist}{R-friendly distribution name.}
 \item{par}{Parameter set for r\code{dist} random sampling.}
-}}
+}
+}
 \usage{
 default_parameters
 }
@@ -39,9 +41,7 @@ Other neet_test_one One neet test has been written:
 \code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
-\code{\link{plots}},
 \code{\link{sim_df}()},
-\code{\link{sim_dist}()},
 \code{\link{sim_n}()}
 }
 \concept{neet_test_one One neet test has been written}

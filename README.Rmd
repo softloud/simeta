@@ -210,7 +210,7 @@ metasim()
 
 ## visualise
 
-```{r}
+```{r coverage}
 sim %>% coverage_plot()
 ```
 

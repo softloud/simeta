@@ -1,0 +1,33 @@
+---
+title: "simeta medians"
+author: "Charles T. Gray"
+date: "04/05/2020"
+output: 
+  html_document:
+    number_sections: true
+params: 
+  trials: 3
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# objective
+
+
+
+# simulation metaparameters
+
+
+# perform simulations
+
+```{r}
+sims <- metasims()
+
+```
+
+
+# report simulation results
+

@@ -16,7 +16,7 @@ params:
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(cache = TRUE, eval = FALSE)
 
 # run this to update the pdf, as well
 # rmarkdown::render("vignettes/simeta.Rmd", "all")
