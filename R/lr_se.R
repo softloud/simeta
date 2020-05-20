@@ -24,6 +24,14 @@ lr_se <-
            n_i,
            effect_i,
            effect_se_i) {
+    neet::assert_neet(measure, "character")
+    neet::assert_neet(n_c, "numint")
+    neet::assert_neet(n_i, "numint")
+    neet::assert_neet(effect_c, "numint")
+    neet::assert_neet(effect_se_c, "numint")
+    neet::assert_neet(effect_i, "numint")
+    neet::assert_neet(effect_se_i, "numint")
+
     case_when(
       measure == "median" ~ sqrt(effect_se_c ^ 2 / effect_c ^ 2 +
                                    effect_se_i ^ 2 / effect_i ^ 2),

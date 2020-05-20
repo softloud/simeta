@@ -17,6 +17,9 @@ metamodel <- function(
   test = "knha",
   data = NULL
 ){
+  neet::assert_neet(y, "numeric")
+  neet::assert_neet(se, "numeric")
+  neet::assert_neet(test, "character")
 
   # try a re model; may fail to converge.
   rma <- try(

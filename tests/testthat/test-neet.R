@@ -51,6 +51,7 @@ test_that("default_parameters", {
 
 test_that("lr_se", {
   expect_neet(lr_se("median", 4, 3, 0.2, 5, 4.1, 0.3), "numeric")
+  expect_neet(lr_se("mean", 4, 3, 0.2, 5, 4.1, 0.3), "numeric")
 })
 
 test_that("metamodel", {
@@ -62,7 +63,7 @@ test_that("metasim", {
 })
 
 test_that("metasims", {
-  expect_neet(sims, "list")
+  expect_neet(sims, "metasim")
 })
 
 test_that("metatrial", {
@@ -86,10 +87,11 @@ test_that("sim_stats", {
   expect_neet(sim_stats(), "data.frame")
 })
 
-test_that("singletrial", {
-  expect_neet(singletrial(), "data.frame")
-})
-
-
 # test reporting ----------------------------------------------------------
+
+test_that("coverage plot", {
+  covplot <- sims %>% coverage_plot()
+
+  expect_neet(covplot, "ggplot")
+})
 

@@ -15,7 +15,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.0
 Depends:
-    actuar
+    actuar,
+    R (>= 2.10)
 Imports: 
     assertthat,
     collateral,

@@ -8,6 +8,8 @@
 #' @export
 
 coverage_plot <- function(results_df) {
+  assertthat::assert_that( "metasim" %in% class(results_df))
+
   results_df %>%
     purrr::pluck("results") %>%
     dplyr::mutate(Distribution = purrr::map_chr(rdist, dist_name),

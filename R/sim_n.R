@@ -29,7 +29,7 @@ sim_n <- function(k = 3,
               msg = "minimum sample size cannot exceed maximum sample size")
 
   # set up study label and sample kth sample size of control + intervention
-  n_df <- tibble::tibble(study = paste0("study_", seq(1, k)),
+  n_df <- tibble::tibble(study = sample(lotr_study, size = k, replace = FALSE),
                          study_n = sample(seq(min_n, max_n),
                                           size = k, replace = TRUE)) %>%
     dplyr::mutate(

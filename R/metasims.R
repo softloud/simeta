@@ -2,13 +2,11 @@
 #'
 #' coverage probability simulations of an estimator for various
 #'
-#' @param single_study Set this to TRUE for a simulation of single samples; i.e., one control and one intervention group.
 #' @param measure Calculate sample median or mean. Defaults to median.
 #' @param measure_spread Specify "iqr", "range", "sd", "var". Will have to check how many of these are done right now.
 #' @param k Vector of desired numbers studies to simulate for.
 #' @param tau_sq_true The true value of the variation between the studies.
 #' @param distributions a dataframe with a `dist` column of R distributions, i.e., norm, exp, pareto, and a list-column `par` of parameter sets. Defaults to [default_parameters].
-#' @param single_study When set to TRUE, will override simulation parameters with k = 1 and tau_sq_true = 0.
 #' @param k Simulate for different numbers of studies.
 #' @param tau_sq_true Variance \eqn{\gamma_k \sim N(0, \tau^2)} associated with the random effect
 #' @param unequal_effect_ratio \eqn{\nu_I / \nu_C := \rho} where \eqn{\rho = 1} and whatever arguments passed to this. Defaults to 1.2, so that the cases \eqn{\rho = 1, 1.2} are considered.
@@ -21,8 +19,7 @@
 #'
 #' @export
 
-metasims <- function(single_study = FALSE,
-                     measure = "median",
+metasims <- function(measure = "median",
                      measure_spread = "iqr",
                      distributions = default_parameters,
                      k = c(3, 7, 10),
@@ -92,11 +89,7 @@ metasims <- function(single_study = FALSE,
   measure_string <- measure
 
   # set variance between studies to 0 whenthere's only one study
-  if (isTRUE(single_study)) {
-    k <- 1
-    tau_sq_true <- 0
-  }
-
+  tau_sq_true <- if_else(k == 1, 0, tau_sq_true)
 
   # instantiate simulation --------------------------------------------------
 
@@ -196,9 +189,7 @@ metasims <- function(single_study = FALSE,
   )
 
   # define simulation class
-  class(sim) <- if_else(!isTRUE(single_study),
-                        "sim_ma",
-                        "sim_ss") %>% c("list")
+  class(sim) <- "metasim"
 
   # at the end --------------------------------------------------------------
 

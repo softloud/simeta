@@ -5,7 +5,6 @@
 \title{metasims}
 \usage{
 metasims(
-  single_study = FALSE,
   measure = "median",
   measure_spread = "iqr",
   distributions = default_parameters,
@@ -24,8 +23,6 @@ metasims(
 )
 }
 \arguments{
-\item{single_study}{When set to TRUE, will override simulation parameters with k = 1 and tau_sq_true = 0.}
-
 \item{measure}{Calculate sample median or mean. Defaults to median.}
 
 \item{measure_spread}{Specify "iqr", "range", "sd", "var". Will have to check how many of these are done right now.}

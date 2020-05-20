@@ -26,6 +26,9 @@ beta_par <- function(proportion, error) {
       (1 / proportion - 1) - 1
   )
 
+  neet::assert_neet(proportion, "numeric")
+  neet::assert_neet(error, "numeric")
+
   beta <- alpha / proportion - alpha
 
   return(list(
