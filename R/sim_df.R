@@ -27,6 +27,22 @@ sim_df <- function(
   max_n = 200,
   prop = 0.5,
   prop_error = 0.1) {
+
+
+# check inputs ------------------------------------------------------------
+
+  assert_neet(dist_tribble, "data.frame")
+  assert_neet(k, "numint")
+  assert_neet(tau2, "numeric")
+  assert_neet(effect_ratio, "numeric")
+  assert_neet(min_n, "numint")
+  assert_neet(max_n, "numint")
+  assert_neet(prop, "numeric")
+  assert_neet(prop_error, "numeric")
+
+# body --------------------------------------------------------------------
+
+
   dist_tribble %>%
     dplyr::mutate(distribution =
                     purrr::map2(dist, par,

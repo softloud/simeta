@@ -18,6 +18,11 @@ density_fn <- function(x,
                        distribution,
                        parameters,
                        type = "q") {
+  assert_neet(x, "numeric")
+  assert_neet(distribution, "character")
+  assert_neet(parameters, "list")
+  assert_neet(type, "character")
+
   fn <- get(paste0(type, distribution))
 
   # dplyr::case_when()

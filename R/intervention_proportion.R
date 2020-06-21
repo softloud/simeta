@@ -11,6 +11,10 @@
 
 intervention_proportion <- function(n, proportion, error) {
 
+  assert_neet(n, "numint")
+  assert_neet(proportion, "numeric")
+  assert_neet(error, "numeric")
+
   par <- beta_par(proportion, error)
 
   rbeta(n, shape1 = par$alpha, shape2 = par$beta)

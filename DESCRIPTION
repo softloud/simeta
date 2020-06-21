@@ -32,7 +32,8 @@ Imports:
     tibble,
     tidyr,
     varameta (>= 0.0.0.9000),
-    rlang
+    rlang,
+    neet (>= 0.0.0.9000)
 Suggests: 
     testthat (>= 2.1.0),
     knitr,

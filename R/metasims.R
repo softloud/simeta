@@ -34,6 +34,25 @@ metasims <- function(measure = "median",
                      beep = FALSE,
                      knha = TRUE,
                      progress = TRUE) {
+  # check input -------------------------------------------------------------
+
+  assert_neet(measure, "character")
+  assert_neet(measure_spread, "character")
+  assert_neet(k, "numint")
+  assert_neet(tau_sq_true, "numeric")
+  assert_neet(unequal_effect_ratio, "numeric")
+  assert_neet(min_n, "numint")
+  assert_neet(max_n, "numint")
+  assert_neet(prop, "numeric")
+  assert_neet(prop_error, "numeric")
+  assert_neet(trials, "numeric")
+  assert_neet(trian_fn, "function")
+  assert_neet(beep, "logical")
+  assert_neet(knha, "logical")
+  assert_neet(progress, "logical")
+
+
+
   # simulation-level parameters ---------------------------------------------
 
   # Ultimately, I'd love to extract this as a function, but I'm not sure how.

@@ -23,6 +23,22 @@ metatrial <- function(measure = "median",
                       knha = TRUE,
                       true_effect = 50,
                       test = "knha") {
+
+# check inputs ------------------------------------------------------------
+
+  assert_neet(measure, "character")
+  assert_neet(measure_spread, "character")
+  assert_neet(tau_sq, "numeric")
+  assert_neet(effect_ratio, "numeric")
+  assert_neet(parameters, "list")
+  assert_neet(n_df, "data.frame")
+  assert_neet(knha, "logical")
+  assert_neet(true_effect, "numint")
+  assert_Neet(test, "character")
+
+  # set up simulation -------------------------------------------------------
+
+
   measures <- c(measure, paste0("lr_", measure))
 
   # calculate true effects

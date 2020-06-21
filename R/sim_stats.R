@@ -44,11 +44,11 @@ sim_stats <- function(measure = "median",
 
   # generate study-level random effect
   samples <-
-    tibble::tibble(
-      this_study_error =
-        rnorm(nrow(n_df) / 2, 0, tau_sq) / 2,
-      study =
-        paste0("study_", seq(1, nrow(n_df) / 2))
+    n_df %>%
+    dplyr::filter(group == "control") %>%
+    dplyr::select(study) %>%
+    dplyr::mutate(this_study_error =
+                   rnorm(nrow(n_df) / 2, 0, tau_sq) / 2,
     ) %>%
     # join to df
     dplyr::full_join(n_df, by = "study") %>%

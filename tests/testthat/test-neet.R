@@ -3,6 +3,11 @@ context("neet: non-empty thing of expected type")
 # devtools::install_github("softloud/neet")
 library(neet)
 
+
+# datasets ----------------------------------------------------------------
+
+test_neet(default_parameters, "dataframe")
+
 # zeta beta ---------------------------------------------------------------
 test_prop <- runif(1, 0.3, 0.8)
 test_error <- runif(1, 0.1, 0.2)
@@ -20,6 +25,8 @@ test_that("intervention_proportion", {
 test_that("intervention_proportion", {
   expect_neet(intervention_proportion(4, 0.2, 0.01), "numeric")
 })
+
+test_neet(zeta_plot(0.2, 0.1), "ggplot")
 
 
 # sims data ---------------------------------------------------------------
@@ -87,7 +94,13 @@ test_that("sim_stats", {
   expect_neet(sim_stats(), "data.frame")
 })
 
-# test reporting ----------------------------------------------------------
+test_neet(
+  sim_stats() %>%
+    metafor::rma(yi = effect, vi = effect_spread) %>%
+    tidy_sim()
+  , "data.frame")
+
+# reporting ----------------------------------------------------------
 
 test_that("coverage plot", {
   covplot <- sims %>% coverage_plot()
@@ -95,3 +108,4 @@ test_that("coverage plot", {
   expect_neet(covplot, "ggplot")
 })
 
+test_neet("simpar_table", "data.frame")

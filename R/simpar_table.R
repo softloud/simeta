@@ -8,6 +8,8 @@
 #' @export
 
 simpar_table <- function(sim) {
+  assert_neet(sim, "metasim")
+
   sim %>%
     purrr::pluck("arguments") %>%
     dplyr::mutate(class = purrr::map_chr(value, class),) %>%

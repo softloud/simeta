@@ -16,6 +16,11 @@ metasim <- function(...,
                     id = "simulation1",
                     trial_fn = metatrial,
                     trials = 4) {
+
+  assert_neet(id, "character")
+  assert_neet(trial_fn, "function")
+  assert_neet(trials, "numint")
+
   all_trials <-
     map_peacefully(1:trials, .f = function(x) {trial_fn(...)})
 

@@ -20,6 +20,8 @@ sim_sample <- function(n = 18,
                        par = list(mean = 20, sd = 0.2),
                        control = TRUE,
                        effect_ratio = 1.2) {
+
+
   # check inputs are valid
   assert_that(length(par) <= 2,
                           msg = "haven't coded this

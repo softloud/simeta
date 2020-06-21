@@ -21,6 +21,15 @@ sim_n <- function(k = 3,
                   prop = 0.5,
                   prop_error = 0.1,
                   wide = FALSE) {
+  # check inputs ------------------------------------------------------------
+
+  assert_neet(k, "numint")
+  assert_neet(min_n, "numint")
+  assert_neet(max_n, "numint")
+  assert_neet(prop, "numeric")
+  assert_neet(prop_error, "numeric")
+  assert_neet(wide, "logical")
+
   assert_that(min_n > 0,
               msg = "minimum sample size must be positive")
   assert_that(max_n > 0,
@@ -29,9 +38,12 @@ sim_n <- function(k = 3,
               msg = "minimum sample size cannot exceed maximum sample size")
 
   # set up study label and sample kth sample size of control + intervention
-  n_df <- tibble::tibble(study = sample(lotr_study, size = k, replace = FALSE),
-                         study_n = sample(seq(min_n, max_n),
-                                          size = k, replace = TRUE)) %>%
+  n_df <-
+    tibble::tibble(
+      study = sample(lotr_study, size = k, replace = FALSE),
+      study_n = sample(seq(min_n, max_n),
+                       size = k, replace = TRUE)
+    ) %>%
     dplyr::mutate(
       # get kth proportion for the intervention group
       intervention_proportion = intervention_proportion(
@@ -43,14 +55,14 @@ sim_n <- function(k = 3,
       intervention = round(intervention_proportion * study_n),
       control = round((1 - intervention_proportion) * study_n)
     ) %>%
-    dplyr::select(-study_n, -intervention_proportion)
+    dplyr::select(-study_n,-intervention_proportion)
 
-    if (wide == FALSE) {
-      return(n_df %>%
-               tidyr::gather(key = "group",
-                             value = "n",
-                             control, intervention))
-    } else {
-      return(n_df)
-    }
+  if (wide == FALSE) {
+    return(n_df %>%
+             tidyr::gather(key = "group",
+                           value = "n",
+                           control, intervention))
+  } else {
+    return(n_df)
+  }
 }
