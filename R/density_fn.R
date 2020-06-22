@@ -18,10 +18,10 @@ density_fn <- function(x,
                        distribution,
                        parameters,
                        type = "q") {
-  assert_neet(x, "numeric")
-  assert_neet(distribution, "character")
-  assert_neet(parameters, "list")
-  assert_neet(type, "character")
+  neet::assert_neet(x, "numeric")
+  neet::assert_neet(distribution, "character")
+  neet::assert_neet(parameters, "list")
+  neet::assert_neet(type, "character")
 
   fn <- get(paste0(type, distribution))
 

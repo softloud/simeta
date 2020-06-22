@@ -31,18 +31,19 @@ sim_df <- function(
 
 # check inputs ------------------------------------------------------------
 
-  assert_neet(dist_tribble, "data.frame")
-  assert_neet(k, "numint")
-  assert_neet(tau2, "numeric")
-  assert_neet(effect_ratio, "numeric")
-  assert_neet(min_n, "numint")
-  assert_neet(max_n, "numint")
-  assert_neet(prop, "numeric")
-  assert_neet(prop_error, "numeric")
+  neet::assert_neet(dist_tribble, "data.frame")
+  neet::assert_neet(k, "numint")
+  neet::assert_neet(tau2, "numeric")
+  neet::assert_neet(effect_ratio, "numeric")
+  neet::assert_neet(min_n, "numint")
+  neet::assert_neet(max_n, "numint")
+  neet::assert_neet(prop, "numeric")
+  neet::assert_neet(prop_error, "numeric")
 
 # body --------------------------------------------------------------------
 
 
+# this_works <-
   dist_tribble %>%
     dplyr::mutate(distribution =
                     purrr::map2(dist, par,
@@ -70,14 +71,14 @@ sim_df <- function(
                                  max_n = max_n,
                                  prop = prop,
                                  prop_error = prop_error),
-                  id = paste0("sim_", seq(1, nrow(.))))  %>%
+                  id = paste0("sim_", seq(1, nrow(.)))) %>%
     dplyr::mutate(true_effect =
                     purrr::map2_dbl(
                       rdist,
                       parameters,
                       .f = function(rdist, parameters) {
                         if (rdist == "pareto") {
-                          actuar::qpareto2(0.5,
+                          actuar::qpareto(0.5,
                                            shape = parameters[[1]],
                                            scale = parameters[[2]])
                         } else {

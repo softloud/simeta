@@ -11,9 +11,9 @@
 
 intervention_proportion <- function(n, proportion, error) {
 
-  assert_neet(n, "numint")
-  assert_neet(proportion, "numeric")
-  assert_neet(error, "numeric")
+  neet::assert_neet(n, "numint")
+  neet::assert_neet(proportion, "numeric")
+  neet::assert_neet(error, "numeric")
 
   par <- beta_par(proportion, error)
 

@@ -14,7 +14,7 @@
 
 dist_name <- function(dist, toR = FALSE) {
 
-  assert_neet(dist, "character")
+  neet::assert_neet(dist, "character")
   assesrt_neet(toR, "logical")
 
   if (toR) {

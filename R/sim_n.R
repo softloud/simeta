@@ -23,12 +23,12 @@ sim_n <- function(k = 3,
                   wide = FALSE) {
   # check inputs ------------------------------------------------------------
 
-  assert_neet(k, "numint")
-  assert_neet(min_n, "numint")
-  assert_neet(max_n, "numint")
-  assert_neet(prop, "numeric")
-  assert_neet(prop_error, "numeric")
-  assert_neet(wide, "logical")
+  neet::assert_neet(k, "numint")
+  neet::assert_neet(min_n, "numint")
+  neet::assert_neet(max_n, "numint")
+  neet::assert_neet(prop, "numeric")
+  neet::assert_neet(prop_error, "numeric")
+  neet::assert_neet(wide, "logical")
 
   assert_that(min_n > 0,
               msg = "minimum sample size must be positive")

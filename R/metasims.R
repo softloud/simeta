@@ -36,20 +36,20 @@ metasims <- function(measure = "median",
                      progress = TRUE) {
   # check input -------------------------------------------------------------
 
-  assert_neet(measure, "character")
-  assert_neet(measure_spread, "character")
-  assert_neet(k, "numint")
-  assert_neet(tau_sq_true, "numeric")
-  assert_neet(unequal_effect_ratio, "numeric")
-  assert_neet(min_n, "numint")
-  assert_neet(max_n, "numint")
-  assert_neet(prop, "numeric")
-  assert_neet(prop_error, "numeric")
-  assert_neet(trials, "numeric")
-  assert_neet(trian_fn, "function")
-  assert_neet(beep, "logical")
-  assert_neet(knha, "logical")
-  assert_neet(progress, "logical")
+  neet::assert_neet(measure, "character")
+  neet::assert_neet(measure_spread, "character")
+  neet::assert_neet(k, "numint")
+  neet::assert_neet(tau_sq_true, "numeric")
+  neet::assert_neet(unequal_effect_ratio, "numeric")
+  neet::assert_neet(min_n, "numint")
+  neet::assert_neet(max_n, "numint")
+  neet::assert_neet(prop, "numeric")
+  neet::assert_neet(prop_error, "numeric")
+  neet::assert_neet(trials, "numeric")
+  neet::assert_neet(trian_fn, "function")
+  neet::assert_neet(beep, "logical")
+  neet::assert_neet(knha, "logical")
+  neet::assert_neet(progress, "logical")
 
 
 

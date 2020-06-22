@@ -8,7 +8,7 @@
 #' @export
 
 simpar_table <- function(sim) {
-  assert_neet(sim, "metasim")
+  neet::assert_neet(sim, "metasim")
 
   sim %>%
     purrr::pluck("arguments") %>%

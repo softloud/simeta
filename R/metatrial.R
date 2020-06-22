@@ -26,15 +26,15 @@ metatrial <- function(measure = "median",
 
 # check inputs ------------------------------------------------------------
 
-  assert_neet(measure, "character")
-  assert_neet(measure_spread, "character")
-  assert_neet(tau_sq, "numeric")
-  assert_neet(effect_ratio, "numeric")
-  assert_neet(parameters, "list")
-  assert_neet(n_df, "data.frame")
-  assert_neet(knha, "logical")
-  assert_neet(true_effect, "numint")
-  assert_Neet(test, "character")
+  neet::assert_neet(measure, "character")
+  neet::assert_neet(measure_spread, "character")
+  neet::assert_neet(tau_sq, "numeric")
+  neet::assert_neet(effect_ratio, "numeric")
+  neet::assert_neet(parameters, "list")
+  neet::assert_neet(n_df, "data.frame")
+  neet::assert_neet(knha, "logical")
+  neet::assert_neet(true_effect, "numint")
+  neet::assert_neet(test, "character")
 
   # set up simulation -------------------------------------------------------
 

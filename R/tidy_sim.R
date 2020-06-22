@@ -9,7 +9,7 @@
 #' @export
 
 tidy_sim <- function(rma_model) {
-  assert_neet(rma_model, "rma")
+  neet::assert_neet(rma_model, "rma")
 
   rma_model %>%
     {
