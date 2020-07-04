@@ -46,7 +46,7 @@ metasims <- function(measure = "median",
   neet::assert_neet(prop, "numeric")
   neet::assert_neet(prop_error, "numeric")
   neet::assert_neet(trials, "numeric")
-  neet::assert_neet(trian_fn, "function")
+  neet::assert_neet(trial_fn, "function")
   neet::assert_neet(beep, "logical")
   neet::assert_neet(knha, "logical")
   neet::assert_neet(progress, "logical")
@@ -108,7 +108,7 @@ metasims <- function(measure = "median",
   measure_string <- measure
 
   # set variance between studies to 0 whenthere's only one study
-  tau_sq_true <- if_else(k == 1, 0, tau_sq_true)
+  tau_sq_true <- dplyr::if_else(k == 1, 0, tau_sq_true)
 
   # instantiate simulation --------------------------------------------------
 
@@ -138,7 +138,7 @@ metasims <- function(measure = "median",
       " trials\n"
     ))
 
-    pb <- progress_estimated(nrow(simpars))
+    pb <- dplyr::progress_estimated(nrow(simpars))
 
     simulation <- function(...) {
       pb$tick()$print()
@@ -155,8 +155,8 @@ metasims <- function(measure = "median",
 
   # # simulate
   simulations <- simpars  %>%
-    mutate(
-      sim_results = pmap(
+    dplyr::mutate(
+      sim_results = purrr::pmap(
         list(
           tau_sq = tau_sq_true,
           effect_ratio = effect_ratio,
@@ -164,7 +164,7 @@ metasims <- function(measure = "median",
           parameters = parameters,
           n_df = n,
           true_effect = true_effect,
-          id = id
+          id = sim_id
         ),
         simulation,
         measure = measure,
@@ -176,10 +176,10 @@ metasims <- function(measure = "median",
     )
 
   results <- simulations %>%
-    pluck("sim_results") %>%
-    bind_rows() %>%
-    full_join(simulations, by = "id") %>%
-    mutate(effect_ratio = map2_chr(
+    purrr::pluck("sim_results") %>%
+    dplyr::bind_rows() %>%
+    dplyr::full_join(simulations, by = "sim_id") %>%
+    dplyr::mutate(effect_ratio = map2_chr(
       measure,
       effect_ratio,
       .f = function(x, y) {

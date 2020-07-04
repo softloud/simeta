@@ -6,7 +6,7 @@ library(neet)
 
 # datasets ----------------------------------------------------------------
 
-test_neet(default_parameters, "dataframe")
+test_neet(default_parameters, "data.frame")
 
 # zeta beta ---------------------------------------------------------------
 test_prop <- runif(1, 0.3, 0.8)

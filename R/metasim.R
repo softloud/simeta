@@ -39,7 +39,7 @@ metasim <- function(...,
       successful_trials = length(coverage),
       coverage = coverage_count / successful_trials
     ) %>%
-    mutate(id = id,
+    mutate(sim_id = id,
            errors = tally_errors(all_trials),
            warnings = tally_warnings(all_trials),
            messages = tally_messages(all_trials),

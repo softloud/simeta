@@ -71,7 +71,7 @@ sim_df <- function(
                                  max_n = max_n,
                                  prop = prop,
                                  prop_error = prop_error),
-                  id = paste0("sim_", seq(1, nrow(.)))) %>%
+                sim_id = paste("sim", seq(1, nrow(.)))) %>%
     dplyr::mutate(true_effect =
                     purrr::map2_dbl(
                       rdist,
