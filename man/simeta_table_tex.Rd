@@ -4,7 +4,14 @@
 \alias{simeta_table_tex}
 \title{Simeta table formating for Tex}
 \usage{
-simeta_table_tex(x, ...)
+simeta_table_tex(x, digits = 2, ...)
+}
+\arguments{
+\item{x}{A dataframe to format for tex.}
+
+\item{digits}{Defaults to 2.}
+
+\item{...}{Arguments for \link{kable}.}
 }
 \description{
 Simeta table formating for Tex

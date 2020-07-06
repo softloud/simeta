@@ -49,5 +49,5 @@ test_that("simulation runs over other inputs", {
               mean(), 1.0000001)
 
   # # check simualation id is parsed
-  expect_equal(metasim(id = "sim 4") %>% pluck("id") %>% unique(), "sim 4")
+  expect_equal(metasim(id = "sim 4") %>% pluck("sim_id") %>% unique(), "sim 4")
 })
