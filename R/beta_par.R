@@ -21,18 +21,22 @@
 #' @export
 
 beta_par <- function(proportion, error) {
-  alpha <- proportion * (
-    ((10 * proportion^2) / error^2) *
-      (1 / proportion - 1) - 1
-  )
 
-  neet::assert_neet(proportion, "numeric")
-  neet::assert_neet(error, "numeric")
+  # check inputs
+  assertthat::assert_that(proportion > 0 &
+                             proportion < 1,
+                           msg = "proportion must be from (0,1)")
+  assertthat::assert_that(error > 0 &
+                             error < 1,
+                           msg = "error must be from (0,1)")
+
+  # calculate beta distribution parameters
+
+  alpha <- proportion * (((10 * proportion ^ 2) / error ^ 2) *
+                           (1 / proportion - 1) - 1)
 
   beta <- alpha / proportion - alpha
 
-  return(list(
-    alpha = alpha,
-    beta = beta
-  ))
+  return(list(alpha = alpha,
+              beta = beta))
 }

@@ -45,13 +45,13 @@ test_that("from user inputs, generate a simulation overview dataframe", {
   )
 
   # check that simulation id is unique
-  expect_equal(testdf %>% pluck("id") %>% unique() %>% length(),
+  expect_equal(testdf %>% pluck("sim_id") %>% unique() %>% length(),
                testdf %>% nrow())
 })
 
 sim_df_test  <- function(...) {
   sim_df(...) %>%
-    dplyr::select(id, n) %>%
+    dplyr::select(sim_id, n) %>%
     tidyr::unnest(n) %>%
     tidyr::spread(group, n) %>%
     dplyr::mutate(p = intervention / (intervention + control),
@@ -75,7 +75,7 @@ metasims_test  <- function(...) {
   metasims(...) %>%
     pluck("results") %>%
     dplyr::filter(measure == "median") %>%
-    dplyr::select(id, n) %>%
+    dplyr::select(sim_id, n) %>%
     tidyr::unnest(n) %>%
     tidyr::spread(group, n) %>%
     dplyr::mutate(p = intervention / (intervention + control),

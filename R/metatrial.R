@@ -39,12 +39,11 @@ metatrial <- function(measure = "median",
   # set up simulation -------------------------------------------------------
 
 
-  measures <- c(measure, paste0("lr_", measure))
+  measure_label <- paste0("lr_", measure)
 
   # calculate true effects
-  true_effects <- tibble::tibble(measure = measures,
-                                 true_effect = c(true_effect,
-                                                 log(effect_ratio)))
+  true_effects <- tibble::tibble(measure = measure_label,
+                                 true_effect = log(effect_ratio))
   # simulate data
   metadata <- sim_stats(
     measure = measure,

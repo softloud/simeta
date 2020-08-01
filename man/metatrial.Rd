@@ -27,7 +27,7 @@ such as output by \code{\link{meta_n}}.}
 
 \item{true_effect}{The value of the control population median.}
 
-\item{test}{"knha" or "z" for \link[metafor:rma]{metafor::rma}.}
+\item{test}{"knha" or "z" for \link[metafor:rma.uni]{metafor::rma}.}
 }
 \description{
 Simulate data based on simulation parameters and meta-analyse.

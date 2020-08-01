@@ -17,7 +17,7 @@ below to see their documentation.
 \describe{
   \item{janitor}{\code{\link[janitor]{clean_names}}}
 
-  \item{metafor}{\code{\link[metafor]{escalc}}, \code{\link[metafor]{forest}}, \code{\link[metafor]{rma}}}
+  \item{metafor}{\code{\link[metafor]{escalc}}, \code{\link[metafor]{forest}}, \code{\link[metafor:rma.uni]{rma}}}
 
   \item{purrr}{\code{\link[purrr]{pluck}}}
 }}

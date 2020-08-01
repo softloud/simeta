@@ -4,10 +4,10 @@
 \alias{coverage_plot}
 \title{Plot a coverage simulation for a single estimator}
 \usage{
-coverage_plot(results_df)
+coverage_plot(metasims_results)
 }
 \arguments{
-\item{results_df}{A data.frame produced by \link{metasims}.}
+\item{metasims_results}{A data.frame produced by \link{metasims}.}
 }
 \description{
 Plot a coverage simulation for a single estimator
