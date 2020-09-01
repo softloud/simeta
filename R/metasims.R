@@ -163,7 +163,6 @@ metasims <- function(measure = "median",
           rdist = rdist,
           parameters = parameters,
           n_df = n,
-          true_effect = true_effect,
           id = sim_id
         ),
         simulation,

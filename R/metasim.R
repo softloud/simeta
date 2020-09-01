@@ -30,14 +30,12 @@ metasim <- function(...,
     keep(is.data.frame) %>%
     keep( ~ nrow(.) >= 1) %>% # keep non-empty results
     bind_rows() %>%
-    dplyr::group_by(measure) %>%
     dplyr::summarise(
       tau_sq = mean(tau_sq),
       ci_width = mean(conf_high - conf_low),
       bias = mean(bias),
-      coverage_count = sum(coverage),
       successful_trials = length(coverage),
-      coverage = coverage_count / successful_trials
+      coverage = sum(coverage) / successful_trials
     ) %>%
     mutate(sim_id = id,
            errors = tally_errors(all_trials),

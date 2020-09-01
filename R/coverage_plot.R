@@ -20,30 +20,34 @@ coverage_plot <- function(metasims_results) {
   metasims_results %>%
     purrr::pluck("results") %>%
     # this is a hack
-    dplyr::filter(measure == "lr_median") %>%
+    # dplyr::filter(measure == "lr_median") %>%
     dplyr::mutate(
+      plot_par = purrr::map(parameters, .f = function(par) {
+        par %>% purrr::map_dbl(pluck) %>% round(digits = 2)
+      }) ,
       Distribution = purrr::map_chr(rdist, dist_name),
-      Effect_ratio = purrr::map_chr(
-        effect_ratio,
-        .f = function(x) {
-          dplyr::if_else(is.na(x),
-                         "single group",
-                         as.character(as.numeric(x)))
-        }
-      )
+      plot_label = stringr::str_replace(plot_par, "c\\(", "") %>%
+        stringr::str_replace("\\)", "") %>%
+        stringr::str_c(Distribution, ., sep = " ")
     ) %>%
     ggplot2::ggplot(ggplot2::aes(x = Distribution, y = coverage)) +
-    ggplot2::geom_hline(
-      yintercept = 0.95,
-      linetype = "dotted",
-      alpha = 0.4,
-    ) +
+    ggplot2::geom_hline(yintercept = 0.95,
+                        linetype = "dotted",
+                        alpha = 0.4,) +
+    # ggrepel::geom_text_repel(
+    #   min.segment.length = 1,
+    #   colour = "darkgrey",
+    #   force = 3,
+    #   size = 2.2,
+    #   segment.alpha = 0.5,
+    #   ggplot2::aes(label = plot_label)
+    # ) +
     ggplot2::geom_point(
       position = "jitter",
       alpha = 0.4,
       size = 4,
-      ggplot2::aes(colour = Distribution,
-                   shape = Effect_ratio)
+      ggplot2::aes(colour = effect_ratio,
+                   shape = plot_label)
     ) +
     ggplot2::facet_grid(k ~ tau_sq_true) +
     hrbrthemes::scale_color_ipsum() +

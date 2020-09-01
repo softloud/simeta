@@ -20,8 +20,7 @@ test_that("exponential is parsed throughout", {
   expect_is(sim_stats(rdist = "exp", par = list(rate = 3)), "data.frame")
 
   # check trial
-  expect_is(metatrial(rdist = "exp", parameters = list(rate = 3),
-                      true_effect = log(2) / 3),
+  expect_is(metatrial(rdist = "exp", parameters = list(rate = 3)),
             "data.frame")
 
   expect_is(purrr::rerun(.n = 10, metatrial(

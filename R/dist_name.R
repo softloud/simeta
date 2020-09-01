@@ -14,9 +14,6 @@
 
 dist_name <- function(dist, toR = FALSE) {
 
-  neet::assert_neet(dist, "character")
-  neet::assert_neet(toR, "logical")
-
   if (toR) {
     switch(dist,
            normal = "norm",
@@ -27,6 +24,7 @@ dist_name <- function(dist, toR = FALSE) {
            gamma = "gamma",
            Pareto = "pareto",
            "chi-squared" = "chisq",
+           Cauchy = "cauchy",
            "error")
   } else {
     switch(dist,
@@ -38,6 +36,7 @@ dist_name <- function(dist, toR = FALSE) {
            gamma = "gamma",
            pareto = "Pareto",
            chisq = "chi-squared",
+           cauchy = "Cauchy",
            "error")
   }
 }

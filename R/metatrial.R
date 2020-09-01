@@ -4,7 +4,7 @@
 #'
 #' NB: bias is effect - true effect.
 #'
-#' @param true_effect The value of the control population median.
+#' @param log(effect_ratio) The value of the control population median.
 #' @inheritParams sim_stats
 #' @param test "knha" or "z" for [metafor::rma].
 #'
@@ -21,31 +21,25 @@ metatrial <- function(measure = "median",
                       parameters = list(mean = 50, sd = 0.2),
                       n_df = sim_n(k = 3),
                       knha = TRUE,
-                      true_effect = 50,
                       test = "knha") {
 
 # check inputs ------------------------------------------------------------
 
-  neet::assert_neet(measure, "character")
-  neet::assert_neet(measure_spread, "character")
-  neet::assert_neet(tau_sq, "numeric")
-  neet::assert_neet(effect_ratio, "numeric")
-  neet::assert_neet(parameters, "list")
-  neet::assert_neet(n_df, "data.frame")
-  neet::assert_neet(knha, "logical")
-  neet::assert_neet(true_effect, "numint")
-  neet::assert_neet(test, "character")
+  # neet::assert_neet(measure, "character")
+  # neet::assert_neet(measure_spread, "character")
+  # neet::assert_neet(tau_sq, "numeric")
+  # neet::assert_neet(effect_ratio, "numeric")
+  # neet::assert_neet(parameters, "list")
+  # neet::assert_neet(n_df, "data.frame")
+  # neet::assert_neet(knha, "logical")
+  #  neet::assert_neet(test, "character")
 
   # set up simulation -------------------------------------------------------
-
-
   measure_label <- paste0("lr_", measure)
 
-  # calculate true effects
-  true_effects <- tibble::tibble(measure = measure_label,
-                                 true_effect = log(effect_ratio))
   # simulate data
-  metadata <- sim_stats(
+  metadata <-
+    sim_stats(
     measure = measure,
     measure_spread = measure_spread,
     n_df = n_df,
@@ -90,37 +84,21 @@ metatrial <- function(measure = "median",
           effect_i = effect_i,
           effect_se_i = effect_se_i
         ),
-      .f = lr_se)) %>%
-  select(study, effect_c, effect_se_c, lr, lr_se) %>%
-  mutate(effect = map2(effect_c, effect_se_c,
-                       .f = function(x, y) list(x, y))) %>%
-  select(-effect_c, -effect_se_c) %>%
-  rename(lr_value = lr) %>%
-  mutate(lr = map2(lr_value, lr_se, list)) %>%
-  select(-lr_value, -lr_se) %>%
-  gather(key = measure, value = obs, effect, lr) %>%
-  mutate(centre = map_dbl(obs, 1),
-         error = map_dbl(obs, 2)) %>%
-  select(-obs) %>%
-  group_nest(measure) %>%
-  mutate(model = map(data, .f = function(df){
-    metamodel(df %>% pluck(2), df %>% pluck(3))
-  })) %>%
-  select(-data) %>%
-  unnest(model) %>%
-  # now to rename with informative effect labels
-  mutate(measure = case_when(measure == "effect" ~ measures[[1]],
-                             measure == "lr" ~ measures[[2]])) %>%
-  full_join(true_effects, by = "measure") %>%
-  mutate(
-    coverage = conf_low < true_effect & true_effect < conf_high,
-    # can't scale bc log(1) = 0
-    bias = effect - true_effect,
-    scaled_bias = case_when(
-      measure == measures[[1]] ~ bias / true_effect,
-      measure == measures[[2]] ~ bias
-    )
-  )
+      .f = lr_se),
+      lr_var = lr_se^2)
 
-return(metadata)
+  # i think this is where the problem with coverage is
+  metamodel <-
+    metadata %>%
+    metafor::rma(yi = lr, vi = lr_var, data = .)
+
+  metamodel %>%
+    tidy() %>%
+    mutate(ci_lb = estimate - std.error * qnorm(0.975),
+           ci_ub = estimate + std.error * qnorm(0.975),
+           tau_sq = metamodel %>% glance() %>% pluck("tau.squared"),
+           covered = log(effect_ratio) > ci_lb & log(effect_ratio) < ci_ub,
+           bias = abs(estimate - log(effect_ratio))) %>%
+    select(effect = estimate, ci_lb, ci_ub, tau_sq, covered, bias)
+
 }

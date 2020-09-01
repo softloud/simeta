@@ -13,7 +13,6 @@ metatrial(
   parameters = list(mean = 50, sd = 0.2),
   n_df = sim_n(k = 3),
   knha = TRUE,
-  true_effect = 50,
   test = "knha"
 )
 }
@@ -25,9 +24,9 @@ metatrial(
 \item{n_df}{\code{data.frame} of sample sizes,
 such as output by \code{\link{meta_n}}.}
 
-\item{true_effect}{The value of the control population median.}
-
 \item{test}{"knha" or "z" for \link[metafor:rma.uni]{metafor::rma}.}
+
+\item{log(effect_ratio)}{The value of the control population median.}
 }
 \description{
 Simulate data based on simulation parameters and meta-analyse.

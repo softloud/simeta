@@ -71,24 +71,6 @@ sim_df <- function(
                                  max_n = max_n,
                                  prop = prop,
                                  prop_error = prop_error),
-                sim_id = paste("sim", seq(1, nrow(.)))) %>%
-    dplyr::mutate(true_effect =
-                    purrr::map2_dbl(
-                      rdist,
-                      parameters,
-                      .f = function(rdist, parameters) {
-                        if (rdist == "pareto") {
-                          actuar::qpareto(0.5,
-                                           shape = parameters[[1]],
-                                           scale = parameters[[2]])
-                        } else {
-                          density_fn(
-                            x = 0.5,
-                            distribution = rdist,
-                            parameters = parameters,
-                            type = "q"
-                          )
-                        }
-                      }
-                    ))
+                sim_id = paste("sim", seq(1, nrow(.))))
+
 }
