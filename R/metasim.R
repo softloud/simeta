@@ -22,27 +22,18 @@ metasim <- function(...,
   neet::assert_neet(trials, "numint")
 
   all_trials <-
-    map_peacefully(1:trials, .f = function(x) {trial_fn(...)})
+    # map_peacefully(1:trials, .f = function(x) {trial_fn(...)})
+    map_df(1:trials, .f = function(x) {trial_fn(...)})
 
-  results <- all_trials %>%
-    transpose() %>%
-    pluck("result") %>%
-    keep(is.data.frame) %>%
-    keep( ~ nrow(.) >= 1) %>% # keep non-empty results
-    bind_rows() %>%
+  results <-
+    all_trials %>%
     dplyr::summarise(
       tau_sq = mean(tau_sq),
-      ci_width = mean(conf_high - conf_low),
+      ci_width = mean(ci_ub - ci_lb),
       bias = mean(bias),
-      successful_trials = length(coverage),
-      coverage = sum(coverage) / successful_trials
+      coverage = sum(covered) / length(covered)
     ) %>%
-    mutate(sim_id = id,
-           errors = tally_errors(all_trials),
-           warnings = tally_warnings(all_trials),
-           messages = tally_messages(all_trials),
-           result = tally_results(all_trials)
-    )
+    mutate(sim_id = id)
 
   return(results)
 

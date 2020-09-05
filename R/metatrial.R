@@ -93,12 +93,12 @@ metatrial <- function(measure = "median",
     metafor::rma(yi = lr, vi = lr_var, data = .)
 
   metamodel %>%
-    tidy() %>%
-    mutate(ci_lb = estimate - std.error * qnorm(0.975),
+    broom::tidy() %>%
+    dplyr::mutate(ci_lb = estimate - std.error * qnorm(0.975),
            ci_ub = estimate + std.error * qnorm(0.975),
            tau_sq = metamodel %>% glance() %>% pluck("tau.squared"),
            covered = log(effect_ratio) > ci_lb & log(effect_ratio) < ci_ub,
            bias = abs(estimate - log(effect_ratio))) %>%
-    select(effect = estimate, ci_lb, ci_ub, tau_sq, covered, bias)
+    dplyr::select(effect = estimate, ci_lb, ci_ub, tau_sq, covered, bias)
 
 }

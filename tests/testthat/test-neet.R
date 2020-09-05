@@ -30,7 +30,6 @@ test_that("ggplot", {
 
 # sims data ---------------------------------------------------------------
 
-sims <- metasims(progress = FALSE)
 
 # simulation functions ----------------------------------------------------
 
@@ -56,13 +55,6 @@ test_that("metamodel", {
   expect_is(metamodel(), "data.frame")
 })
 
-test_that("metasim", {
-  expect_is(metasim(), "data.frame")
-})
-
-test_that("metasims", {
-  expect_is(sims, "metasim")
-})
 
 test_that("metatrial", {
   expect_is(metatrial(), "data.frame")
@@ -92,6 +84,17 @@ test_that("sim_stats", {
   )
 })
 
+
+
+test_that("metasim", {
+  expect_is(metasim(), "data.frame")
+})
+
+test_that("metasims", {
+  sims <- metasims(progress = FALSE)
+
+  expect_is(sims, "metasim")
+})
 
 # # reporting ----------------------------------------------------------
 

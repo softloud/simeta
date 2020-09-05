@@ -103,7 +103,8 @@ sim_stats <- function(measure = "median",
           effect_i = effect,
           effect_spread_i = effect_spread,
           n_i = n
-    ))}
+        ),
+    by = "study")}
 
   return(summary_stats %>% dplyr::arrange(study))
 }
