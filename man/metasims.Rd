@@ -18,7 +18,6 @@ metasims(
   trials = 3,
   trial_fn = metatrial,
   beep = FALSE,
-  knha = TRUE,
   progress = TRUE
 )
 }
@@ -57,7 +56,6 @@ Other simulation Functions that contribute to simulation pipeline.:
 \code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
-\code{\link{metamodel}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
 \code{\link{sim_df}()},
@@ -71,7 +69,6 @@ Other neet_test_one One neet test has been written:
 \code{\link{dist_name}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
-\code{\link{metamodel}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},
 \code{\link{sim_df}()},

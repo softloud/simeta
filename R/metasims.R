@@ -32,7 +32,6 @@ metasims <- function(measure = "median",
                      trials = 3,
                      trial_fn = metatrial,
                      beep = FALSE,
-                     knha = TRUE,
                      progress = TRUE) {
   # check input -------------------------------------------------------------
 
@@ -48,7 +47,6 @@ metasims <- function(measure = "median",
   neet::assert_neet(trials, "numeric")
   neet::assert_neet(trial_fn, "function")
   neet::assert_neet(beep, "logical")
-  neet::assert_neet(knha, "logical")
   neet::assert_neet(progress, "logical")
 
 
@@ -114,7 +112,8 @@ metasims <- function(measure = "median",
 
 
   # set up simulation parameters
-  simpars <- sim_df(
+
+ simpars <- sim_df(
     dist_tribble = distributions,
     k = k,
     tau2 = tau_sq_true,
@@ -124,7 +123,6 @@ metasims <- function(measure = "median",
     prop = prop,
     prop_error = prop_error
   )
-
 
   # progress bar ------------------------------------------------------------
 
@@ -154,7 +152,8 @@ metasims <- function(measure = "median",
   # run simulation ----------------------------------------------------------
 
   # # simulate
-  simulations <- simpars  %>%
+  simulations <-
+    simpars  %>%
     dplyr::mutate(
       sim_results = purrr::pmap(
         list(
@@ -169,28 +168,15 @@ metasims <- function(measure = "median",
         measure = measure,
         measure_spread = measure_spread,
         trials = trials,
-        trial_fn = trial_fn,
-        knha = knha
+        trial_fn = trial_fn
       )
     )
 
-  results <- simulations %>%
+  results <-
+    simulations %>%
     purrr::pluck("sim_results") %>%
     dplyr::bind_rows() %>%
-    dplyr::full_join(simulations, by = "sim_id") %>%
-    dplyr::mutate(effect_ratio = map2_chr(
-      measure,
-      effect_ratio,
-      .f = function(x, y) {
-        output <- if (x == measure_string) {
-          NA
-        } else {
-          y
-        }
-        return(output)
-      }
-    ))
-
+    dplyr::full_join(simulations, by = "sim_id")
 
   # wrangle simulation output------------------------------------------------
 

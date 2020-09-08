@@ -19,11 +19,8 @@ metatrial <- function(measure = "median",
                       effect_ratio = 1.2,
                       rdist = "norm",
                       parameters = list(mean = 50, sd = 0.2),
-                      n_df = sim_n(k = 3),
-                      knha = TRUE,
-                      test = "knha") {
-
-# check inputs ------------------------------------------------------------
+                      n_df = sim_n(k = 3)) {
+  # check inputs ------------------------------------------------------------
 
   # neet::assert_neet(measure, "character")
   # neet::assert_neet(measure_spread, "character")
@@ -40,16 +37,16 @@ metatrial <- function(measure = "median",
   # simulate data
   metadata <-
     sim_stats(
-    measure = measure,
-    measure_spread = measure_spread,
-    n_df = n_df,
-    rdist = rdist,
-    par = parameters,
-    tau_sq = tau_sq,
-    effect_ratio = effect_ratio,
-    wide = TRUE
-  ) %>%
-  # append estimators
+      measure = measure,
+      measure_spread = measure_spread,
+      n_df = n_df,
+      rdist = rdist,
+      par = parameters,
+      tau_sq = tau_sq,
+      effect_ratio = effect_ratio,
+      wide = TRUE
+    ) %>%
+    # append estimators
     mutate(
       effect_se_c = pmap_dbl(
         list(
@@ -84,21 +81,43 @@ metatrial <- function(measure = "median",
           effect_i = effect_i,
           effect_se_i = effect_se_i
         ),
-      .f = lr_se),
-      lr_var = lr_se^2)
+        .f = lr_se
+      ),
+      lr_var = lr_se ^ 2
+    )
 
-  # i think this is where the problem with coverage is
   metamodel <-
-    metadata %>%
-    metafor::rma(yi = lr, vi = lr_var, data = .)
+    tryCatch(
+      metafor::rma(
+        yi = lr,
+        vi = lr_var,
+        data = metadata,
+        test = "knha"
+      ),
+      warning = function(x) {
+        NULL
+      },
+      error = function(x) {
+        NULL
+      }
+    )
 
-  metamodel %>%
-    broom::tidy() %>%
-    dplyr::mutate(ci_lb = estimate - std.error * qnorm(0.975),
-           ci_ub = estimate + std.error * qnorm(0.975),
-           tau_sq = metamodel %>% glance() %>% pluck("tau.squared"),
-           covered = log(effect_ratio) > ci_lb & log(effect_ratio) < ci_ub,
-           bias = abs(estimate - log(effect_ratio))) %>%
-    dplyr::select(effect = estimate, ci_lb, ci_ub, tau_sq, covered, bias)
+  if (is.null(metamodel)) {
+    return(NULL)
+  } else {
+    model_summary <-
+      metamodel %>%
+      broom::tidy() %>%
+      dplyr::mutate(
+        ci_lb = estimate - std.error * qnorm(0.975),
+        ci_ub = estimate + std.error * qnorm(0.975),
+        tau_sq = metamodel %>% broom::glance() %>% purrr::pluck("tau.squared"),
+        covered = log(effect_ratio) > ci_lb &
+          log(effect_ratio) < ci_ub,
+        bias = abs(estimate - log(effect_ratio))
+      ) %>%
+      dplyr::select(effect = estimate, ci_lb, ci_ub, tau_sq, covered, bias)
 
+    return(model_summary)
+  }
 }

@@ -11,9 +11,7 @@ metatrial(
   effect_ratio = 1.2,
   rdist = "norm",
   parameters = list(mean = 50, sd = 0.2),
-  n_df = sim_n(k = 3),
-  knha = TRUE,
-  test = "knha"
+  n_df = sim_n(k = 3)
 )
 }
 \arguments{
@@ -24,9 +22,9 @@ metatrial(
 \item{n_df}{\code{data.frame} of sample sizes,
 such as output by \code{\link{meta_n}}.}
 
-\item{test}{"knha" or "z" for \link[metafor:rma.uni]{metafor::rma}.}
-
 \item{log(effect_ratio)}{The value of the control population median.}
+
+\item{test}{"knha" or "z" for \link[metafor:rma.uni]{metafor::rma}.}
 }
 \description{
 Simulate data based on simulation parameters and meta-analyse.
@@ -42,7 +40,6 @@ Other neet_test_one One neet test has been written:
 \code{\link{dist_name}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
-\code{\link{metamodel}()},
 \code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{sim_df}()},
@@ -54,7 +51,6 @@ Other simulation Functions that contribute to simulation pipeline.:
 \code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
-\code{\link{metamodel}()},
 \code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{sim_df}()},

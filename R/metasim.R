@@ -31,7 +31,8 @@ metasim <- function(...,
       tau_sq = mean(tau_sq),
       ci_width = mean(ci_ub - ci_lb),
       bias = mean(bias),
-      coverage = sum(covered) / length(covered)
+      coverage = sum(covered) / length(covered),
+      successful_trials = length(covered)
     ) %>%
     mutate(sim_id = id)
 

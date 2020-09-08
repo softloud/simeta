@@ -23,7 +23,6 @@ Other neet_test_one One neet test has been written:
 \code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
-\code{\link{metamodel}()},
 \code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},

@@ -38,7 +38,6 @@ Other simulation Functions that contribute to simulation pipeline.:
 \code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
 \code{\link{lr_se}()},
-\code{\link{metamodel}()},
 \code{\link{metasims}()},
 \code{\link{metasim}()},
 \code{\link{metatrial}()},

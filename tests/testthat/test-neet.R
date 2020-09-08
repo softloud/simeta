@@ -51,10 +51,6 @@ test_that("lr_se", {
   expect_type(lr_se("mean", 4, 3, 0.2, 5, 4.1, 0.3), "double")
 })
 
-test_that("metamodel", {
-  expect_is(metamodel(), "data.frame")
-})
-
 
 test_that("metatrial", {
   expect_is(metatrial(), "data.frame")
@@ -75,31 +71,26 @@ test_that("sim_sample", {
 
 test_that("sim_stats", {
   expect_is(sim_stats(), "data.frame")
-  expect_is(
+  expect_s3_class(
     sim_stats() %>%
-      metafor::rma(yi = effect, vi = effect_spread, data = .) %>%
-      tidy_sim()
+      metafor::rma(yi = effect, vi = effect_spread, data = .)
     ,
-    "data.frame"
+    "rma"
   )
 })
-
 
 
 test_that("metasim", {
   expect_is(metasim(), "data.frame")
 })
 
-test_that("metasims", {
+test_that("metasims + coverage plot", {
   sims <- metasims(progress = FALSE)
 
   expect_is(sims, "metasim")
-})
-
-# # reporting ----------------------------------------------------------
-
-test_that("coverage plot", {
   covplot <- sims %>% coverage_plot()
 
   expect_s3_class(covplot, "ggplot")
 })
+
+# # reporting ----------------------------------------------------------
