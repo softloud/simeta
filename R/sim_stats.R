@@ -44,9 +44,30 @@ sim_stats <- function(measure = "median",
 
   # generate study-level random effect
   samples <-
+
+    ## this code could be rewritten
+
+    # set a tibble with random vector x_k ~ N(0, tau_sq) for K studies
+    # study_error
+    #
+    # add column of studies
+    #
+    # add column of control
+    # add column of intervention
+    # pivot_longer cols = c(control, intervention)
+    # names_to = ""
+    # values_to = "group"
+    #
+    # add column of control_indicator = group == "control"
+
+    # take set of sample sizes for studies & arms
     n_df %>%
+    # just the control group
     dplyr::filter(group == "control") %>%
+    # just select study
     dplyr::select(study) %>%
+
+    # this sampling is then correct
     dplyr::mutate(this_study_error =
                    rnorm(nrow(n_df) / 2, 0, tau_sq) / 2,
     ) %>%

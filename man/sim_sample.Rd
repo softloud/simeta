@@ -16,7 +16,8 @@ sim_sample(
 \arguments{
 \item{n}{sample size}
 
-\item{this_study_error}{this study error}
+\item{this_study_error}{this study error, gamma_k / 2, under the assumption
+random effect variance is split between two.}
 
 \item{rdist}{string indicating distribution, "norm", "lnorm", "exp", or "pareto"}
 

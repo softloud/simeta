@@ -3,7 +3,8 @@
 #' Given a distribution, parameters, sample size, generate a sample.
 #'
 #' @param n sample size
-#' @param this_study_error this study error
+#' @param this_study_error this study error, gamma_k / 2, under the assumption
+#' random effect variance is split between two.
 #' @param epsilon within study error
 #' @param rdist string indicating distribution, "norm", "lnorm", "exp", or "pareto"
 #' @param par list of parameter arguments
@@ -93,13 +94,13 @@ sim_sample <- function(n = 18,
   } else if (rdist == "exp") {
     # set value of first parameter to ensure median ratio
     par_j <- if (control == FALSE) {
-      par[[1]] * effect_ratio
+      par[[1]] / effect_ratio
     } else {
       par[[1]]
     }
 
     # generate sample
-    return(rexp(n, par_j * exp(beta * this_study_error)))
+    return(rexp(n, par_j * exp(-beta * this_study_error)))
   }
 
 }
