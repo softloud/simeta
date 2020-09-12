@@ -1,72 +1,85 @@
 #' Plot a coverage simulation for a single estimator
 #'
-#' @param metasims_results A data.frame produced by [metasims].
+#' @param metasims_output A data.frame produced by [metasims].
 #'
 #' @family vis_tools
 #' @family reporting Functions and tools for reporting simulation results.
 #'
 #' @export
 
-coverage_plot <- function(metasims_results) {
-  assertthat::assert_that("metasim" %in% class(metasims_results))
+coverage_plot <- function(metasims_output) {
+  assertthat::assert_that("metasim" %in% class(metasims_output))
 
   # get trials
   trials <-
-    metasims_results %>%
+    metasims_output %>%
     purrr::pluck("arguments") %>%
     dplyr::filter(argument == "trials") %>%
     purrr::pluck("value")
 
-  metasims_results %>%
-    purrr::pluck("results") %>%
-    # this is a hack
-    # dplyr::filter(measure == "lr_median") %>%
-    dplyr::mutate(
-      plot_par = purrr::map(parameters, .f = function(par) {
-        par %>% purrr::map_dbl(pluck) %>% round(digits = 2)
-      }) ,
-      Distribution = purrr::map_chr(rdist, dist_name),
-      plot_label = stringr::str_replace(plot_par, "c\\(", "") %>%
-        stringr::str_replace("\\)", "") %>%
-        stringr::str_c(Distribution, ., sep = " ")
+  distns <-
+    metasims_output %>%
+    purrr::pluck("distributions") %>%
+    tibble::as_tibble() %>%
+    dplyr::mutate(plot_label_dist = #"test"
+                    purrr::map2_chr(dist, par, dist_label)) %>%
+    dplyr::group_by(dist) %>%
+    dplyr::mutate(grouping = 1:dplyr::n())
+
+  shape_labels <-
+    distns %>%
+    dplyr::ungroup() %>%
+    dplyr::select(plot_label_dist, grouping) %>%
+    dplyr::group_split(grouping) %>%
+    purrr::map(1) %>%
+    purrr::map(paste, collapse = ", ") %>%
+    tibble::tibble(shape_label = .) %>%
+    dplyr::mutate(shape_label = as.character(shape_label),
+                  grouping = dplyr::row_number()
     ) %>%
+    dplyr::left_join(distns, by = "grouping") %>%
+    dplyr::select(-grouping)
+
+  metasims_output %>%
+    purrr::pluck("results") %>%
+    dplyr::mutate(Distribution = purrr::map_chr(rdist, dist_name),
+                  effect_ratio = dplyr::if_else(
+                    effect_ratio == 1,
+                    sprintf("equal: %g", effect_ratio),
+                    sprintf("unequal: %g", effect_ratio)
+                  )) %>%
+    dplyr::left_join(shape_labels,
+                     by = c("rdist"= "dist",
+                            "parameters" ="par")) %>%
     ggplot2::ggplot(ggplot2::aes(x = Distribution, y = coverage)) +
     ggplot2::geom_hline(yintercept = 0.95,
                         linetype = "dotted",
-                        alpha = 0.4,) +
-    # ggrepel::geom_text_repel(
-    #   min.segment.length = 1,
-    #   colour = "darkgrey",
-    #   force = 3,
-    #   size = 2.2,
-    #   segment.alpha = 0.5,
-    #   ggplot2::aes(label = plot_label)
-    # ) +
-    ggplot2::geom_point(
-      position = "jitter",
+                        alpha = 0.4,
+    ) +
+    ggplot2::geom_jitter(
       alpha = 0.4,
       size = 4,
+      height = 0,
+      width = 0.25,
       ggplot2::aes(colour = effect_ratio,
-                   shape = plot_label)
+                   shape = shape_label)
     ) +
-    ggplot2::facet_grid(k ~ tau_sq_true) +
-    hrbrthemes::scale_color_ipsum() +
-    ggplot2::theme(axis.text.x = ggplot2::element_text(angle = 30, hjust = 1)) +
-    # ggplot2::scale_y_log10(
-    #   n.breaks = 5,
-    #   breaks = scales::trans_breaks("log10", function(x)
-    #     10 ^ x),
-    #   labels = scales::trans_format("log10", scales::math_format(10 ^ .x))
-    # )  +
+    ggplot2::facet_grid(tau_sq_true ~ k) +
+    hrbrthemes::scale_color_ipsum("Effect ratio") +
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_text(angle = 30, hjust = 1),
+      legend.position = "bottom",
+      legend.direction = "vertical") +
     ggplot2::labs(
       y = "Coverage",
       title = "Coverage probability simulation results",
       caption = stringr::str_wrap(
-        "*A meta-analytic random sample comprises K
+        "A small amount of random horizontal displacement has been applied. The dotted line indicates 0.95, the ideal result for this
+          coverage probability simulation. *A meta-analytic random sample comprises K
       pairings of intervention and control groups, where there is random
       error associated with both the study's context and the variability.
       See the R package
-      simeta:: for more details.",
+      simeta:: for more details. ",
         90
       ),
       subtitle = stringr::str_wrap(
@@ -76,13 +89,11 @@ coverage_plot <- function(metasims_results) {
           " trials wherein the true
       effect ratio falls within the confidence interveral calculated from a
       meta-analytic random sample* from a given distribution,
-      distributional parameter set, variance between studies (facet columns), and number of
-      studies (facet rows). The dotted line indicates 0.95, the ideal result for this
-          coverage probability simulation."
+      distributional parameter set, variance between studies (facet rows), and number of studies (facet columns)."
         )
         ,
         80
       )
     ) +
-    ggplot2::scale_shape_discrete(name = "Effect ratio")
+    ggplot2::scale_shape_discrete(name = "Distribution")
 }
