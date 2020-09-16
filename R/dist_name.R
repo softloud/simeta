@@ -25,6 +25,7 @@ dist_name <- function(dist, toR = FALSE) {
            Pareto = "pareto",
            "chi-squared" = "chisq",
            Cauchy = "cauchy",
+           halfnormal = "halfnorm",
            "error")
   } else {
     switch(dist,
@@ -37,6 +38,7 @@ dist_name <- function(dist, toR = FALSE) {
            pareto = "Pareto",
            chisq = "chi-squared",
            cauchy = "Cauchy",
+           halfnorm = "halfnormal",
            "error")
   }
 }
