@@ -150,8 +150,8 @@ variance_plot <- function(metasims_output) {
                             "parameters" ="par")) %>%
     ggplot2::ggplot(ggplot2::aes(x = log(ci_width), y = log(tau_sq))) +
     ggplot2::geom_point(
-      alpha = 0.6,
-      size = 4,
+      alpha = 0.3,
+      size = 6,
       ggplot2::aes(colour = Distribution,
                    shape = shape_label)
     ) +
@@ -159,7 +159,7 @@ variance_plot <- function(metasims_output) {
       ggplot2::aes(size = effect_ratio),
       alpha = 0.2
     ) +
-    ggplot2::scale_size_discrete(range = c(0.2, 1)) +
+    ggplot2::scale_size_discrete(range = c(0.2, 1.5)) +
 
     ggplot2::facet_grid(tau_sq_true ~ k, scales = "free") +
     hrbrthemes::scale_colour_ipsum("Effect ratio") +
