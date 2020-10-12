@@ -65,7 +65,8 @@ coverage_plot <- function(metasims_output) {
                    shape = shape_label)
     ) +
     ggplot2::facet_grid(tau_sq_true ~ k) +
-    hrbrthemes::scale_colour_ipsum("Effect ratio") +
+    scale_colour_manual(values = c("#75b8d1", "#3f2d54")) +
+    # hrbrthemes::scale_colour_ipsum("Effect ratio") +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 30, hjust = 1),
       legend.position = "bottom",
@@ -148,29 +149,29 @@ variance_plot <- function(metasims_output) {
     dplyr::left_join(shape_labels,
                      by = c("rdist"= "dist",
                             "parameters" ="par")) %>%
-    ggplot2::ggplot(ggplot2::aes(x = log(ci_width), y = log(tau_sq))) +
+    ggplot2::ggplot(ggplot2::aes(x = ci_width, y = tau_sq)) +
     ggplot2::geom_point(
-      alpha = 0.3,
-      size = 6,
+      alpha = 0.6,
+      size = 4,
       ggplot2::aes(colour = Distribution,
                    shape = shape_label)
     ) +
-    ggplot2::geom_point(
-      ggplot2::aes(size = effect_ratio),
-      alpha = 0.2
-    ) +
-    ggplot2::scale_size_discrete(range = c(0.2, 1.5)) +
-
-    ggplot2::facet_grid(tau_sq_true ~ k, scales = "free") +
+    # ggplot2::geom_point(
+    #   ggplot2::aes(size = effect_ratio),
+    #   alpha = 0.2
+    # ) +
+    # ggplot2::scale_size_discrete(range = c(0.2, 1.5)) +
+    #
+    ggplot2::facet_grid(tau_sq_true ~ k + effect_ratio, scales = "free") +
     hrbrthemes::scale_colour_ipsum("Effect ratio") +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 30, hjust = 1),
       legend.position = "bottom",
       legend.direction = "vertical") +
     ggplot2::labs(
-      y = latex2exp::TeX("Log mean estimated study heterogeneity"),
-      x = latex2exp::TeX("Log mean confidence interval width"),
-      title = "Simulation mean estimates for study heterogeneity by confidence interval width",
+      y = latex2exp::TeX("Mean estimated study heterogeneity"),
+      x = latex2exp::TeX("Mean confidence interval width"),
+      title = stringr::str_wrap("Simulation mean estimates for study heterogeneity by confidence interval width", 50),
       caption = stringr::str_wrap(
         "*A meta-analytic random sample comprises K
       pairings of intervention and control groups, where there is random
