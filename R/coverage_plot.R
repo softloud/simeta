@@ -65,8 +65,9 @@ coverage_plot <- function(metasims_output) {
                    shape = shape_label)
     ) +
     ggplot2::facet_grid(tau_sq_true ~ k) +
-    scale_colour_manual(values = c("#75b8d1", "#3f2d54")) +
+    # scale_colour_manual(values = c("#75b8d1", "#3f2d54")) +
     # hrbrthemes::scale_colour_ipsum("Effect ratio") +
+    rockthemes::scale_colour_nodoubt("Effect ratio") +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 30, hjust = 1),
       legend.position = "bottom",
@@ -163,7 +164,8 @@ variance_plot <- function(metasims_output) {
     # ggplot2::scale_size_discrete(range = c(0.2, 1.5)) +
     #
     ggplot2::facet_grid(tau_sq_true ~ k + effect_ratio, scales = "free") +
-    hrbrthemes::scale_colour_ipsum("Effect ratio") +
+    # hrbrthemes::scale_colour_ipsum("Effect ratio") +
+    rockthemes::scale_colour_nodoubt("Effect ratio") +
     ggplot2::theme(
       axis.text.x = ggplot2::element_text(angle = 30, hjust = 1),
       legend.position = "bottom",
