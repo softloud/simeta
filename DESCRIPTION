@@ -34,7 +34,8 @@ Imports:
     varameta (>= 0.0.0.9000),
     rlang,
     neet (>= 0.0.0.9000),
-    broom
+    broom,
+    rockthemes
 Suggests: 
     testthat (>= 2.1.0),
     knitr,
