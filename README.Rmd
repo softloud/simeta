@@ -53,7 +53,7 @@ devtools::install_github("softloud/simeta")
 # packages
 library(simeta)
 library(tidyverse)
-library(gt)
+library(knitr)
 library(metafor)
 
 # so these results are reproducible
@@ -173,7 +173,7 @@ NB: Caching is needed as simulations ramp in scale. The `targets` package can he
 Without specification, the function uses the default parameters dataset (`?default_parameters`). 
 
 ```{r}
-default_parameters %>% gt()
+default_parameters %>% kable()
 
 ```
 
@@ -222,13 +222,13 @@ Given a specific $k$, generate a set of sample sizes.
 ```{r different k}
 
 # defaults to k = 3
-sim_n() %>% gt()
+sim_n() %>% kable()
 
-sim_n(k = 3) %>% gt()
+sim_n(k = 3) %>% kable()
 
 # set k to a different value
 
-sim_n(k = 6) %>% gt()
+sim_n(k = 6) %>% kable()
 
 
 ```
@@ -237,7 +237,7 @@ sim_n(k = 6) %>% gt()
 
 ```{r small cohort}
 # control upper and lower bounds
-sim_n(min_n = 3, max_n = 50) %>% gt()
+sim_n(min_n = 3, max_n = 50) %>% kable()
  
 ```
 
@@ -247,7 +247,7 @@ Suppose we wish to mimic data for which the cohorts are almost exactly the same 
 
 ```{r prop}
 # small variation between sample sizes of studies
-sim_n(k = 2, prop = 0.05, max_n = 50) %>% gt()
+sim_n(k = 2, prop = 0.05, max_n = 50) %>% kable()
 
 ```
 
@@ -301,7 +301,7 @@ A random effect is added to account for the between study error $\tau$ and withi
 For meta-analysis data, we work with summmary statistics, so we drop the sample and return tabulated summary stats. 
 
 ```{r simulate a sample}
-sim_stats()  %>% gt()
+sim_stats()  %>% kable()
 ```
 
 
