@@ -1,9 +1,11 @@
 #' Simulate a meta-analysis dataset
 #'
-#' @param n_df \code{data.frame} of sample sizes,
-#' such as output by \code{\link{meta_n}}.
-#' @param wide Logical indicating if wide format, as is expected by \code{\link{metafor}::}.
+#' @param measure Calculate sample median or mean. Defaults to mean.
+#' @param measure_spread Defaults to standard deviation, `sd`. Specify "iqr", "range", "sd", "var". Will have to check how many of these are done right now.
+#' @param n_df \code{data.frame} of sample sizes.
+#' @param wide Logical indicating if wide format, as is expected by `metafor`. Defaults to TRUE.
 #' @inheritParams sim_sample
+#' @inheritParams sim_df
 #'
 #' @importFrom assertthat assert_that
 #' @import tibble
@@ -11,10 +13,10 @@
 #' @import dplyr
 #' @export
 
-sim_stats <- function(measure = "median",
-                      measure_spread = "iqr",
+sim_stats <- function(measure = "mean",
+                      measure_spread = "sd",
                       n_df = sim_n(),
-                      wide = FALSE,
+                      wide = TRUE,
                       rdist = "norm",
                       par = list(mean = 50, sd = 0.2),
                       tau_sq = 0.4,

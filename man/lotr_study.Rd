@@ -12,6 +12,6 @@ lotr_study
 }
 \description{
 These data were obtained from
-\link{kaggle}(# https://www.kaggle.com/paultimothymooney/lord-of-the-rings-data/data).
+\href{https://www.kaggle.com/paultimothymooney/lord-of-the-rings-data/data}{kaggle}.
 }
 \keyword{datasets}

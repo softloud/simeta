@@ -3,3 +3,8 @@
 ^LICENSE\.md$
 ^README\.Rmd$
 ^\.travis\.yml$
+^phd-scripts$
+^README-coverage-1\.png$
+^analysis$
+^data-raw$
+^development$

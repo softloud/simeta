@@ -5,10 +5,10 @@
 \title{generate simulation parameter dataframe}
 \usage{
 sim_df(
-  dist_tribble = default_parameters,
+  dist_df = default_parameters,
   k = c(3, 7, 20),
-  tau2 = seq(0, 0.4, by = 0.2),
-  effect_ratio = c(1, 1.2),
+  tau_sq = seq(0, 0.4, by = 0.2),
+  effect_ratio = c(1, 1.2, 1.5),
   min_n = 20,
   max_n = 200,
   prop = 0.5,
@@ -16,10 +16,17 @@ sim_df(
 )
 }
 \arguments{
-\item{dist_tribble}{A \code{\link{tibble::tribble}}
-with one column for distribution, and one column for the parameters}
+\item{dist_df}{A \code{tibble::tribble}.
+with one column for distribution, and one column for the parameters.
+Defaults to \link{default_parameters}. Note that the \code{par} arguments can be
+changed, but only the distributions presented in \link{default_parameters} have
+been implemented.}
 
-\item{k}{number of studies, defaults to 3}
+\item{k}{Simulate for different numbers of studies.}
+
+\item{tau_sq}{Variance \eqn{\gamma_k \sim N(0, \tau^2)} associated with the random effect}
+
+\item{effect_ratio}{Ratio of population effects intervention / control}
 
 \item{min_n}{lower bound for sample sizes, defaults to 20}
 
@@ -36,26 +43,8 @@ generate simulation parameter dataframe
 Other simulation Functions that contribute to simulation pipeline.: 
 \code{\link{beta_par}()},
 \code{\link{default_parameters}},
-\code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
-\code{\link{lr_se}()},
-\code{\link{metasims}()},
-\code{\link{metasim}()},
-\code{\link{metatrial}()},
 \code{\link{sim_n}()},
 \code{\link{sim_sample}()}
-
-Other neet_test_one One neet test has been written: 
-\code{\link{beta_par}()},
-\code{\link{default_parameters}},
-\code{\link{density_fn}()},
-\code{\link{dist_name}()},
-\code{\link{intervention_proportion}()},
-\code{\link{lr_se}()},
-\code{\link{metasims}()},
-\code{\link{metasim}()},
-\code{\link{metatrial}()},
-\code{\link{sim_n}()}
 }
-\concept{neet_test_one One neet test has been written}
 \concept{simulation Functions that contribute to simulation pipeline.}

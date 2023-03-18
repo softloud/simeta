@@ -30,27 +30,10 @@ sim_n(
 Generate a set of meta-analysis sample sizes. We assume that control and intervention sizes are mostly within some proportion \code{prop} of the same sample size.
 }
 \seealso{
-Other neet_test_one One neet test has been written: 
-\code{\link{beta_par}()},
-\code{\link{default_parameters}},
-\code{\link{density_fn}()},
-\code{\link{dist_name}()},
-\code{\link{intervention_proportion}()},
-\code{\link{lr_se}()},
-\code{\link{metasims}()},
-\code{\link{metasim}()},
-\code{\link{metatrial}()},
-\code{\link{sim_df}()}
-
 Other simulation Functions that contribute to simulation pipeline.: 
 \code{\link{beta_par}()},
 \code{\link{default_parameters}},
-\code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
-\code{\link{lr_se}()},
-\code{\link{metasims}()},
-\code{\link{metasim}()},
-\code{\link{metatrial}()},
 \code{\link{sim_df}()},
 \code{\link{sim_sample}()}
 
@@ -58,6 +41,5 @@ Other sample_size Generating meta-anlysis sample sizes.:
 \code{\link{beta_par}()},
 \code{\link{intervention_proportion}()}
 }
-\concept{neet_test_one One neet test has been written}
 \concept{sample_size Generating meta-anlysis sample sizes.}
 \concept{simulation Functions that contribute to simulation pipeline.}

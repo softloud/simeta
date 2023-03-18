@@ -9,7 +9,6 @@
 #' @param prop_error what do we expect 90% of proportions to fall within?
 #' @param wide if true, case and control sample sizes are provided in one row
 #'
-#' @family neet_test_one One neet test has been written
 #' @family simulation Functions that contribute to simulation pipeline.
 #' @family sample_size Generating meta-anlysis sample sizes.
 #'
@@ -23,18 +22,11 @@ sim_n <- function(k = 3,
                   wide = FALSE) {
   # check inputs ------------------------------------------------------------
 
-  neet::assert_neet(k, "numint")
-  neet::assert_neet(min_n, "numint")
-  neet::assert_neet(max_n, "numint")
-  neet::assert_neet(prop, "numeric")
-  neet::assert_neet(prop_error, "numeric")
-  neet::assert_neet(wide, "logical")
-
-  assert_that(min_n > 0,
+  assertthat::assert_that(min_n > 0,
               msg = "minimum sample size must be positive")
-  assert_that(max_n > 0,
+  assertthat::assert_that(max_n > 0,
               msg = "maximum sample size must be positive")
-  assert_that(min_n <= max_n,
+  assertthat::assert_that(min_n <= max_n,
               msg = "minimum sample size cannot exceed maximum sample size")
 
   # set up study label and sample kth sample size of control + intervention

@@ -1,27 +1,32 @@
 #' generate simulation parameter dataframe
 #'
 #'
-#' @param dist_tribble A \code{\link{tibble::tribble}}
-#' with one column for distribution, and one column for the parameters
+#' @param dist_df A `tibble::tribble`.
+#' with one column for distribution, and one column for the parameters.
+#' Defaults to [default_parameters]. Note that the `par` arguments can be
+#' changed, but only the distributions presented in [default_parameters] have
+#' been implemented.
 #' @inheritParams sim_n
-#' @inheritParams metasims
+#' @param k Vector of desired numbers studies to simulate for.
+#' @param k Simulate for different numbers of studies.
+#' @param tau_sq Variance \eqn{\gamma_k \sim N(0, \tau^2)} associated with the random effect
+#' @param effect_ratio Ratio of population effects intervention / control
 #'
 #' @import purrr
 #' @import tibble
 #' @import dplyr
 #'
 #' @family simulation Functions that contribute to simulation pipeline.
-#' @family neet_test_one One neet test has been written
 #'
 #' @export
 
 
 sim_df <- function(
   # simulation-level parameters
-  dist_tribble = default_parameters,
+  dist_df = default_parameters,
   k = c(3, 7, 20),
-  tau2 = seq(0, 0.4, by = 0.2),
-  effect_ratio = c(1, 1.2),
+  tau_sq = seq(0, 0.4, by = 0.2),
+  effect_ratio = c(1, 1.2, 1.5),
   # arguments for sample sizes
   min_n = 20,
   max_n = 200,
@@ -29,22 +34,10 @@ sim_df <- function(
   prop_error = 0.1) {
 
 
-# check inputs ------------------------------------------------------------
-
-  neet::assert_neet(dist_tribble, "data.frame")
-  neet::assert_neet(k, "numint")
-  neet::assert_neet(tau2, "numeric")
-  neet::assert_neet(effect_ratio, "numeric")
-  neet::assert_neet(min_n, "numint")
-  neet::assert_neet(max_n, "numint")
-  neet::assert_neet(prop, "numeric")
-  neet::assert_neet(prop_error, "numeric")
 
 # body --------------------------------------------------------------------
 
-
-# this_works <-
-  dist_tribble %>%
+  dist_df %>%
     dplyr::mutate(distribution =
                     purrr::map2(dist, par,
                                 function(x, y) {
@@ -55,7 +48,7 @@ sim_df <- function(
         list(
           distribution = .,
           k = k,
-          tau_sq_true = tau2,
+          tau_sq_true = tau_sq,
           effect_ratio = effect_ratio
         )
       )

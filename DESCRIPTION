@@ -1,46 +1,32 @@
 Package: simeta
 Title: Simulate Meta-Analysis Data
-Version: 0.0.0.9000
+Version: 0.0.1.0000
 Authors@R: 
     person(given = "Charles",
            family = "Gray",
            role = c("aut", "cre"),
            email = "charlestigray@gmail.com",
            comment = c(ORCID = "0000-0002-9978-011X"))
-Description: Simulate meta-analysis data and provide coverage probabiliity for different estimators for sample variance.
+Description: Simulate meta-analysis data.
 Date: 2020-01-03
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Depends:
-    actuar,
     R (>= 2.10)
 Imports: 
     assertthat,
-    collateral,
-    cowplot,
     dplyr,
-    ggplot2,
-    janitor,
-    latex2exp,
-    magrittr,
-    metafor,
-    purrr,
-    stringr,
     tibble,
+    magrittr,
+    tibble,
+    actuar,
     tidyr,
-    varameta (>= 0.0.0.9000),
-    rlang,
-    neet (>= 0.0.0.9000),
-    broom,
-    rockthemes
+    stats,
+    purrr
 Suggests: 
-    testthat (>= 2.1.0),
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Remotes: 
-    softloud/varameta,
-    softloud/neet

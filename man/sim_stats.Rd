@@ -5,10 +5,10 @@
 \title{Simulate a meta-analysis dataset}
 \usage{
 sim_stats(
-  measure = "median",
-  measure_spread = "iqr",
+  measure = "mean",
+  measure_spread = "sd",
   n_df = sim_n(),
-  wide = FALSE,
+  wide = TRUE,
   rdist = "norm",
   par = list(mean = 50, sd = 0.2),
   tau_sq = 0.4,
@@ -16,14 +16,19 @@ sim_stats(
 )
 }
 \arguments{
-\item{n_df}{\code{data.frame} of sample sizes,
-such as output by \code{\link{meta_n}}.}
+\item{measure}{Calculate sample median or mean. Defaults to mean.}
 
-\item{wide}{Logical indicating if wide format, as is expected by \code{\link{metafor}::}.}
+\item{measure_spread}{Defaults to standard deviation, \code{sd}. Specify "iqr", "range", "sd", "var". Will have to check how many of these are done right now.}
+
+\item{n_df}{\code{data.frame} of sample sizes.}
+
+\item{wide}{Logical indicating if wide format, as is expected by \code{metafor}. Defaults to TRUE.}
 
 \item{rdist}{string indicating distribution, "norm", "lnorm", "exp", or "pareto"}
 
 \item{par}{list of parameter arguments}
+
+\item{tau_sq}{Variance \eqn{\gamma_k \sim N(0, \tau^2)} associated with the random effect}
 
 \item{effect_ratio}{ratio of population effects intervention / control}
 }

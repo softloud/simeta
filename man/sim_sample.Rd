@@ -26,8 +26,6 @@ random effect variance is split between two.}
 \item{control}{value of first parameter of distribution is determined by median ratio}
 
 \item{effect_ratio}{ratio of population effects intervention / control}
-
-\item{epsilon}{within study error}
 }
 \description{
 Given a distribution, parameters, sample size, generate a sample.
@@ -36,12 +34,7 @@ Given a distribution, parameters, sample size, generate a sample.
 Other simulation Functions that contribute to simulation pipeline.: 
 \code{\link{beta_par}()},
 \code{\link{default_parameters}},
-\code{\link{density_fn}()},
 \code{\link{intervention_proportion}()},
-\code{\link{lr_se}()},
-\code{\link{metasims}()},
-\code{\link{metasim}()},
-\code{\link{metatrial}()},
 \code{\link{sim_df}()},
 \code{\link{sim_n}()}
 }

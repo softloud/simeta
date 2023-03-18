@@ -5,7 +5,6 @@
 #' @param n sample size
 #' @param this_study_error this study error, gamma_k / 2, under the assumption
 #' random effect variance is split between two.
-#' @param epsilon within study error
 #' @param rdist string indicating distribution, "norm", "lnorm", "exp", or "pareto"
 #' @param par list of parameter arguments
 #' @param control value of first parameter of distribution is determined by median ratio

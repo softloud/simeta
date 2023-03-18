@@ -1,6 +1,8 @@
 #' Default Simulation Parameters
 #'
-#' These are the default distributional parameter sets used in [metasim].
+#' These are the default distributional parameter sets used in [sim_df].
+#'
+#' See data-raw/generate-default-parameters.R for more details.
 #'
 #' @format A dataframe with 6 rows and 2 variables.
 #' \describe{
@@ -9,6 +11,5 @@
 #' }
 #'
 #' @family simulation Functions that contribute to simulation pipeline.
-#' @family neet_test_one One neet test has been written
 
 "default_parameters"

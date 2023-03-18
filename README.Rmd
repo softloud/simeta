@@ -1,11 +1,14 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r set up, echo = FALSE}
 knitr::opts_chunk$set(
+  cache = TRUE,
   eval = TRUE,
   collapse = TRUE,
   comment = "#>",
@@ -46,18 +49,170 @@ devtools::install_github("softloud/simeta")
 
 ## examples
 
-
-### simulate paired sample sizes
-
 ```{r packages, message=FALSE}
 # packages
 library(simeta)
 library(tidyverse)
+library(gt)
+library(metafor)
 
 # so these results are reproducible
 set.seed(39) 
 
 ```
+
+
+## simulate meta-analysis data 
+
+Suppose we are interested in comparing how variation between studies and overall sample size influence the likelihood of significance in meta-analyses with small to large effects. 
+
+
+### set simulation-level parameters
+
+
+```{r}
+# set default parameters, useful to store as an object for visualisation 
+# labelling
+
+# set effect ratios of interest
+sim_effect_ratio <- c(1, 1.5)
+# set desired variance between studies
+sim_tau_sq <- c(0, 0.2)
+# set minimum sample size per study
+sim_min_n <- 5
+# set maximum sample size per study
+sim_max_n <- 150
+
+```
+
+Use `sim_df` to set up a dataframe of simulation parameters, wherein every row represents one combination of simulation parameters.
+
+```{r}
+
+# see ?sim_df to see what other things can be specified
+
+sim_parameters <- sim_df(
+  # choose three default distributions to sample from to keep example small
+  dist_df = default_parameters %>% sample_n(3),
+  tau_sq = sim_tau_sq,
+  effect_ratio = sim_effect_ratio,
+  min_n = sim_min_n,
+  max_n = sim_max_n
+)
+
+```
+
+### Generate samples
+
+Use `sim_samples` to create a dataframe where each row of the simulation parameter level dataframe is repeated `trials` times, and a new list-column of meta-analysis samples are generated using the row-level simulation parameters. 
+
+```{r}
+# Generate simulated meta-analyses from simulation parameters dataframe
+# Number of trials represents number of repeated rows per simulation parameter
+# set
+
+samples_df <- 
+  sim_samples(
+  measure = "mean",
+  measure_spread = "sd",
+  sim_dat = sim_parameters,
+  # small for the purposes of example
+  trials = 3
+)
+
+# take a look at a few rows
+samples_df %>% sample_n(5)
+
+```
+
+
+```{r}
+# example simulated dataset meta-analysed
+samples_df %>% sample_n(1) %>% pluck("sample")
+```
+
+### Meta-analyse each sample
+
+
+```{r}
+# Generate meta-anlyses and extract a parameter of interest, such as p-value.
+sim_metafor <-
+  samples_df %>%
+  # making small for purposes of example (simulations scale fast!)
+  sample_n(20) %>% 
+  mutate(
+    rma = map(sample,
+      function(x) {
+        metafor::rma(data = x,
+          measure = "SMD",
+          m1i = effect_c,
+          sd1i = effect_spread_c,
+          n1i = n_c,
+          m2i = effect_i,
+          sd2i = effect_spread_i,
+          n2i = n_i
+            )}
+
+      )
+  ) %>%
+  # extract pvalues
+  mutate(
+    p_val = map_dbl(rma, pluck, "pval")
+  )
+
+# take a look
+sim_metafor %>% mutate(p_val = round(p_val, 2)) %>% select(p_val, everything())
+
+```
+
+NB: Caching is needed as simulations ramp in scale. The `targets` package can help.
+
+
+### Some details
+
+Without specification, the function uses the default parameters dataset (`?default_parameters`). 
+
+```{r}
+default_parameters %>% gt()
+
+```
+
+This dataset also provides a template for how to set up a dataframe specifying the distributions and parameters of interest for `sim_df`. The default sampling distributions are designed to provide a mix of common symmetric and asymmetric families, with both fixed and randomly-generated parameters.
+
+
+```{r}
+sim_dat <-
+  # defaults to using default_parameters if we do not specify dist_df argument
+  sim_df(
+  # different effect sizes
+  # what is small, medium large effect
+  effect_ratio = sim_effect_ratio,
+  # what is small medium large variance
+  tau_sq = sim_tau_sq,
+  min_n = sim_min_n,
+  max_n = sim_max_n
+)
+
+
+
+```
+
+```{r}
+
+# take a look at the top of the dataset
+sim_dat %>% head(3) 
+
+# the end of the dataset
+sim_dat %>% tail(3) 
+
+# take a look at a random handful of rows
+sim_dat %>% sample_n(5)
+
+```
+
+`sim_df` uses `sim_n` as explained below to create each dataset of sample sizes. 
+
+### simulate paired sample sizes
 
 
 This is a function I have often wished I've had on hand when simulating meta-analysis data. Thing is, running, say, 1000 simulations, I want to do this for the _same_ sample sizes. So, I need to generate the sample sizes for each study and for each group (control or intervention).   
@@ -67,22 +222,22 @@ Given a specific $k$, generate a set of sample sizes.
 ```{r different k}
 
 # defaults to k = 3
-sim_n() %>% knitr::kable()
+sim_n() %>% gt()
 
-sim_n(k = 3) %>% knitr::kable()
+sim_n(k = 3) %>% gt()
 
 # set k to a different value
 
-sim_n(k = 6) %>% knitr::kable()
+sim_n(k = 6) %>% gt()
 
 
 ```
 
-Suppose we require data that mimics small cohorts, say as small as 3, and as large as 50. 
+<!-- Suppose we require data that mimics small cohorts, say as small as 3, and as large as 50.  -->
 
 ```{r small cohort}
 # control upper and lower bounds
-sim_n(min_n = 3, max_n = 50) %>% knitr::kable()
+sim_n(min_n = 3, max_n = 50) %>% gt()
  
 ```
 
@@ -92,24 +247,11 @@ Suppose we wish to mimic data for which the cohorts are almost exactly the same 
 
 ```{r prop}
 # small variation between sample sizes of studies
-sim_n(k = 2, prop = 0.05, max_n = 50) %>% knitr::kable()
+sim_n(k = 2, prop = 0.05, max_n = 50) %>% gt()
 
 ```
 
 It can be useful, for more human-interpretable purposes, to display the sample sizes in wide format. 
-
-This is also useful for calculations that convert two measures to one, say, the standardised mean difference of the control and intervention groups. 
-
-Consider four classrooms of children, who may have one or two away for illness.
-
-```{r wide n}
-sim_n(k = 4, prop = 0.05, max_n = 30, wide = TRUE) %>%
-  # from here I'm just relabelling the class variable for prettiness
-  separate(study, into = c("remove", "class"), sep = "_") %>% 
-  select(-remove) %>% 
-  mutate(class = letters[as.numeric(class)]) %>% knitr::kable()
-```
-
 
 ### simulation parameters
 
@@ -148,6 +290,8 @@ demo_k %>% pluck("k") %>% head(3)
 
 ```
 
+
+
 ## simulating data
 
 Once we have established a set of sample sizes for a given distribution, with parameters, and so forth, I usually want to generate a sample for each of those `n`. We need to adjust the value of the sampled data based on the median ratio, and whether the `n` is from a control or intervention group.
@@ -157,8 +301,11 @@ A random effect is added to account for the between study error $\tau$ and withi
 For meta-analysis data, we work with summmary statistics, so we drop the sample and return tabulated summary stats. 
 
 ```{r simulate a sample}
-sim_stats()  %>% knitr::kable()
+sim_stats()  %>% gt()
 ```
+
+
+# Archived PhD work (see [phd-scripts/](TODO link to GITHUB archive dir))
 
 ## trial
 
@@ -187,7 +334,7 @@ calculate effects | summary stats | `effect` and `effect_se`
 meta-analyse | `effect` and `effect_se` | `rma` object 
 summary stats | `rma` object | some kind of `broom`ing script
 
-```{r}
+```{r eval=FALSE}
 metatrial()
 ```
 
@@ -197,20 +344,20 @@ So, now we can put together some generic summarisations. Things I always want to
 
 `metasim` calls `metatrial` many times and summarises the results.
 
-```{r}
+```{r eval=FALSE}
 metasim()
 ```
 
 ## simulate over parameters
 
-```{r}
+```{r eval=FALSE}
 (sim <- metasims())
 ```
 
 
 ## visualise
 
-```{r coverage}
+```{r coverage, eval=FALSE}
 sim %>% coverage_plot()
 ```
 
