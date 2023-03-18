@@ -122,16 +122,25 @@ samples_df %>% sample_n(5)
 ```
 
 ``` r
-# example simulated dataset meta-analysed
-samples_df %>% sample_n(1) %>% pluck("sample")
-#> [[1]]
-#> # A tibble: 3 × 7
-#>   study        effect_c effect_spread_c   n_c effect_i effect_spread_i   n_i
-#>   <chr>           <dbl>           <dbl> <dbl>    <dbl>           <dbl> <dbl>
-#> 1 Arvegil_1989     72.4            23.6    16     63.8            12.9    17
-#> 2 Borlas_1991      70.3            14.0    26     71.7            23.6    25
-#> 3 Gundor_1999      44.5            11.2    12    108.             21.2    13
+# example simulated meta-analysis dataset 
+samples_df %>% sample_n(1) %>% pluck("sample") %>% kable()
 ```
+
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+
+| study        | effect_c | effect_spread_c | n_c |  effect_i | effect_spread_i | n_i |
+|:-------------|---------:|----------------:|----:|----------:|----------------:|----:|
+| Arvegil_1989 | 72.37340 |        23.62938 |  16 |  63.83742 |        12.89967 |  17 |
+| Borlas_1991  | 70.27285 |        13.98282 |  26 |  71.71700 |        23.58780 |  25 |
+| Gundor_1999  | 44.46493 |        11.21268 |  12 | 108.38549 |        21.15229 |  13 |
+
+</td>
+</tr>
+</tbody>
+</table>
 
 ### Meta-analyse each sample
 

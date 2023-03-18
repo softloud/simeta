@@ -127,8 +127,8 @@ samples_df %>% sample_n(5)
 
 
 ```{r}
-# example simulated dataset meta-analysed
-samples_df %>% sample_n(1) %>% pluck("sample")
+# example simulated meta-analysis dataset 
+samples_df %>% sample_n(1) %>% pluck("sample") %>% kable()
 ```
 
 ### Meta-analyse each sample
