@@ -1,17 +1,18 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
-
-[![Travis build
-status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta)
+<!-- [![Travis build status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta) -->
 <!-- badges: end -->
 
-# `simeta::`
+# `simeta`<img src="man/figures/simeta_hex_sticker.png" align="right" width = 300, height = 300 />
 
-The goal of `simeta::` is to simulate meta-analysis data.
+(*Thank you @anatomecha for the sweet hex sticker*)
 
-I found I was rewriting the same types of analyses. How to make a
-modular set of tools for simulating meta-anlaysis data.
+The goal of `simeta` is to simulate meta-analysis data.
+
+I found I was rewriting the same types of analyses for methodology work
+in meta-analysis. I want a modular set of tools for simulating
+meta-anlaysis data.
 
 In particular, I’m interested in simulating for different values of
 
@@ -24,12 +25,13 @@ In particular, I’m interested in simulating for different values of
 
 ## work in progress
 
-This package is a work in progress, can’t guarantee anything works as
-intended.
+This package grew from my PhD work, repackaged as has been useful to
+other researchers. Such a learning process, sharing and using research
+software.
 
 ## installation
 
-You can install `simeta::` from github with:
+You can install `simeta` from github with:
 
 ``` r
 # install.packages("devtools")
@@ -199,8 +201,18 @@ sim_metafor %>% mutate(p_val = round(p_val, 2)) %>% select(p_val, everything())
 #> #   ¹​effect_ratio
 ```
 
-NB: Caching is needed as simulations ramp in scale. The `targets`
-package can help.
+## Caching with targets
+
+I find I run into problems very quickly with memory. The `targets`
+package can help. See \_targets.R for an example script that produces
+this visualisation. Each point in this plot represents one p-value from
+a meta-analysis on a randomly-generated dataset.
+
+``` r
+include_graphics("man/figures/example_sim.png")
+```
+
+![](man/figures/example_sim.png)<!-- -->
 
 ### Some details
 
@@ -267,11 +279,11 @@ sim_dat %>% sample_n(5)
 #> # A tibble: 5 × 7
 #>       k tau_sq_true effect_ratio rdist  parameters       n                sim_id
 #>   <dbl>       <dbl>        <dbl> <chr>  <list>           <list>           <chr> 
-#> 1    20         0            1.5 norm   <named list [2]> <tibble>         sim 66
-#> 2     3         0            1.5 lnorm  <named list [2]> <tibble [6 × 3]> sim 55
-#> 3    20         0.2          1.5 norm   <named list [2]> <tibble>         sim 94
-#> 4     7         0            1.5 exp    <named list [1]> <tibble>         sim 64
-#> 5    20         0.2          1   pareto <named list [2]> <tibble>         sim 41
+#> 1     3         0            1.5 pareto <named list [2]> <tibble [6 × 3]> sim 49
+#> 2    20         0.2          1   norm   <named list [2]> <tibble>         sim 46
+#> 3     7         0            1.5 exp    <named list [1]> <tibble>         sim 64
+#> 4     3         0.2          1   lnorm  <named list [2]> <tibble [6 × 3]> sim 27
+#> 5     3         0            1   lnorm  <named list [2]> <tibble [6 × 3]> sim 7
 ```
 
 `sim_df` uses `sim_n` as explained below to create each dataset of

@@ -17,14 +17,15 @@ knitr::opts_chunk$set(
 ```
 
 <!-- badges: start -->
-[![Travis build status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta)
+<!-- [![Travis build status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta) -->
 <!-- badges: end -->
 
-# `simeta::`
+# `simeta`<img src="man/figures/simeta_hex_sticker.png" align="right" width = 300, height = 300 /> 
+(*Thank you @anatomecha for the sweet hex sticker*)
 
-The goal of `simeta::` is to simulate meta-analysis data. 
+The goal of `simeta` is to simulate meta-analysis data. 
 
-I found I was rewriting the same types of analyses. How to make a modular set of tools for simulating meta-anlaysis data. 
+I found I was rewriting the same types of analyses for methodology work in meta-analysis. I want a modular set of tools for simulating meta-anlaysis data. 
 
 In particular, I'm interested in simulating for different values of 
 
@@ -36,11 +37,11 @@ In particular, I'm interested in simulating for different values of
 
 ## work in progress
 
-This package is a work in progress, can't guarantee anything works as intended.  
+This package grew from my PhD work, repackaged as has been useful to other researchers. Such a learning process, sharing and using research software.
 
 ## installation
 
-You can install `simeta::` from github with:
+You can install `simeta` from github with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
@@ -165,7 +166,18 @@ sim_metafor %>% mutate(p_val = round(p_val, 2)) %>% select(p_val, everything())
 
 ```
 
-NB: Caching is needed as simulations ramp in scale. The `targets` package can help.
+## Caching with targets
+
+I find I run into problems very quickly with memory. 
+The `targets` package can help. See _targets.R for an example script that
+produces this visualisation. Each point in this plot represents one p-value from a meta-analysis on a randomly-generated dataset.
+
+
+```{r fig.height=10}
+include_graphics("man/figures/example_sim.png")
+
+```
+
 
 
 ### Some details

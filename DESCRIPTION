@@ -2,11 +2,15 @@ Package: simeta
 Title: Simulate Meta-Analysis Data
 Version: 0.0.1.0000
 Authors@R: 
+    c(
     person(given = "Charles",
            family = "Gray",
            role = c("aut", "cre"),
            email = "charlestigray@gmail.com",
-           comment = c(ORCID = "0000-0002-9978-011X"))
+           comment = c(ORCID = "0000-0002-9978-011X")
+           ),
+    person(given = "Dave", family = "Hunt", role = "ctb") 
+    )
 Description: Simulate meta-analysis data.
 Date: 2020-01-03
 License: MIT + file LICENSE

@@ -1,6 +1,19 @@
+#' Repeat rows
+#'
+#' @inheritParams sim_samples
+#'
+#' @export
+
+sim_trials <- function(sim_dat, trials){
+  sim_dat %>%
+    dplyr::ungroup() %>%
+    dplyr::slice(rep(1:dplyr::n(), trials)) %>%
+    dplyr::ungroup()
+}
+
 #' Simulate samples
 #'
-#' Function to repeat rows in sim_df
+#' Function to repeat rows in sim_df and produces a sample for each
 #'
 #' @inheritParams sim_stats
 #' @param sim_dat Dataframe created by [sim_df].
@@ -16,9 +29,7 @@ sim_samples <- function(
   trials = 3
   ){
 
-  trials_dat <- sim_dat %>%
-    dplyr::ungroup() %>%
-    dplyr::slice(rep(1:dplyr::n(), trials))
+  trials_dat <- sim_trials(sim_dat, trials)
 
   sim_samples <-
     trials_dat %>%
@@ -45,3 +56,6 @@ sim_samples <- function(
     )
 
 }
+
+
+

@@ -2,3 +2,5 @@
 .Rhistory
 .RData
 inst/doc
+phd-scripts/data/
+_targets/

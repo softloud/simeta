@@ -1,7 +1,7 @@
 #' generate simulation parameter dataframe
 #'
 #'
-#' @param dist_df A `tibble::tribble`.
+#' @param dist_df A dataframe.
 #' with one column for distribution, and one column for the parameters.
 #' Defaults to [default_parameters]. Note that the `par` arguments can be
 #' changed, but only the distributions presented in [default_parameters] have
@@ -64,6 +64,7 @@ sim_df <- function(
                                  max_n = max_n,
                                  prop = prop,
                                  prop_error = prop_error),
-                sim_id = paste("sim", seq(1, nrow(.))))
+                sim_id = paste("sim", seq(1, nrow(.)))) %>%
+    dplyr::ungroup()
 
 }

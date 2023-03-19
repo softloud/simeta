@@ -1,95 +1,59 @@
 library(simeta)
 library(tidyverse)
+library(targets)
 
-sim_dat <-
-  sim_df(
-  # different effect sizes
-  # what is small, medium large effect
-  effect_ratio = c(1, 1.1, 1.5, 2),
-  # what is small medium large variance
-  tau2 = c(0, 0.1, 0.5, 1),
-  min_n = 5,
-  max_n = 150
-)
+tar_load(trial_results)
+tar_load(trials)
+tar_load(sim_tau_sq)
+tar_load(sim_effect_ratio)
 
-# repeat each row for number of trials per parameter
-trials = 3
-
-trials_dat <- sim_dat %>%
-  ungroup() %>%
-  slice(rep(1:n(), trials))
-
-sim_samples <-
-trials_dat %>%
-  mutate(
-    sample = pmap(
-      list(
-        measure = "mean",
-        measure_spread = "sd",
-        n_df = n,
-        wide = TRUE,
-        rdist,
-        parameters,
-        tau_sq_true,
-        effect_ratio
-      ),
-      sim_stats
-    )
-  )
+paste_parameter_label <- function(a_vector) {
+  paste0(a_vector, collapse = ", ")
+}
 
 
-sim_metafor <-
-  sim_samples %>%
-  mutate(
-    rma = map(sample,
-      function(x) {
-        rma(data = x,
-          measure = "SMD",
-          m1i = effect_c,
-          sd1i = effect_spread_c,
-          n1i = n_c,
-          m2i = effect_i,
-          sd2i = effect_spread_i,
-          n2i = n_i
-            )}
-
-      )
-  ) %>%
-  # extract pvalues
-  mutate(
-    p_val = map_dbl(rma, pluck, "pval")
-  )
-
-
-# calculate proportions
-sim_metafor %>%
-  group_by(k)
-
-# add sample size
-sim_metafor %>%
-  mutate(
-    dist = map_chr(rdist, dist_name)
-  ) %>%
+trial_results %>%
   ggplot(
-    aes(x = p_val, fill = dist)
+    aes(
+      x = participants,
+      y = p_value,
+      colour = dist_label
+    )
   ) +
-  geom_vline(xintercept = 0.05, linetype = "dotted", show.legend = TRUE) +
-  geom_histogram(alpha = 0.7, bins = 19) +
-  facet_grid(effect_ratio + tau_sq_true ~ k) +
+  geom_hline(
+    yintercept = 0.05,
+    linetype = "dotted"
+  ) +
+  geom_point(
+    alpha = 0.2
+  ) +
+  geom_point(
+    alpha = 0.6,
+    data = trial_results %>% filter(p_value < 0.05)
+  ) +
+  facet_grid(effect_ratio + tau_sq_true ~ study_n_label,
+             scales = "free_x") +
   theme_minimal(base_size = 20, base_family = "serif") +
-  labs(
-    title = "Simulated meta-analysis p-value distributions",
-    subtitle = "For simulated studies (3, 7, 20) with effect ratios (1, 1.1, 1.5, 2) and variation between studies (0, 0.1, 0.5)" %>%
-      str_wrap(),
-    x = "P-value",
-    y = "Count",
-    caption = sprintf("Dotted line represents 0.05 signficance. %d simulations run for each parameter set.", trials)
-  ) +
-  theme(panel.grid = element_blank(),
-    axis.text = element_blank(),
-    legend.position = "top"
-  ) +
-  scale_fill_brewer("Sampling Distribution", palette = "Dark2")
-
-
-
+labs(
+  title = "Simulated meta-analysis p-values and sample sizes",
+  subtitle = sprintf("For simulated studies, (%s), with effect ratios
+    (%s) and variation between studies (%s)",
+                     paste_parameter_label(
+                       unique(trial_results$k)
+                     ),
+                     paste_parameter_label(sim_effect_ratio),
+                     paste_parameter_label(sim_tau_sq)) %>%
+    str_wrap(),
+  x = "Total number of participants in meta-analysis",
+  y = "P-value",
+  caption = sprintf("Dotted line represents 0.05 signficance. %d simulations
+                      for each parameter set.", trials) %>% str_wrap(120)
+) +
+  scale_color_brewer("Sampling Distribution", palette = "Dark2") +
+  theme(strip.text.y = element_text(
+    angle = 0
+  ),
+    panel.grid = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "top"
+  )

@@ -17,5 +17,5 @@ sim_samples(measure = "mean", measure_spread = "sd", sim_dat, trials = 3)
 Defaults to 3 (small number of trials is good for testing).}
 }
 \description{
-Function to repeat rows in sim_df
+Function to repeat rows in sim_df and produces a sample for each
 }
