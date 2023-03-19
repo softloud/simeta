@@ -4,17 +4,18 @@
 <!-- [![Travis build status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta) -->
 <!-- badges: end -->
 
-# `simeta`<img src="man/figures/simeta_hex_sticker.png" align="right" width = 300, height = 300 />
+# `simeta` <img src="man/figures/simeta_hex_sticker.png" align="right" width = 300, height = 300 />
 
-(*Thank you @anatomecha for the sweet hex sticker*)
+(*Thank you [@anatomecha](https://github.com/anatomecha/) for the sweet
+hex sticker*)
 
 The goal of `simeta` is to simulate meta-analysis data.
 
-I found I was rewriting the same types of analyses for methodology work
-in meta-analysis. I want a modular set of tools for simulating
-meta-anlaysis data.
+These are a sometimes-useful modular set of tools for simulating
+meta-anlaysis data I mostly developed during my doctoral project.
 
-In particular, I’m interested in simulating for different values of
+In particular, I’m often interested in simulating meta-analysis data for
+different values of
 
 - $k$, number of studies
 - $\tau^2$, variation between studies
@@ -23,11 +24,16 @@ In particular, I’m interested in simulating for different values of
 - distributions, *and* parameters; e.g., $\exp(\lambda = 1)$ and
   $\exp(\lambda = 2)$.
 
-## work in progress
+``` r
+# example simulation using simeta
 
-This package grew from my PhD work, repackaged as has been useful to
-other researchers. Such a learning process, sharing and using research
-software.
+include_graphics("man/figures/example_sim.png")
+```
+
+![Example simulation study](man/figures/example_sim.png)
+
+This readme is not comprehensive, but updated as collaborators need
+scripts and examples.
 
 ## installation
 
@@ -48,7 +54,7 @@ library(knitr)
 library(metafor)
 
 # so these results are reproducible
-set.seed(39) 
+set.seed(306) 
 ```
 
 ## simulate meta-analysis data
@@ -204,9 +210,29 @@ sim_metafor %>% mutate(p_val = round(p_val, 2)) %>% select(p_val, everything())
 ## Caching with targets
 
 I find I run into problems very quickly with memory. The `targets`
-package can help. See \_targets.R for an example script that produces
-this visualisation. Each point in this plot represents one p-value from
-a meta-analysis on a randomly-generated dataset.
+package can help. For example, the following example samples from
+several distributions, each with different parameter sets. This
+combinatorially increases the number of simulations.
+
+``` r
+default_parameters %>% 
+  kable(digits = 2)
+```
+
+| dist   | par                  |
+|:-------|:---------------------|
+| pareto | 2, 1                 |
+| norm   | 50, 17               |
+| lnorm  | 4.0, 0.3             |
+| exp    | 10                   |
+| pareto | 3.576119, 2.745808   |
+| norm   | 75.209383, 6.739041  |
+| lnorm  | 2.3900182, 0.3383603 |
+| exp    | 4.86717              |
+
+See \_targets.R for an example script that produces this visualisation
+adapting the workflow above. Each point in this plot represents one
+p-value from a meta-analysis on a randomly-generated dataset.
 
 ``` r
 include_graphics("man/figures/example_sim.png")

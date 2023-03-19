@@ -57,13 +57,13 @@
   <div class="contents col-md-9">
 
 <div class="section level1">
-<div class="page-header"><h1 id="simeta">
-<code>simeta</code><img src="reference/figures/simeta_hex_sticker.png" align="right" width="300," height="300"><a class="anchor" aria-label="anchor" href="#simeta"></a>
+<div class="page-header"><h1 id="simeta-">
+<code>simeta</code> <img src="reference/figures/simeta_hex_sticker.png" align="right" width="300," height="300"><a class="anchor" aria-label="anchor" href="#simeta-"></a>
 </h1></div>
-<p>(<em>Thank you @anatomecha for the sweet hex sticker</em>)</p>
+<p>(<em>Thank you <a href="https://github.com/anatomecha/" class="external-link">@anatomecha</a> for the sweet hex sticker</em>)</p>
 <p>The goal of <code>simeta</code> is to simulate meta-analysis data.</p>
-<p>I found I was rewriting the same types of analyses for methodology work in meta-analysis. I want a modular set of tools for simulating meta-anlaysis data.</p>
-<p>In particular, I’m interested in simulating for different values of</p>
+<p>These are a sometimes-useful modular set of tools for simulating meta-anlaysis data I mostly developed during my doctoral project.</p>
+<p>In particular, I’m often interested in simulating meta-analysis data for different values of</p>
 <ul>
 <li>
 <span class="math inline"><em>k</em></span>, number of studies</li>
@@ -74,23 +74,26 @@
 <li>numbers of trials, say 10, 100, 1000</li>
 <li>distributions, <em>and</em> parameters; e.g., <span class="math inline">exp (<em>λ</em>=1)</span> and <span class="math inline">exp (<em>λ</em>=2)</span>.</li>
 </ul>
-<div class="section level2">
-<h2 id="work-in-progress">work in progress<a class="anchor" aria-label="anchor" href="#work-in-progress"></a>
-</h2>
-<p>This package grew from my PhD work, repackaged as has been useful to other researchers. Such a learning process, sharing and using research software.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># example simulation using simeta</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"man/figures/example_sim.png"</span><span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="reference/figures/example_sim.png" alt=""><p class="caption">Example simulation study</p>
 </div>
+<p>This readme is not comprehensive, but updated as collaborators need scripts and examples.</p>
 <div class="section level2">
 <h2 id="installation">installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install <code>simeta</code> from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"softloud/simeta"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="examples">examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># packages</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">simeta</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
@@ -98,7 +101,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.metafor-project.org" class="external-link">metafor</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># so these results are reproducible</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">39</span><span class="op">)</span> </span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">306</span><span class="op">)</span> </span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="simulate-meta-analysis-data">simulate meta-analysis data<a class="anchor" aria-label="anchor" href="#simulate-meta-analysis-data"></a>
@@ -107,7 +110,7 @@
 <div class="section level3">
 <h3 id="set-simulation-level-parameters">set simulation-level parameters<a class="anchor" aria-label="anchor" href="#set-simulation-level-parameters"></a>
 </h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set default parameters, useful to store as an object for visualisation </span></span>
 <span><span class="co"># labelling</span></span>
 <span></span>
@@ -120,7 +123,7 @@
 <span><span class="co"># set maximum sample size per study</span></span>
 <span><span class="va">sim_max_n</span> <span class="op">&lt;-</span> <span class="fl">150</span></span></code></pre></div>
 <p>Use <code>sim_df</code> to set up a dataframe of simulation parameters, wherein every row represents one combination of simulation parameters.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># see ?sim_df to see what other things can be specified</span></span>
 <span></span>
@@ -137,7 +140,7 @@
 <h3 id="generate-samples">Generate samples<a class="anchor" aria-label="anchor" href="#generate-samples"></a>
 </h3>
 <p>Use <code>sim_samples</code> to create a dataframe where each row of the simulation parameter level dataframe is repeated <code>trials</code> times, and a new list-column of meta-analysis samples are generated using the row-level simulation parameters.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate simulated meta-analyses from simulation parameters dataframe</span></span>
 <span><span class="co"># Number of trials represents number of repeated rows per simulation parameter</span></span>
 <span><span class="co"># set</span></span>
@@ -161,7 +164,7 @@
 <span><span class="co">#&gt; 3     7         0            1   pareto &lt;named list&gt; &lt;tibble&gt; sim 4  &lt;tibble&gt;</span></span>
 <span><span class="co">#&gt; 4     3         0            1.5 norm   &lt;named list&gt; &lt;tibble&gt; sim 21 &lt;tibble&gt;</span></span>
 <span><span class="co">#&gt; 5     3         0.2          1.5 pareto &lt;named list&gt; &lt;tibble&gt; sim 28 &lt;tibble&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># example simulated meta-analysis dataset </span></span>
 <span><span class="va">samples_df</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/sample_n.html" class="external-link">sample_n</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/pluck.html" class="external-link">pluck</a></span><span class="op">(</span><span class="st">"sample"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table kable_wrapper"><tbody><tr>
@@ -221,7 +224,7 @@
 <div class="section level3">
 <h3 id="meta-analyse-each-sample">Meta-analyse each sample<a class="anchor" aria-label="anchor" href="#meta-analyse-each-sample"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate meta-anlyses and extract a parameter of interest, such as p-value.</span></span>
 <span><span class="va">sim_metafor</span> <span class="op">&lt;-</span></span>
 <span>  <span class="va">samples_df</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
@@ -279,15 +282,59 @@
 <div class="section level2">
 <h2 id="caching-with-targets">Caching with targets<a class="anchor" aria-label="anchor" href="#caching-with-targets"></a>
 </h2>
-<p>I find I run into problems very quickly with memory. The <code>targets</code> package can help. See _targets.R for an example script that produces this visualisation. Each point in this plot represents one p-value from a meta-analysis on a randomly-generated dataset.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p>I find I run into problems very quickly with memory. The <code>targets</code> package can help. For example, the following example samples from several distributions, each with different parameter sets. This combinatorially increases the number of simulations.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">default_parameters</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">dist</th>
+<th align="left">par</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">pareto</td>
+<td align="left">2, 1</td>
+</tr>
+<tr class="even">
+<td align="left">norm</td>
+<td align="left">50, 17</td>
+</tr>
+<tr class="odd">
+<td align="left">lnorm</td>
+<td align="left">4.0, 0.3</td>
+</tr>
+<tr class="even">
+<td align="left">exp</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">pareto</td>
+<td align="left">3.576119, 2.745808</td>
+</tr>
+<tr class="even">
+<td align="left">norm</td>
+<td align="left">75.209383, 6.739041</td>
+</tr>
+<tr class="odd">
+<td align="left">lnorm</td>
+<td align="left">2.3900182, 0.3383603</td>
+</tr>
+<tr class="even">
+<td align="left">exp</td>
+<td align="left">4.86717</td>
+</tr>
+</tbody>
+</table>
+<p>See _targets.R for an example script that produces this visualisation adapting the workflow above. Each point in this plot represents one p-value from a meta-analysis on a randomly-generated dataset.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/include_graphics.html" class="external-link">include_graphics</a></span><span class="op">(</span><span class="st">"man/figures/example_sim.png"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/example_sim.png"><!-- --></p>
 <div class="section level3">
 <h3 id="some-details">Some details<a class="anchor" aria-label="anchor" href="#some-details"></a>
 </h3>
 <p>Without specification, the function uses the default parameters dataset (<code><a href="reference/default_parameters.html">?default_parameters</a></code>).</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">default_parameters</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -330,7 +377,7 @@
 </tbody>
 </table>
 <p>This dataset also provides a template for how to set up a dataframe specifying the distributions and parameters of interest for <code>sim_df</code>. The default sampling distributions are designed to provide a mix of common symmetric and asymmetric families, with both fixed and randomly-generated parameters.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim_dat</span> <span class="op">&lt;-</span></span>
 <span>  <span class="co"># defaults to using default_parameters if we do not specify dist_df argument</span></span>
 <span>  <span class="fu"><a href="reference/sim_df.html">sim_df</a></span><span class="op">(</span></span>
@@ -342,7 +389,7 @@
 <span>  min_n <span class="op">=</span> <span class="va">sim_min_n</span>,</span>
 <span>  max_n <span class="op">=</span> <span class="va">sim_max_n</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># take a look at the top of the dataset</span></span>
 <span><span class="va">sim_dat</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> </span>
@@ -379,7 +426,7 @@
 </h3>
 <p>This is a function I have often wished I’ve had on hand when simulating meta-analysis data. Thing is, running, say, 1000 simulations, I want to do this for the <em>same</em> sample sizes. So, I need to generate the sample sizes for each study and for each group (control or intervention).</p>
 <p>Given a specific <span class="math inline"><em>k</em></span>, generate a set of sample sizes.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># defaults to k = 3</span></span>
 <span><span class="fu"><a href="reference/sim_n.html">sim_n</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -422,7 +469,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="reference/sim_n.html">sim_n</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -464,7 +511,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># set k to a different value</span></span>
 <span></span>
@@ -538,7 +585,7 @@
 </tr>
 </tbody>
 </table>
-<!-- Suppose we require data that mimics small cohorts, say as small as 3, and as large as 50.  --><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<!-- Suppose we require data that mimics small cohorts, say as small as 3, and as large as 50.  --><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># control upper and lower bounds</span></span>
 <span><span class="fu"><a href="reference/sim_n.html">sim_n</a></span><span class="op">(</span>min_n <span class="op">=</span> <span class="fl">3</span>, max_n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -582,7 +629,7 @@
 </table>
 <p>We expect cohorts from the same study to have roughly the same size, proportional to that size. We can control this proportion with the <code>prop</code> argument.</p>
 <p>Suppose we wish to mimic data for which the cohorts are almost exactly the same (say becaues of classes of undergrads being split in half and accounting for dropouts).</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># small variation between sample sizes of studies</span></span>
 <span><span class="fu"><a href="reference/sim_n.html">sim_n</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">2</span>, prop <span class="op">=</span> <span class="fl">0.05</span>, max_n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -623,7 +670,7 @@
 <p>I haven’t settled on a <em>way</em> of simulating data, and haven’t found heaps in the way of guidance yet. So, this is all a bit experimental. My guiding star is packaging what I’d use right now.</p>
 <p>What I do always end up with is generating a dataset that summarises what I would like to iterate over in simulation.</p>
 <p>The <code>sim_df</code> takes user inputs for distributions, numbers of studies, between-study error <span class="math inline"><em>τ</em></span>, within-study error <span class="math inline"><em>ε</em></span>, and the proportion <span class="math inline"><em>ρ</em></span> of sample size we expect the sample sizes to different within study cohorts.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># defaults</span></span>
 <span><span class="fu"><a href="reference/sim_df.html">sim_df</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; # A tibble: 216 × 7</span></span>
@@ -648,7 +695,7 @@
 <span><span class="fu"><a href="reference/sim_df.html">sim_df</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [216 × 7] (S3: tbl_df/tbl/data.frame)</span></span></code></pre></div>
 <p>For the list-column of tibbles <code>n</code>, the <code>sim_df</code> function calls <code>sim_n</code> and generates a set of sample sizes based on the value in the column <code>k</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">demo_k</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/sim_df.html">sim_df</a></span><span class="op">(</span><span class="op">)</span> </span>
 <span></span>
 <span><span class="co"># the variable n is a list-column of tibbles</span></span>
@@ -702,7 +749,7 @@
 <p>Once we have established a set of sample sizes for a given distribution, with parameters, and so forth, I usually want to generate a sample for each of those <code>n</code>. We need to adjust the value of the sampled data based on the median ratio, and whether the <code>n</code> is from a control or intervention group.</p>
 <p>A random effect is added to account for the between study error <span class="math inline"><em>τ</em></span> and within study error <span class="math inline"><em>ε</em></span>.</p>
 <p>For meta-analysis data, we work with summmary statistics, so we drop the sample and return tabulated summary stats.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/sim_stats.html">sim_stats</a></span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -815,7 +862,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">metatrial</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -823,19 +870,19 @@
 </h2>
 <p>So, now we can put together some generic summarisations. Things I always want to do. Like calculate the coverage probability, confidence interval width, and bias. Most results here are mean values across all trials, the exceptions being <code>cp_</code> variables.</p>
 <p><code>metasim</code> calls <code>metatrial</code> many times and summarises the results.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">metasim</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="simulate-over-parameters">simulate over parameters<a class="anchor" aria-label="anchor" href="#simulate-over-parameters"></a>
 </h2>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">sim</span> <span class="op">&lt;-</span> <span class="fu">metasims</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="visualise">visualise<a class="anchor" aria-label="anchor" href="#visualise"></a>
 </h2>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sim</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> <span class="fu">coverage_plot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
