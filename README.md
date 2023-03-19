@@ -7,7 +7,7 @@
 # [`simeta`](https://softloud.github.io/simeta/) <img src="man/figures/simeta_hex_sticker.png" align="right" width = 300, height = 300 />
 
 (*Thank you [@anatomecha](https://github.com/anatomecha/) for the sweet
-hex sticker*)
+hex*)
 
 The goal of `simeta` is to simulate meta-analysis data.
 

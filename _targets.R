@@ -27,7 +27,7 @@ paste_parameter_label <- function(a_vector) {
 list(
   # set simulation parameters
   tar_target(trials,
-             10),
+             100),
   tar_target(sim_effect_ratio,
              c(1, 1.1, 1.5)),
 
@@ -123,7 +123,7 @@ list(
                if (!is.character(models)) {
                  models %>% pluck("pval")
                } else {
-                 NA
+                 NA_real_
 
                }
              },
@@ -213,9 +213,17 @@ list(
                    y = "P-value",
                    caption = sprintf(
                      "Dotted line represents 0.05 signficance. %d simulations
-                      for each parameter set.",
+                      for each parameter set. The percentage of trials with
+                      p-values less than 0.05 is displayed in text in each grid
+                      of the plot, representing a parameter set.
+                      Each point represents one
+                     simulation of total sample size,
+                     represented in the x-axis, and
+                     p-value, in the y-axis, for a given number of studies,
+                     effect ratio, and variation between studies. See the
+                     sampling distributions table for distribution parameters.",
                      trials
-                   ) %>% str_wrap(120)
+                   ) %>% str_wrap()
                  ) +
                  scale_color_brewer("Sampling distribution", palette = "Dark2") +
                  theme(
