@@ -119,13 +119,13 @@ list(
   ),
 
   tar_target(p_values,
-             if ("pval" %in% objects(models))
-             {
-               p_value <- models %>% pluck("pval")
-
-             } else {p_value <- 100},
-             pattern = map(models),
-             iteration = "vector"),
+             tibble(
+               model = models
+             ) %>%
+               mutate(
+                 p_value = map(model, "pval")
+               ) %>% pull(p_value)
+             ),
 
   tar_target(
     trial_results_raw,
@@ -136,23 +136,41 @@ list(
       select(-n) %>%
       mutate(
         # append model results of interest
-        p_value = p_values,
+        p_value_result = p_values,
         # create some plot labels
         dist_label = map_chr(rdist, dist_name),
         study_n_label = sprintf("%d studies", k) %>%
           fct_relevel("3 studies", "7 studies")
+      )
+
+  ),
+
+  tar_target(
+    trial_results_successes,
+    # filter sims that didn't converge
+    trial_results_raw %>%
+      mutate(
+        p_value = map(p_value_result, pluck, 1),
+
+        p_value_class = map_chr(p_value, class)
       ) %>%
-      # filter sims that didn't converge
-      filter(p_value != 100)
+      filter(
+        p_value_class != "NULL"
+      ) %>%
+      mutate(
+        p_value = as.double(p_value),
+        significant = p_value < 0.05
+      ) %>%
+      select(-p_value_class)
 
   ),
 
   tar_target(trial_results,
              # overwrite common variables with labellers
-             trial_results_raw),
+             trial_results_successes),
 
   tar_target(
-    sim_props,
+    sim_vis_props,
     trial_results %>%
       group_by(study_n_label) %>%
       mutate(x = quantile(participants, 0.5)) %>%
@@ -160,7 +178,7 @@ list(
                study_n_label,
                tau_sq_true,
                effect_ratio) %>%
-      summarise(sig = sum(p_value < 0.05) / n(), ) %>%
+      summarise(sig = sum(significant) / n(), ) %>%
       mutate(label = str_c(round(sig * 100), "% significant"),
              y = 0.5)
   ),
@@ -175,25 +193,23 @@ list(
       )) +
       geom_hline(yintercept = 0.05,
                  linetype = "dotted") +
+      geom_point(aes(shape = significant), alpha = 0.1) +
       geom_text(
-        data = sim_props,
+        data = sim_vis_props,
         aes(x = x, y = y, label = label),
         size = 5,
-        alpha = 0.3,
+        alpha = 0.4,
         colour = "black"
       ) +
-      geom_point(alpha = 0.2) +
-      geom_point(alpha = 0.6,
-                 data = trial_results %>% filter(p_value < 0.05)) +
       facet_grid(effect_ratio + tau_sq_true ~ study_n_label,
-                 scales = "free_x")
+                 scales = "free_x") +
+      theme_minimal(base_size = 10, base_family = "serif")
   ),
 
   tar_target(sim_vis,
              {
                this_plot <-
                  sim_vis_foundation +
-                 theme_minimal(base_size = 10, base_family = "serif") +
                  labs(
                    title = "Simulated meta-analysis p-values and sample sizes",
                    subtitle = sprintf(
@@ -212,7 +228,7 @@ list(
                       p-values less than 0.05 is displayed in text in each grid
                       of the plot, representing a parameter set.
                       Each point represents one
-                     simulation of total sample size,
+                     simulation of a meta-analysis with total sample size
                      represented in the x-axis, and
                      p-value, in the y-axis, for a given number of studies,
                      effect ratio, and variation between studies. See the
@@ -225,10 +241,11 @@ list(
                    strip.text.y = element_text(angle = 0),
                    panel.grid = element_blank(),
                    axis.text.y = element_blank(),
-                   legend.position = "top"
+                   legend.position = "top",
+                   legend.box = "vertical"
                  ) + ylim(-0.05, 1)
 
-               ggsave("man/figures/example_sim.png", this_plot)
+               ggsave("man/figures/example_sim.png", this_plot, dpi=600)
                write_rds(this_plot, "example_plot.rds")
              }),
 

@@ -15,12 +15,12 @@ data.
 These are a sometimes-useful modular set of tools for simulating
 meta-anlaysis data I mostly developed during my doctoral project. For
 more details, see the associated manuscript (freely-accessible [arxiv
-version](https://arxiv.org/pdf/1910.06964.pdf)).
+version](https://arxiv.org/pdf/1910.06964.pdf)):
 
-> Charles T. Gray. “code::proof: Prepare for Most Weather Conditions”.
-> en. In: Statistics and Data Science. Communications in Computer and
-> Information Science (2019). Ed. by Hien Nguyen, pp. 22–41. [DOi:
-> 10.1007/978-981-15-1960-4_2](https://link.springer.com/chapter/10.1007/978-981-15-1960-4_2)
+Charles T. Gray. “code::proof: Prepare for Most Weather Conditions”. en.
+In: Statistics and Data Science. Communications in Computer and
+Information Science (2019). Ed. by Hien Nguyen, pp. 22–41. [DOi:
+10.1007/978-981-15-1960-4_2](https://link.springer.com/chapter/10.1007/978-981-15-1960-4_2)
 
 In particular, I’m often interested in simulating meta-analysis data for
 different values of
