@@ -119,14 +119,11 @@ list(
   ),
 
   tar_target(p_values,
+             if ("pval" %in% objects(models))
              {
-               if (!is.character(models)) {
-                 models %>% pluck("pval")
-               } else {
-                 NA_real_
+               p_value <- models %>% pluck("pval")
 
-               }
-             },
+             } else {p_value <- 100},
              pattern = map(models),
              iteration = "vector"),
 
@@ -146,7 +143,7 @@ list(
           fct_relevel("3 studies", "7 studies")
       ) %>%
       # filter sims that didn't converge
-      filter(!is.na(p_value))
+      filter(p_value != 100)
 
   ),
 
@@ -188,10 +185,8 @@ list(
       geom_point(alpha = 0.2) +
       geom_point(alpha = 0.6,
                  data = trial_results %>% filter(p_value < 0.05)) +
-      facet_grid(
-        effect_ratio + tau_sq_true ~ study_n_label,
-        scales = "free_x"
-      )
+      facet_grid(effect_ratio + tau_sq_true ~ study_n_label,
+                 scales = "free_x")
   ),
 
   tar_target(sim_vis,
