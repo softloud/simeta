@@ -24,9 +24,12 @@ knitr::opts_chunk$set(
 
 (*Thank you [@anatomecha](https://github.com/anatomecha/) for the sweet hex*)
 
-The goal of `simeta` is to simulate meta-analysis data. 
+The goal of `simeta` is to make it easier to simulate meta-analysis data. 
 
-These are a sometimes-useful modular set of tools for simulating meta-anlaysis data I mostly developed during my doctoral project. 
+These are a sometimes-useful modular set of tools for simulating meta-anlaysis data I mostly developed during my doctoral project. For more details, see the associated manuscript (freely-accessible [arxiv version](https://arxiv.org/pdf/1910.06964.pdf)).
+
+> Charles T. Gray. “code::proof: Prepare for Most Weather Conditions”. en. In: Statistics and Data Science. Communications in Computer and
+Information Science (2019). Ed. by Hien Nguyen, pp. 22–41. [DOi: 10.1007/978-981-15-1960-4_2](https://link.springer.com/chapter/10.1007/978-981-15-1960-4_2)
 
 In particular, I'm often interested in simulating meta-analysis data for different values of 
 
@@ -36,15 +39,19 @@ In particular, I'm often interested in simulating meta-analysis data for differe
 - numbers of trials, say 10, 100, 1000
 - distributions, _and_ parameters; e.g., $\exp(\lambda = 1)$ and $\exp(\lambda = 2)$. 
 
+### example simulation
 
-```{r fig.height=10,fig.cap="Example simulation study"}
+
+```{r fig.height=10,echo=FALSE}
 # example simulation using simeta
 
-include_graphics("man/figures/example_sim.png")
+knitr::include_graphics("man/figures/example_sim.png")
 
 ```
 
-This readme is not comprehensive, but updated as collaborators need scripts and examples.   
+### updated as needed
+
+This readme is not comprehensive, but updated as collaborators need scripts and examples.  
 
 ## installation
 
@@ -170,7 +177,10 @@ sim_metafor <-
   )
 
 # take a look
-sim_metafor %>% mutate(p_val = round(p_val, 2)) %>% select(p_val, everything())
+sim_metafor %>% 
+  mutate(p_val = round(p_val, 2)) %>% 
+  select(p_val, everything()) %>% 
+  kable()
 
 ```
 
