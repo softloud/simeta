@@ -41,6 +41,9 @@ different values of
 This readme is not comprehensive, but updated as collaborators need
 scripts and examples.
 
+Have ideas? Want to contribute? Request a workflow, etc. Create an
+[issue](https://github.com/softloud/simeta/issues).
+
 ## installation
 
 You can install `simeta` from github with:
