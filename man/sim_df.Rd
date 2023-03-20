@@ -16,7 +16,7 @@ sim_df(
 )
 }
 \arguments{
-\item{dist_df}{A \code{tibble::tribble}.
+\item{dist_df}{A dataframe.
 with one column for distribution, and one column for the parameters.
 Defaults to \link{default_parameters}. Note that the \code{par} arguments can be
 changed, but only the distributions presented in \link{default_parameters} have

@@ -11,7 +11,12 @@ An object of class \code{character} of length 383.
 lotr_study
 }
 \description{
-These data were obtained from
+Lord of the Rings characters combined with a random year.
+}
+\details{
+The names data were obtained from
 \href{https://www.kaggle.com/paultimothymooney/lord-of-the-rings-data/data}{kaggle}.
+
+See data-raw/lotr_study.R to see how the dummy set of studies was created.
 }
 \keyword{datasets}
