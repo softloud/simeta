@@ -232,7 +232,10 @@ list(
                      represented in the x-axis, and
                      p-value, in the y-axis, for a given number of studies,
                      effect ratio, and variation between studies. See the
-                     sampling distributions table for distribution parameters.",
+                     sampling distributions table for distribution parameters.
+                     For a given sample size, each trial has the same sample
+                     sizes in each arm for each study, however each trial draws
+                     a new random sample for each",
                      trials
                    ) %>% str_wrap()
                  ) +
