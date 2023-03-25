@@ -4,7 +4,7 @@
 <!-- [![Travis build status](https://travis-ci.org/softloud/simeta.svg?branch=master)](https://travis-ci.org/softloud/simeta) -->
 <!-- badges: end -->
 
-# [`simeta`](https://softloud.github.io/simeta/) <img src="man/figures/simeta_hex_sticker.png" align="right" width = 300, height = 300 />
+# [`simeta`](https://softloud.github.io/simeta/) <img src="man/figures/simeta_hex.png" align="right" width = 300, height = 300 />
 
 (*Thank you [@anatomecha](https://github.com/anatomecha/) for the sweet
 hex*)
